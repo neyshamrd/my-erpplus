@@ -42,20 +42,6 @@ export function IndustrySolutions() {
       id="industri"
       className="w-full border-t border-slate-100 bg-white py-12 sm:py-14 lg:py-16"
     >
-      {/* Animasi muncul konten panel aktif */}
-      <style>{`
-        @keyframes myerp-industry-in {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .myerp-industry-in {
-          animation: myerp-industry-in 0.5s ease-out 0.2s both;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .myerp-industry-in { animation: none; }
-        }
-      `}</style>
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 grid grid-cols-1 gap-4 lg:mb-10 lg:grid-cols-2 lg:items-end lg:gap-12">
@@ -82,61 +68,87 @@ export function IndustrySolutions() {
             const Icon = iconMap[item.id] ?? Factory;
             const accent = accentMap[item.accent] ?? accentMap.indigo;
 
-            const panelBase =
-              "relative overflow-hidden rounded-3xl bg-[#0B132B] transition-all duration-500 ease-in-out";
-            const panelSize = isActive
-              ? "h-[560px] sm:h-[500px] lg:h-[430px] lg:flex-[10_1_0%] shadow-xl shadow-slate-900/15"
-              : "h-[76px] lg:h-[430px] lg:flex-[1_1_0%] lg:min-w-[88px]";
+            // Panel selalu dirender sebagai elemen yang sama agar lebar bisa beranimasi mulus
+            const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+              if (!isActive && (e.key === "Enter" || e.key === " ")) {
+                e.preventDefault();
+                setActiveId(item.id);
+              }
+            };
 
-            const backgroundImage = (
-              <>
-                <Image
-                  src={item.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 80vw, 100vw"
-                  className="object-cover"
-                />
-                {isActive ? (
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#0B132B]/85 via-[#0B132B]/92 to-[#0B132B]" />
-                )}
-              </>
-            );
-
-            // Panel tidak aktif: tombol untuk membuka panel
-            if (!isActive) {
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setActiveId(item.id)}
-                  aria-expanded={false}
-                  aria-label={item.title}
-                  className={`${panelBase} ${panelSize} group cursor-pointer text-left`}
-                >
-                  {backgroundImage}
-                  <div className="relative z-10 flex h-full flex-row items-center gap-3 px-4 lg:flex-col lg:gap-0 lg:px-0 lg:py-5">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition-colors group-hover:bg-white/20">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <span className="flex lg:flex-1 lg:items-center">
-                      <span className="whitespace-nowrap text-sm font-bold text-white lg:[writing-mode:vertical-rl] lg:rotate-180">
-                        {item.title}
-                      </span>
-                    </span>
-                  </div>
-                </button>
-              );
-            }
-
-            // Panel aktif: tampil penuh dengan kartu kaca
             return (
-              <div key={item.id} className={`${panelBase} ${panelSize}`} aria-expanded={true}>
-                {backgroundImage}
+              <div
+                key={item.id}
+                role={isActive ? undefined : "button"}
+                tabIndex={isActive ? -1 : 0}
+                aria-label={isActive ? undefined : item.title}
+                aria-expanded={isActive}
+                onClick={() => {
+                  if (!isActive) setActiveId(item.id);
+                }}
+                onKeyDown={handleKeyDown}
+                className={`group relative overflow-hidden rounded-3xl bg-[#0B132B] transition-[flex-grow,height,box-shadow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  isActive
+                    ? "h-[560px] sm:h-[500px] lg:h-[430px] lg:flex-[10_1_0%] shadow-xl shadow-slate-900/15"
+                    : "h-[76px] cursor-pointer lg:h-[430px] lg:flex-[1_1_0%] lg:min-w-[88px] shadow-none"
+                }`}
+              >
+                {/* Gambar: zoom out saat aktif, zoom in saat tidak aktif */}
+                <div
+                  className={`absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    isActive ? "scale-100" : "scale-125 group-hover:scale-[1.18]"
+                  }`}
+                >
+                  <Image
+                    src={item.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 80vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
 
-                <div className="myerp-industry-in absolute inset-x-3 bottom-3 rounded-2xl border border-white/20 bg-slate-900/45 p-4 text-white backdrop-blur-md sm:inset-x-4 sm:bottom-4 sm:p-5 lg:inset-x-auto lg:bottom-7 lg:left-7 lg:w-[min(620px,calc(100%-3.5rem))]">
+                {/* Lapisan gelap panel aktif (tipis) */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent transition-opacity duration-700 ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+
+                {/* Lapisan gelap panel tidak aktif (pekat) */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-b from-[#0B132B]/85 via-[#0B132B]/92 to-[#0B132B] transition-opacity duration-700 ${
+                    isActive ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+
+                {/* Label panel tidak aktif: ikon + judul vertikal */}
+                <div
+                  className={`absolute inset-0 z-10 flex flex-row items-center gap-3 px-4 transition-opacity duration-500 lg:flex-col lg:gap-0 lg:px-0 lg:py-5 ${
+                    isActive
+                      ? "pointer-events-none opacity-0 delay-0"
+                      : "opacity-100 delay-300"
+                  }`}
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition-colors group-hover:bg-white/20">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="flex lg:flex-1 lg:items-center">
+                    <span className="whitespace-nowrap text-sm font-bold text-white lg:[writing-mode:vertical-rl] lg:rotate-180">
+                      {item.title}
+                    </span>
+                  </span>
+                </div>
+
+                {/* Kartu kaca panel aktif: fade + naik pelan, muncul setelah panel melebar */}
+                <div
+                  aria-hidden={!isActive}
+                  className={`absolute inset-x-3 bottom-3 z-10 rounded-2xl border border-white/20 bg-slate-900/45 p-4 text-white backdrop-blur-md transition-all duration-700 ease-out sm:inset-x-4 sm:bottom-4 sm:p-5 lg:inset-x-auto lg:bottom-7 lg:left-7 lg:w-[min(620px,calc(100%-3.5rem))] ${
+                    isActive
+                      ? "translate-y-0 opacity-100 delay-300"
+                      : "pointer-events-none translate-y-6 opacity-0 delay-0"
+                  }`}
+                >
                   <div className="flex items-center gap-3">
                     <span
                       className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white ${accent.icon}`}
@@ -175,6 +187,8 @@ export function IndustrySolutions() {
 
                   <Link
                     href={item.href}
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={(e) => e.stopPropagation()}
                     className={`mt-4 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold text-white shadow-md transition-colors ${accent.button}`}
                   >
                     <span>{item.ctaText}</span>
