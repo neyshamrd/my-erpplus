@@ -1,402 +1,332 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import {
-  ChevronDown,
-  Globe,
-  Menu,
-  X,
-  Building2,
-  ShieldCheck,
-  Award,
-  Wallet,
-  Boxes,
-  ShoppingCart,
-  Factory,
-  Layers,
-  HelpCircle,
-  Headphones,
-  FileText,
-} from "lucide-react";
-import { MyErpPlusLogo } from "./brand-logos";
-import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/lib/content-data";
+import * as Lucide from "lucide-react";
 
-interface NavDropdownItem {
-  title: string;
-  icon: React.ElementType;
-}
+/* -------------------------------------------------------------
+   Helper: Color Mapper untuk Tailwind class (mencegah JIT purge)
+   ------------------------------------------------------------- */
+const getColorClasses = (colorName?: string) => {
+  // Jika warna berupa kelas Tailwind langsung (misal: "text-orange-500")
+  if (colorName?.startsWith("text-")) {
+    return {
+      bg: "bg-slate-50",
+      text: colorName,
+    };
+  }
 
-const perusahaanItems: NavDropdownItem[] = [
-  {
-    title: "Tentang MyERP Plus",
-    icon: Building2,
-  },
-  {
-    title: "Portofolio",
-    icon: Award,
-  },
-];
+  // Pemetaan warna soft background & icon text
+  switch (colorName) {
+    case "emerald":
+      return { bg: "bg-emerald-50", text: "text-emerald-600" };
+    case "indigo":
+      return { bg: "bg-indigo-50", text: "text-indigo-600" };
+    case "amber":
+      return { bg: "bg-amber-50", text: "text-amber-600" };
+    case "cyan":
+      return { bg: "bg-cyan-50", text: "text-cyan-600" };
+    case "purple":
+      return { bg: "bg-purple-50", text: "text-purple-600" };
+    case "blue":
+      return { bg: "bg-blue-50", text: "text-blue-600" };
+    case "teal":
+      return { bg: "bg-teal-50", text: "text-teal-600" };
+    case "rose":
+      return { bg: "bg-rose-50", text: "text-rose-600" };
+    default:
+      return { bg: "bg-slate-100", text: "text-slate-600" };
+  }
+};
 
-const layananItems: NavDropdownItem[] = [
-  {
-    title: "ERP Keuangan",
-    icon: Wallet,
-  },
-  {
-    title: "ERP Dagang",
-    icon: Boxes,
-  },
-  {
-    title: "ERP Pabrik",
-    icon: ShoppingCart,
-  },
-  {
-    title: "Layanan Lainnya",
-    icon: Layers,
-  },
-];
+/* -------------------------------------------------------------
+   Utility: Render Lucide Icon by string name
+   ------------------------------------------------------------- */
+const Icon = ({ name, className }: { name: string; className?: string }) => {
+  // @ts-ignore – dynamic access
+  const Comp = (Lucide as any)[name];
+  return Comp ? <Comp className={className} /> : <Lucide.Box className={className} />;
+};
 
-const supportItems: NavDropdownItem[] = [
-  {
-    title: "Tutorial",
-    icon: HelpCircle,
-  },
-  {
-    title: "FAQ",
-    icon: Headphones,
-  },
-];
-
+/* -------------------------------------------------------------
+   Navbar Component
+   ------------------------------------------------------------- */
 export function Navbar() {
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState<"ID" | "EN">("ID");
+  // -1 = no dropdown, >=0 = index of opened dropdown, -2 = mobile sheet open
+  const [open, setOpen] = useState<number>(-1);
+
+  const toggleDropdown = (idx: number) => setOpen(open === idx ? -1 : idx);
+  const closeAll = () => setOpen(-1);
+
+  /* ---------------------------------------------------------
+     Logo MYERP+
+   --------------------------------------------------------- */
+  const BrandLogo = (
+    <Link href="/" className="flex items-center gap-0.5 group">
+      <span className="text-2xl font-black tracking-tight text-slate-900">
+        {siteConfig.nav.logo.text}
+      </span>
+      {/* Red circle '+' badge */}
+      <div className="relative ml-0.5 flex items-center justify-center w-6 h-6 rounded-full bg-red-600 text-white font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
+        <span>{siteConfig.nav.logo.tag}</span>
+      </div>
+    </Link>
+  );
+
+  /* ---------------------------------------------------------
+     Desktop Navigation & Dropdowns
+   --------------------------------------------------------- */
+  const desktopNav = (
+    <ul className="hidden lg:flex items-center gap-1 xl:gap-2">
+      {siteConfig.nav.mainNav.map((item, idx) => {
+        const hasDropdown = Array.isArray(item.items) && item.items.length > 0;
+        const isOpen = open === idx;
+
+        return (
+          <li
+            key={item.title}
+            className="relative"
+            onMouseEnter={() => hasDropdown && setOpen(idx)}
+            onMouseLeave={() => hasDropdown && setOpen(-1)}
+          >
+            {/* Main Link / Trigger */}
+            {hasDropdown ? (
+              <button
+                type="button"
+                onClick={() => toggleDropdown(idx)}
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-150 ${
+                  isOpen
+                    ? "bg-slate-100/80 text-slate-900"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+              >
+                <span>{item.title}</span>
+                <Lucide.ChevronDown
+                  className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                    isOpen ? "rotate-180 text-slate-700" : ""
+                  }`}
+                />
+              </button>
+            ) : (
+              <Link
+                href={item.href || "#"}
+                className="block px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-all duration-150"
+              >
+                {item.title}
+              </Link>
+            )}
+
+            {/* Dropdown Menu Box */}
+            {hasDropdown && (
+              <div
+                className={`absolute left-0 top-full pt-2 z-30 transition-all duration-200 origin-top-left ${
+                  isOpen
+                    ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+                    : "opacity-0 scale-95 pointer-events-none -translate-y-2"
+                }`}
+              >
+                <div
+                  className={`bg-white shadow-2xl shadow-slate-900/10 rounded-2xl border border-slate-100 p-5 ${
+                    item.sectionTitle ? "w-[560px]" : item.items!.length > 3 ? "w-[620px]" : "w-[440px]"
+                  }`}
+                  role="menu"
+                  aria-label={item.title}
+                >
+                  {/* Optional Section Title (misal: "STUDI KASUS 11 SEKTOR INDUSTRI") */}
+                  {item.sectionTitle && (
+                    <div className="text-[11px] font-bold tracking-wider text-slate-400 uppercase mb-3 px-2">
+                      {item.sectionTitle}
+                    </div>
+                  )}
+
+                  {/* Grid Layout untuk Item Dropdown */}
+                  <div
+                    className={`grid gap-2 ${
+                      item.sectionTitle
+                        ? "grid-cols-2"
+                        : item.items!.length > 3
+                        ? "grid-cols-2"
+                        : "grid-cols-1"
+                    }`}
+                  >
+                    {item.items!.map((sub) => {
+                      const colors = getColorClasses(sub.color);
+
+                      return (
+                        <Link
+                          key={sub.title}
+                          href={sub.href}
+                          onClick={closeAll}
+                          className="group flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50/80 transition-all duration-150"
+                        >
+                          {/* Icon Container */}
+                          <div
+                            className={`flex items-center justify-center shrink-0 h-9 w-9 rounded-xl ${colors.bg} ${colors.text} transition-transform duration-150 group-hover:scale-105`}
+                          >
+                            <Icon name={sub.iconName} className="h-4 w-4 stroke-[2.2]" />
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex flex-col pt-0.5">
+                            <span className="text-[13px] font-bold text-slate-800 leading-snug group-hover:text-blue-600 transition-colors">
+                              {sub.title}
+                            </span>
+                            {'description' in sub && sub.description && (
+                              <span className="mt-0.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
+                                {sub.description}
+                              </span>
+                            )}
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+
+  /* ---------------------------------------------------------
+     Mobile Navigation Sheet
+   --------------------------------------------------------- */
+  const mobileMenu = (
+    <div
+      className={`fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 transition-opacity duration-300 ${
+        open === -2 ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+      onClick={closeAll}
+    >
+      <aside
+        className={`fixed inset-y-0 right-0 w-80 bg-white p-6 overflow-y-auto shadow-2xl transition-transform duration-300 ease-out ${
+          open === -2 ? "translate-x-0" : "translate-x-full"
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Mobile Header */}
+        <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+          {BrandLogo}
+          <button
+            onClick={closeAll}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+          >
+            <Lucide.X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Mobile Menu List */}
+        <ul className="flex flex-col gap-2">
+          {siteConfig.nav.mainNav.map((item, idx) => {
+            const hasDropdown = Array.isArray(item.items) && item.items.length > 0;
+            const isOpen = open === idx;
+
+            return (
+              <li key={item.title} className="border-b border-slate-50 pb-2">
+                {hasDropdown ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => toggleDropdown(idx)}
+                      className="w-full flex justify-between items-center py-2 text-sm font-bold text-slate-800"
+                    >
+                      <span>{item.title}</span>
+                      <Lucide.ChevronDown
+                        className={`h-4 w-4 text-slate-400 transition-transform ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Submenu Items */}
+                    {isOpen && (
+                      <div className="mt-1 ml-2 space-y-1 pl-2 border-l-2 border-slate-100">
+                        {item.items!.map((sub) => {
+                          const colors = getColorClasses(sub.color);
+                          return (
+                            <Link
+                              key={sub.title}
+                              href={sub.href}
+                              onClick={closeAll}
+                              className="flex items-center gap-2.5 p-2 rounded-lg text-xs font-medium text-slate-700 hover:bg-slate-50"
+                            >
+                              <div
+                                className={`flex items-center justify-center h-6 w-6 rounded-md ${colors.bg} ${colors.text}`}
+                              >
+                                <Icon name={sub.iconName} className="h-3.5 w-3.5" />
+                              </div>
+                              <span>{sub.title}</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href || "#"}
+                    onClick={closeAll}
+                    className="block py-2 text-sm font-bold text-slate-800 hover:text-blue-600"
+                  >
+                    {item.title}
+                  </Link>
+                )}
+              </li>
+            );
+          })}
+
+          {/* CTA Mobile Button */}
+          <li className="pt-4">
+            <Link
+              href={siteConfig.nav.ctaButton.href}
+              onClick={closeAll}
+              className="flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-3 rounded-xl shadow-lg shadow-blue-500/20 transition"
+            >
+              <span>{siteConfig.nav.ctaButton.text}</span>
+              <Lucide.ArrowRight className="w-4 h-4" />
+            </Link>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  );
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 transition-all duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        
-        {/* Left: Brand Logo & Navigation Links */}
-        <div className="flex items-center gap-7 xl:gap-9">
-          <Link href="/" className="hover:opacity-90 transition-opacity">
-            <MyErpPlusLogo />
-          </Link>
+    <nav className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3.5">
+        {/* Left: Brand Logo */}
+        {BrandLogo}
 
-          {/* Desktop Navigation matching MyERP Plus: Beranda, Perusahaan, Layanan, Studi Kasus, Support, Trial, Kontak */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-6">
-            
-            {/* 1. Beranda */}
-            <Link
-              href="/"
-              className="text-sm font-semibold text-blue-600 py-2 transition-colors"
-            >
-              Beranda
-            </Link>
+        {/* Center: Desktop Navigation */}
+        {desktopNav}
 
-            {/* 2. Perusahaan (Dropdown) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("perusahaan")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button
-                type="button"
-                className="flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-blue-600 py-2 transition-colors cursor-pointer"
-              >
-                <span>Perusahaan</span>
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    activeDropdown === "perusahaan" ? "rotate-180 text-blue-600" : "text-slate-400"
-                  }`}
-                />
-              </button>
-
-              {activeDropdown === "perusahaan" && (
-                <div className="absolute top-full left-0 w-80 pt-2 shadow-2xl animate-in fade-in-50 zoom-in-95 duration-150">
-                  <div className="bg-white rounded-xl border border-slate-100 p-2 shadow-lg ring-1 ring-black/5">
-                    {perusahaanItems.map((item, idx) => (
-                      <Link
-                        key={idx}
-                        href="#company"
-                        className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors group"
-                      >
-                        <div className="p-2 rounded-md bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                          <item.icon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">
-                            {item.title}
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 3. Layanan (Dropdown) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("layanan")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button
-                type="button"
-                className="flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-blue-600 py-2 transition-colors cursor-pointer"
-              >
-                <span>Layanan</span>
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    activeDropdown === "layanan" ? "rotate-180 text-blue-600" : "text-slate-400"
-                  }`}
-                />
-              </button>
-
-              {activeDropdown === "layanan" && (
-                <div className="absolute top-full -left-12 w-88 pt-2 shadow-2xl animate-in fade-in-50 zoom-in-95 duration-150">
-                  <div className="bg-white rounded-xl border border-slate-100 p-2 shadow-lg ring-1 ring-black/5">
-                    {layananItems.map((item, idx) => (
-                      <Link
-                        key={idx}
-                        href="#services"
-                        className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors group"
-                      >
-                        <div className="p-2 rounded-md bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                          <item.icon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">
-                            {item.title}
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 4. Studi Kasus */}
-            <Link
-              href="#case-studies"
-              className="text-sm font-medium text-slate-700 hover:text-blue-600 py-2 transition-colors"
-            >
-              Studi Kasus
-            </Link>
-
-            {/* 5. Support (Dropdown) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setActiveDropdown("support")}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button
-                type="button"
-                className="flex items-center gap-1.5 text-sm font-medium text-slate-700 hover:text-blue-600 py-2 transition-colors cursor-pointer"
-              >
-                <span>Support</span>
-                <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    activeDropdown === "support" ? "rotate-180 text-blue-600" : "text-slate-400"
-                  }`}
-                />
-              </button>
-
-              {activeDropdown === "support" && (
-                <div className="absolute top-full left-0 w-80 pt-2 shadow-2xl animate-in fade-in-50 zoom-in-95 duration-150">
-                  <div className="bg-white rounded-xl border border-slate-100 p-2 shadow-lg ring-1 ring-black/5">
-                    {supportItems.map((item, idx) => (
-                      <Link
-                        key={idx}
-                        href="#support"
-                        className="flex items-start gap-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors group"
-                      >
-                        <div className="p-2 rounded-md bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                          <item.icon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">
-                            {item.title}
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* 6. Trial */}
-            <Link
-              href="#trial"
-              className="text-sm font-medium text-slate-700 hover:text-blue-600 py-2 transition-colors"
-            >
-              Trial
-            </Link>
-
-            {/* 7. Kontak */}
-            <Link
-              href="#contact"
-              className="text-sm font-medium text-slate-700 hover:text-blue-600 py-2 transition-colors"
-            >
-              Kontak
-            </Link>
-          </nav>
-        </div>
-
-        {/* Right: Language Selector & Clean CTA Layout */}
-        <div className="hidden lg:flex items-center gap-3.5 xl:gap-4">
-          {/* Language Selector */}
-          <button
-            type="button"
-            onClick={() => setCurrentLang(currentLang === "ID" ? "EN" : "ID")}
-            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-blue-600 px-2 py-1.5 rounded-md hover:bg-slate-100/60 transition-colors cursor-pointer"
-            title="Ganti Bahasa"
-          >
-            <Globe className="w-3.5 h-3.5 text-slate-500" />
-            <span>{currentLang}</span>
-            <ChevronDown className="w-3 h-3 text-slate-400" />
-          </button>
-
-          {/* Secondary Action: Jadwalkan Demo */}
+        {/* Right: CTA Button */}
+        <div className="hidden lg:flex items-center">
           <Link
-            href="#demo"
-            className={buttonVariants({
-              variant: "outline",
-              className:
-                "border-slate-300 text-slate-800 hover:bg-slate-50 hover:border-slate-400 font-semibold text-sm px-4 h-10 rounded-lg transition-all",
-            })}
+            href={siteConfig.nav.ctaButton.href}
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
           >
-            Jadwalkan Demo
-          </Link>
-
-          {/* Primary Action: Coba Gratis */}
-          <Link
-            href="#trial"
-            className={buttonVariants({
-              className:
-                "bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-5 h-10 rounded-lg shadow-sm hover:shadow transition-all",
-            })}
-          >
-            Coba Gratis
+            <span>{siteConfig.nav.ctaButton.text}</span>
+            <Lucide.ArrowRight className="h-4 w-4 stroke-[2.5]" />
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-3 lg:hidden">
-          <Link
-            href="#trial"
-            className={buttonVariants({
-              size: "sm",
-              className:
-                "bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs px-3.5 h-8 rounded-md",
-            })}
-          >
-            Coba Gratis
-          </Link>
-
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-700 hover:text-blue-600 rounded-lg hover:bg-slate-100 transition-colors"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+        {/* Mobile menu toggle */}
+        <button
+          type="button"
+          className="lg:hidden flex items-center justify-center p-2 rounded-xl text-slate-700 hover:bg-slate-100"
+          onClick={() => setOpen(open === -2 ? -1 : -2)}
+          aria-label="Toggle menu"
+        >
+          <Lucide.Menu className="h-6 w-6" />
+        </button>
       </div>
 
-      {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-6 space-y-4 shadow-lg animate-in slide-in-from-top-2 duration-200">
-          <div className="flex flex-col space-y-2.5 font-medium text-slate-700 text-sm">
-            <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-lg text-blue-600 font-semibold bg-blue-50/60"
-            >
-              Beranda
-            </Link>
-            <Link
-              href="#company"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-lg hover:bg-slate-50 flex items-center justify-between"
-            >
-              <span>Perusahaan</span>
-              <ChevronDown className="w-4 h-4 text-slate-400" />
-            </Link>
-            <Link
-              href="#services"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-lg hover:bg-slate-50 flex items-center justify-between"
-            >
-              <span>Layanan</span>
-              <ChevronDown className="w-4 h-4 text-slate-400" />
-            </Link>
-            <Link
-              href="#case-studies"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-lg hover:bg-slate-50"
-            >
-              Studi Kasus
-            </Link>
-            <Link
-              href="#support"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-lg hover:bg-slate-50 flex items-center justify-between"
-            >
-              <span>Support</span>
-              <ChevronDown className="w-4 h-4 text-slate-400" />
-            </Link>
-            <Link
-              href="#trial"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-lg hover:bg-slate-50"
-            >
-              Trial
-            </Link>
-            <Link
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-lg hover:bg-slate-50"
-            >
-              Kontak
-            </Link>
-          </div>
-
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-3">
-            <div className="flex items-center justify-between px-3 py-1 text-sm text-slate-600">
-              <span className="flex items-center gap-2">
-                <Globe className="w-4 h-4 text-slate-400" /> Bahasa
-              </span>
-              <span className="font-semibold text-slate-900">ID (Bahasa Indonesia)</span>
-            </div>
-
-            <Link
-              href="#demo"
-              onClick={() => setMobileMenuOpen(false)}
-              className={buttonVariants({
-                variant: "outline",
-                className: "w-full border-slate-300 text-slate-800 hover:bg-slate-50 font-semibold justify-center",
-              })}
-            >
-              Jadwalkan Demo
-            </Link>
-
-            <Link
-              href="#trial"
-              onClick={() => setMobileMenuOpen(false)}
-              className={buttonVariants({
-                className: "w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold justify-center",
-              })}
-            >
-              Coba Gratis Sekarang
-            </Link>
-          </div>
-        </div>
-      )}
-    </header>
+      {/* Mobile Sheet Overlay */}
+      {mobileMenu}
+    </nav>
   );
 }

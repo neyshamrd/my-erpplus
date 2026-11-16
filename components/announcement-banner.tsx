@@ -10,10 +10,10 @@ export function AnnouncementBanner() {
         {/* Sisi Kiri: Badge & Teks Utama */}
         <div className="flex items-center gap-3 flex-wrap">
           <span className="bg-[#132238] border border-blue-500/30 text-blue-400 px-3 py-1 rounded-full text-[11px] font-medium tracking-wide">
-            Rilis v5.0 MRP II
+            {siteConfig.announcement.realese}
           </span>
           <span className="text-slate-300">
-            {siteConfig.hero.title || "Arsitektur Single Database Terintegrasi untuk Manufaktur & Distribusi Skala Nasional."}
+            {siteConfig.announcement.title}
           </span>
         </div>
 
