@@ -1,281 +1,206 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  IndoManufakturLogo,
-  CentralDistribusiLogo,
-  SastroBogaLogo,
-  NusantaraMedikaLogo,
-  KaryaMultiNiagaLogo,
-} from "./brand-logos";
-import { X, ArrowRight, TrendingUp } from "lucide-react";
+import React from "react";
+import Image from "next/image";
+import { ShieldCheck, FileCheck2 } from "lucide-react";
+import { siteConfig } from "@/lib/content-data";
 
-interface CaseStudy {
-  id: string;
-  client: string;
-  industry: string;
-  metrics: string;
-  description: string;
-  quote: string;
-}
-
-const caseStudiesData: Record<string, CaseStudy> = {
-  manufaktur: {
-    id: "manufaktur",
-    client: "PT. Prima Manufaktur Solusindo",
-    industry: "Manufaktur & Fabrikasi Komponen",
-    metrics: "Hemat 35% Biaya Overstock Bahan Baku",
-    description:
-      "Menerapkan modul Bill of Materials (BOM) dan Work Order MyERP Plus untuk menghitung kebutuhan bahan baku secara akurat dan mengontrol waste produksi.",
-    quote:
-      "“Dulu kami sering overstock bahan baku dan selisih laporan produksi. Sejak menggunakan MyERP Plus, perencanaan produksi dan HPP menjadi sangat presisi.”",
-  },
-  distribusi: {
-    id: "distribusi",
-    client: "Central Mega Distribusi",
-    industry: "Distribusi FMCG & Multi-Cabang",
-    metrics: "Sinkronisasi 14 Gudang Real-time",
-    description:
-      "Mengintegrasikan pencatatan mutasi barang antar gudang, surat jalan otomatis, dan penagihan piutang pelanggan di 14 titik distribusi nasional.",
-    quote:
-      "“Manajemen tidak perlu menunggu laporan rekap bulanan lagi. Data stok dan piutang toko terlihat langsung dalam satu dashboard cloud.”",
-  },
-  sastro: {
-    id: "sastro",
-    client: "Sastro Boga Foods Enterprise",
-    industry: "Pengolahan Makanan & F&B Retail",
-    metrics: "Closing Buku Finansial 4x Lebih Cepat",
-    description:
-      "Otomasi pencatatan jurnal kas keluar-masuk, rekonsiliasi bank otomatis, dan laporan laba rugi per divisi operasional.",
-    quote:
-      "“Proses tutup buku akhir bulan yang biasanya memakan waktu berminggu-minggu kini selesai dalam 2 hari kerja berkat auto-journaling MyERP Plus.”",
-  },
-  medika: {
-    id: "medika",
-    client: "Nusantara Medika Farma",
-    industry: "Alat Medis & Produk Farmasi",
-    metrics: "100% Kepatuhan Pajak & E-Faktur",
-    description:
-      "Integrasi perhitungan PPN, PPh, dan penomoran faktur pajak otomatis langsung dari invoice penjualan barang medis berstandar BPOM.",
-    quote:
-      "“Audit eksternal dan pelaporan pajak tahunan berjalan mulus tanpa temuan selisih faktur pajak berkat validasi otomatis sistem.”",
-  },
-  karya: {
-    id: "karya",
-    client: "Karya Multi Supply & Logistics",
-    industry: "Rantai Pasok & Pengadaan Logistik",
-    metrics: "Percepatan Siklus Order hingga 60%",
-    description:
-      "Digitalisasi proses Purchase Requisition (PR), Purchase Order (PO), hingga penerimaan barang di gudang dengan approval bertingkat.",
-    quote:
-      "“Persetujuan pembelian barang dapat dilakukan pimpinan via smartphone di mana saja tanpa menunggu dokumen fisik bertumpuk.”",
-  },
-};
-
-interface PartnerItem {
+type Client = {
   id: string;
   name: string;
-  category: string;
-  logo: React.ReactNode;
-  caseStudyKey: string;
+  logoSrc?: string;
+};
+
+// Data diambil dari lib/content-data.ts
+const { title: trustTitle, notes: trustNotes } = siteConfig.trust;
+const clients: Client[] = siteConfig.trust.clients;
+
+// Logo placeholder berbentuk SVG, diganti otomatis jika logoSrc diisi
+function ClientMark({ id }: { id: string }) {
+  switch (id) {
+    case "kawata":
+      return (
+        <svg viewBox="0 0 120 36" className="h-9 w-auto" aria-hidden="true">
+          <path d="M4 30 L16 6 L22 6 L10 30 Z" fill="#DC2626" />
+          <path d="M14 30 L26 6 L32 6 L20 30 Z" fill="#DC2626" opacity="0.85" />
+          <text x="34" y="20" fontSize="15" fontWeight="800" fontStyle="italic" fill="#1D4ED8" fontFamily="Arial, sans-serif">
+            KAWATA
+          </text>
+          <rect x="34" y="25" width="80" height="2" fill="#1D4ED8" />
+        </svg>
+      );
+    case "topla":
+      return (
+        <svg viewBox="0 0 40 40" className="h-10 w-10" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" fill="#1D4ED8" />
+          <circle cx="20" cy="20" r="14" fill="none" stroke="#FFFFFF" strokeWidth="1.5" />
+          <text x="20" y="27" textAnchor="middle" fontSize="20" fontWeight="800" fill="#FFFFFF" fontFamily="Arial, sans-serif">
+            P
+          </text>
+        </svg>
+      );
+    case "ikuyo":
+      return (
+        <svg viewBox="0 0 48 32" className="h-8 w-auto" aria-hidden="true">
+          <ellipse cx="24" cy="16" rx="18" ry="11" fill="#2563EB" transform="rotate(-20 24 16)" />
+          <ellipse cx="26" cy="15" rx="8" ry="4" fill="#FFFFFF" transform="rotate(-20 26 15)" />
+          <circle cx="14" cy="22" r="3" fill="#0EA5E9" />
+        </svg>
+      );
+    case "motasa":
+      return (
+        <svg viewBox="0 0 40 40" className="h-10 w-10" aria-hidden="true">
+          <path d="M20 4 C32 8 36 20 20 36 C4 20 8 8 20 4 Z" fill="#16A34A" />
+          <path d="M20 10 L20 30" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+          <path d="M20 18 L14 13 M20 23 L26 18" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      );
+    case "narumi":
+      return (
+        <svg viewBox="0 0 90 36" className="h-9 w-auto" aria-hidden="true">
+          <circle cx="16" cy="18" r="12" fill="none" stroke="#B91C1C" strokeWidth="3" />
+          <circle cx="16" cy="18" r="4" fill="#B91C1C" />
+          <text x="34" y="25" fontSize="20" fontWeight="800" fill="#0F172A" fontFamily="Arial, sans-serif">
+            NIM
+          </text>
+        </svg>
+      );
+    case "pci":
+      return (
+        <svg viewBox="0 0 40 40" className="h-10 w-10" aria-hidden="true">
+          <defs>
+            <linearGradient id="pciGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#D6B28F" />
+              <stop offset="100%" stopColor="#A9794F" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="36" height="36" rx="2" fill="url(#pciGold)" />
+          <rect x="6" y="6" width="28" height="28" fill="none" stroke="#F5E6D6" strokeWidth="1.5" />
+          <text x="20" y="26" textAnchor="middle" fontSize="14" fontWeight="700" fill="#FFF7ED" fontFamily="Georgia, serif">
+            PCI
+          </text>
+        </svg>
+      );
+    case "ujs":
+      return (
+        <svg viewBox="0 0 40 40" className="h-10 w-10" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" fill="#FFFFFF" stroke="#1F2937" strokeWidth="2" />
+          <path d="M20 6 L34 20 L20 34 L6 20 Z" fill="#DC2626" />
+          <path d="M20 12 L28 20 L20 28 L12 20 Z" fill="#FFFFFF" />
+          <path d="M20 16 L24 20 L20 24 L16 20 Z" fill="#DC2626" />
+        </svg>
+      );
+    case "npt":
+      return (
+        <svg viewBox="0 0 90 40" className="h-9 w-auto" aria-hidden="true">
+          {["N", "P", "T"].map((letter, i) => (
+            <g key={letter}>
+              <rect x={4 + i * 28} y="4" width="24" height="24" fill="#FFFFFF" stroke="#0F172A" strokeWidth="2" />
+              <text x={16 + i * 28} y="23" textAnchor="middle" fontSize="18" fontWeight="800" fill="#DC2626" fontFamily="Georgia, serif">
+                {letter}
+              </text>
+            </g>
+          ))}
+          <text x="45" y="37" textAnchor="middle" fontSize="6" fontWeight="700" fill="#0F172A" fontFamily="Arial, sans-serif">
+            EKSPEDISI DARAT
+          </text>
+        </svg>
+      );
+    default:
+      return null;
+  }
 }
 
-const partnerCompanies: PartnerItem[] = [
-  {
-    id: "manufaktur",
-    name: "Prima Manufaktur",
-    category: "Manufaktur & Fabrikasi",
-    logo: <IndoManufakturLogo className="scale-95" />,
-    caseStudyKey: "manufaktur",
-  },
-  {
-    id: "distribusi",
-    name: "Central Mega Distribusi",
-    category: "Distribusi FMCG & Cabang",
-    logo: <CentralDistribusiLogo className="scale-95" />,
-    caseStudyKey: "distribusi",
-  },
-  {
-    id: "sastro",
-    name: "Sastro Boga Foods",
-    category: "Pengolahan Makanan & F&B",
-    logo: <SastroBogaLogo className="scale-95" />,
-    caseStudyKey: "sastro",
-  },
-  {
-    id: "medika",
-    name: "Nusantara Medika Farma",
-    category: "Alat Medis & Farmasi",
-    logo: <NusantaraMedikaLogo className="scale-95" />,
-    caseStudyKey: "medika",
-  },
-  {
-    id: "karya",
-    name: "Karya Multi Supply & Logistics",
-    category: "Rantai Pasok & Logistik",
-    logo: <KaryaMultiNiagaLogo className="scale-95" />,
-    caseStudyKey: "karya",
-  },
-];
+function ClientCard({ client }: { client: Client }) {
+  return (
+    <div className="flex h-[96px] w-[192px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-2xl border border-slate-200 bg-white px-3 shadow-[0_1px_4px_rgba(15,23,42,0.04)] transition-shadow duration-200 hover:shadow-md">
+      <div className="flex h-10 items-center justify-center">
+        {client.logoSrc ? (
+          <Image
+            src={client.logoSrc}
+            alt={client.name}
+            width={120}
+            height={40}
+            className="h-10 w-auto object-contain"
+          />
+        ) : (
+          <ClientMark id={client.id} />
+        )}
+      </div>
+      <span className="w-full truncate text-center text-[11px] font-semibold text-slate-700">
+        {client.name}
+      </span>
+    </div>
+  );
+}
 
 export function TrustSection() {
-  const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null);
-
-  // Lock body scroll and listen for Escape key when modal is open
-  useEffect(() => {
-    if (!selectedCase) return;
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setSelectedCase(null);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedCase]);
-
   return (
-    <section className="w-full overflow-hidden py-16 bg-white border-t border-slate-100 select-none">
-      <div className="w-full">
-        {/* Section Title */}
-        <h2 className="text-center text-sm sm:text-base font-semibold text-slate-700 tracking-tight mb-10 sm:mb-12 px-4">
-          Dipercaya oleh 10,000+ Bisnis, Manufaktur & Distributor di Indonesia
+    <section
+      id="trust"
+      className="w-full select-none overflow-hidden border-t border-slate-100 bg-white py-10 sm:py-12"
+    >
+      {/* Keyframes marquee: 3 set berurutan, geser 1/3 lalu ulang agar mulus */}
+      <style>{`
+        @keyframes myerp-marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-33.3333%); }
+        }
+        .myerp-marquee-track {
+          animation: myerp-marquee 40s linear infinite;
+          will-change: transform;
+        }
+        .myerp-marquee-wrap:hover .myerp-marquee-track {
+          animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .myerp-marquee-track { animation: none; }
+          .myerp-marquee-wrap { overflow-x: auto; }
+        }
+      `}</style>
+
+      {/* Semua konten dibatasi lebar yang sama dengan hero section */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-7 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 sm:text-xs">
+          {trustTitle}
         </h2>
 
-        {/* Marquee Outer Container with Edge Fades */}
-        <div className="relative w-full overflow-hidden marquee-outer-container motion-reduce:overflow-x-auto">
-          {/* Subtle Gradient Fade Masks at Left and Right Edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10 motion-reduce:hidden" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10 motion-reduce:hidden" />
+        {/* Marquee dibatasi: tidak full kiri-kanan layar */}
+        <div className="myerp-marquee-wrap relative w-full overflow-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-white to-transparent sm:w-16" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white to-transparent sm:w-16" />
 
-          {/* Marquee Track: Tripled sets for a seamless 33.33% continuous loop */}
-          <div className="flex w-max animate-marquee hover:[animation-play-state:paused] will-change-transform motion-reduce:animate-none motion-reduce:transform-none">
+          <div className="myerp-marquee-track flex w-max py-1">
             {[0, 1, 2].map((setIndex) => (
               <div
-                key={`marquee-set-${setIndex}`}
-                className="flex shrink-0 items-center gap-6 pr-6"
+                key={`set-${setIndex}`}
+                className="flex shrink-0 items-center gap-4 pr-4"
                 aria-hidden={setIndex > 0 ? true : undefined}
               >
-                {partnerCompanies.map((partner) => (
-                  <div
-                    key={`${partner.id}-set-${setIndex}`}
-                    className="bg-white border border-slate-200/80 rounded-2xl p-6 min-w-[240px] shadow-sm hover:shadow-md transition-shadow flex flex-col items-center justify-between gap-4 text-center shrink-0"
-                  >
-                    {/* Logo Display */}
-                    <div className="h-12 flex items-center justify-center grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-300">
-                      {partner.logo}
-                    </div>
-
-                    {/* Company Name & Sector */}
-                    <div className="space-y-1">
-                      <h3 className="font-bold text-slate-800 text-sm tracking-tight">
-                        {partner.name}
-                      </h3>
-                      <p className="text-[11px] text-slate-500 font-medium">
-                        {partner.category}
-                      </p>
-                    </div>
-
-                    {/* Case Study Pill Action Button */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedCase(caseStudiesData[partner.caseStudyKey])}
-                      className="rounded-full bg-slate-900 text-white text-xs font-semibold px-4 py-1.5 hover:bg-blue-600 transition-colors cursor-pointer"
-                    >
-                      Studi kasus
-                    </button>
-                  </div>
+                {clients.map((client) => (
+                  <ClientCard key={`${client.id}-${setIndex}`} client={client} />
                 ))}
               </div>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Case Study Modal Drawer */}
-      {selectedCase && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="case-study-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-modal-overlay-in"
-          onClick={() => setSelectedCase(null)}
-        >
-          <div
-            className="relative w-full max-w-lg bg-white rounded-2xl p-6 sm:p-7 shadow-2xl border border-slate-100 animate-modal-card-in"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-blue-600">
-                  Studi Kasus MyERP Plus
-                </span>
-                <h3 id="case-study-title" className="text-lg font-bold text-slate-900">
-                  {selectedCase.client}
-                </h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => setSelectedCase(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
-                aria-label="Tutup studi kasus"
-              >
-                <X className="w-5 h-5" />
-              </button>
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 border-t border-slate-100 pt-6 sm:flex-row sm:gap-10">
+          {trustNotes.map((note) => (
+            <div key={note.id} className="flex items-center gap-2 text-center sm:text-left">
+              {note.id === "security" ? (
+                <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-600" />
+              ) : (
+                <FileCheck2 className="h-4 w-4 shrink-0 text-indigo-600" />
+              )}
+              <p className="text-[11px] text-slate-500 sm:text-xs">
+                <span className="font-bold text-slate-800">{note.label}</span>{" "}
+                {note.text}
+              </p>
             </div>
-
-            <div className="py-5 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-bold text-sm border border-blue-100">
-                <TrendingUp className="w-4 h-4" />
-                <span>Dampak Bisnis: {selectedCase.metrics}</span>
-              </div>
-
-              <div>
-                <span className="text-xs font-medium text-slate-400">Industri</span>
-                <p className="text-sm font-semibold text-slate-800">
-                  {selectedCase.industry}
-                </p>
-              </div>
-
-              <div>
-                <span className="text-xs font-medium text-slate-400">Implementasi Solusi Cloud</span>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  {selectedCase.description}
-                </p>
-              </div>
-
-              <blockquote className="bg-slate-50 p-4 rounded-xl border-l-4 border-blue-600 text-xs sm:text-sm italic text-slate-700">
-                {selectedCase.quote}
-              </blockquote>
-            </div>
-
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
-              <button
-                type="button"
-                onClick={() => setSelectedCase(null)}
-                className="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-900 cursor-pointer"
-              >
-                Tutup
-              </button>
-              <a
-                href="#trial"
-                onClick={() => setSelectedCase(null)}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-xs"
-              >
-                <span>Konsultasikan Kebutuhan ERP Anda</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
-      )}
+      </div>
     </section>
   );
 }

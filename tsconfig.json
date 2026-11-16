@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "baseUrl": ".", // added to fix SWC UNC path issue
+    "baseUrl": "./", // adjusted for Windows UNC path
     "ignoreDeprecations": "6.0",
     "plugins": [
       {

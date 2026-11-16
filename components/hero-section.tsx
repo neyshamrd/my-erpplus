@@ -1,138 +1,102 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { Star, Sparkles, ArrowRight } from "lucide-react";
-import {
-  CapterraIcon,
-  SoftwareAdviceIcon,
-  G2Icon,
-} from "./brand-logos";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowRight, Check } from "lucide-react";
+import { siteConfig } from "@/lib/content-data";
 import { HeroIllustration } from "./hero-illustration";
-import { buttonVariants } from "@/components/ui/button";
 
 export function HeroSection() {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#f7fbff] to-white pt-6 pb-12 sm:pt-10 sm:pb-16 lg:pt-14 lg:pb-20">
-      {/* Background Soft Mesh Ambient Lighting */}
-      <div className="absolute top-0 right-0 w-[550px] h-[550px] bg-gradient-to-bl from-blue-200/40 via-sky-100/30 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-sky-100/20 via-blue-50/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const { hero } = siteConfig;
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* ========================================================
-              LEFT COLUMN: HERO COPY & CONVERSION ACTIONS
-             ======================================================== */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-start text-left">
-            
-            {/* Pill Badge matching MyERP Plus screenshot */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EBF3FE] text-blue-700 text-xs sm:text-[13px] font-semibold border border-blue-200/70 shadow-xs mb-5 transition-transform hover:scale-102">
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              <span>Solusi ERP Berbasis Cloud Yang Menciptakan Keunggulan Bisnis</span>
+  // Kirim email ke halaman demo sebagai query
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const query = email.trim() ? `?email=${encodeURIComponent(email.trim())}` : "";
+    router.push(`${siteConfig.nav.ctaButton.href}${query}`);
+  };
+
+  return (
+    <section
+      className="relative overflow-hidden bg-white border-b border-slate-100"
+      style={{
+        backgroundImage:
+          "radial-gradient(rgba(148,163,184,0.25) 1px, transparent 1px)",
+        backgroundSize: "24px 24px",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0 items-center">
+          {/* Kolom kiri */}
+          <div className="lg:col-span-6 flex flex-col items-start text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm mb-5">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+              <span className="text-[11px] sm:text-xs font-semibold text-slate-800">
+                {hero.badge}
+              </span>
             </div>
 
-            {/* Main Headline: Exact text requested */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[42px] xl:text-[46px] font-extrabold text-[#0B132B] tracking-tight leading-[1.16] mb-5">
-              Atur Keuangan Bisnis Secara Praktis Dengan MyERP Plus
+            {/* Judul */}
+            <h1 className="text-3xl sm:text-4xl xl:text-[50px] font-extrabold text-[#0B132B] tracking-tight leading-[1.1] mb-5">
+              <span className="block">{hero.titleLine1}</span>
+              <span className="block">{hero.tittleLine2}</span>
+              <span className="block text-blue-600">{hero.titleHighlight}</span>
+              <span className="block">{hero.titleLine3}</span>
             </h1>
 
-            {/* Subheadline / Description: Cloud ERP solution for finance, inventory, sales, and production */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mb-8 font-normal">
-              MyERP Plus adalah sistem berbasis web yang dirancang untuk membantu bisnis dalam segala hal, mulai dari mengelola uang dan barang di gudang hingga menjalankan penjualan dan produksi dengan lebih efisien.
+            {/* Deskripsi */}
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-md mb-6">
+              {hero.description}
             </p>
 
-            {/* Call To Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 sm:gap-4 w-full sm:w-auto mb-10">
-              {/* Primary CTA: Coba Gratis */}
-              <Link
-                href="#trial"
-                className={buttonVariants({
-                  className:
-                    "w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm sm:text-base px-7 h-12 rounded-lg shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200 flex items-center justify-center gap-2",
-                })}
+            {/* Kotak form */}
+            <div className="w-full max-w-[580px] bg-white border border-slate-200 rounded-xl p-4 shadow-[0_4px_16px_rgba(15,23,42,0.05)]">
+              <p className="text-xs font-bold text-slate-900 mb-3">
+                {hero.form.title}
+              </p>
+
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-2.5"
               >
-                <span>Coba Gratis</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={hero.form.placeholder}
+                  className="flex-1 min-w-0 h-10 px-3.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition"
+                />
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-1.5 h-10 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-semibold whitespace-nowrap shadow-md shadow-blue-500/20 transition"
+                >
+                  <span>{hero.form.buttonText}</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </form>
 
-              {/* Secondary CTA: Pelajari Layanan */}
-              <Link
-                href="#services"
-                className={buttonVariants({
-                  variant: "outline",
-                  className:
-                    "w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 border-slate-300 hover:border-slate-400 font-semibold text-sm sm:text-base px-6 h-12 rounded-lg shadow-xs transition-all duration-200 justify-center",
-                })}
-              >
-                Pelajari Layanan
-              </Link>
-            </div>
-
-            {/* Social Proof / Rating Badges for Cloud ERP */}
-            <div className="w-full">
-              <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 max-w-[430px]">
-                
-                {/* Capterra Review Card */}
-                <div className="flex items-center gap-2.5 bg-white/95 backdrop-blur-xs border border-slate-200/90 rounded-xl p-2 sm:p-2.5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] hover:shadow-md hover:border-slate-300 transition-all duration-200">
-                  <CapterraIcon className="w-8 h-8 shrink-0 shadow-xs" />
-                  <div className="flex flex-col min-w-0">
-                    <div className="flex items-center gap-1 leading-none mb-1">
-                      <Star className="w-3.5 h-3.5 fill-[#F59E0B] stroke-[#F59E0B]" />
-                      <span className="text-xs sm:text-sm font-bold text-slate-900">
-                        4.9
-                      </span>
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-medium text-slate-500 truncate">
-                      Capterra
-                    </span>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-3">
+                {hero.form.checks.map((text) => (
+                  <div
+                    key={text}
+                    className="flex items-center gap-1.5 text-[11px] text-slate-600"
+                  >
+                    <Check className="h-3 w-3 text-emerald-500" />
+                    <span>{text}</span>
                   </div>
-                </div>
-
-                {/* Software Advice Review Card */}
-                <div className="flex items-center gap-2.5 bg-white/95 backdrop-blur-xs border border-slate-200/90 rounded-xl p-2 sm:p-2.5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] hover:shadow-md hover:border-slate-300 transition-all duration-200">
-                  <SoftwareAdviceIcon className="w-8 h-8 shrink-0 shadow-xs" />
-                  <div className="flex flex-col min-w-0">
-                    <div className="flex items-center gap-1 leading-none mb-1">
-                      <Star className="w-3.5 h-3.5 fill-[#F59E0B] stroke-[#F59E0B]" />
-                      <span className="text-xs sm:text-sm font-bold text-slate-900">
-                        4.8
-                      </span>
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-medium text-slate-500 truncate">
-                      Soft Advice
-                    </span>
-                  </div>
-                </div>
-
-                {/* G2 Review Card */}
-                <div className="flex items-center gap-2.5 bg-white/95 backdrop-blur-xs border border-slate-200/90 rounded-xl p-2 sm:p-2.5 shadow-[0_2px_8px_rgba(15,23,42,0.04)] hover:shadow-md hover:border-slate-300 transition-all duration-200">
-                  <G2Icon className="w-8 h-8 shrink-0 shadow-xs" />
-                  <div className="flex flex-col min-w-0">
-                    <div className="flex items-center gap-1 leading-none mb-1">
-                      <Star className="w-3.5 h-3.5 fill-[#F59E0B] stroke-[#F59E0B]" />
-                      <span className="text-xs sm:text-sm font-bold text-slate-900">
-                        4.8
-                      </span>
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-medium text-slate-500 truncate">
-                      G2 ERP
-                    </span>
-                  </div>
-                </div>
-
+                ))}
               </div>
             </div>
-
           </div>
 
-          {/* ========================================================
-              RIGHT COLUMN: FLOATING SAAS VISUAL MOCKUPS
-             ======================================================== */}
-          <div className="lg:col-span-6 xl:col-span-6">
+          {/* Kolom kanan: digeser ke kanan lewat padding kiri */}
+          <div className="lg:col-span-6 lg:pl-12 xl:pl-20">
             <HeroIllustration />
           </div>
-
         </div>
       </div>
     </section>
