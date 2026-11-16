@@ -19,7 +19,7 @@ import {
   Headphones,
   FileText,
 } from "lucide-react";
-import { MyErpPlusLogo } from "./BrandLogos";
+import { MyErpPlusLogo } from "./brand-logos";
 import { buttonVariants } from "@/components/ui/button";
 
 interface NavDropdownItem {

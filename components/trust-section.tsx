@@ -7,7 +7,7 @@ import {
   SastroBogaLogo,
   NusantaraMedikaLogo,
   KaryaMultiNiagaLogo,
-} from "./BrandLogos";
+} from "./brand-logos";
 import { X, ArrowRight, TrendingUp } from "lucide-react";
 
 interface CaseStudy {

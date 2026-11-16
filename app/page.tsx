@@ -1,8 +1,8 @@
 import React from "react";
-import { AnnouncementBanner } from "@/components/AnnouncementBanner";
-import { Navbar } from "@/components/Navbar";
-import { HeroSection } from "@/components/HeroSection";
-import { TrustSection } from "@/components/TrustSection";
+import { AnnouncementBanner } from "@/components/announcement-banner";
+import { Navbar } from "@/components/navbar";
+import { HeroSection } from "@/components/hero-section";
+import { TrustSection } from "@/components/trust-section";
 import { TestimonialSection } from "@/components/testimonial-section";
 import { FeaturesSection } from "@/components/features-section";
 import { IndustrySolutions } from "@/components/industry-solutions";
@@ -10,7 +10,7 @@ import { FaqSection } from "@/components/faq-section";
 import { CtaBanner } from "@/components/cta-banner";
 import { Footer } from "@/components/footer";
 import { ScrollingTrustBar } from "@/components/scrolling-trust-bar";
-import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 
 export default function Home() {
   return (

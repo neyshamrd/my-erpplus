@@ -7,8 +7,8 @@ import {
   CapterraIcon,
   SoftwareAdviceIcon,
   G2Icon,
-} from "./BrandLogos";
-import { HeroIllustration } from "./HeroIllustration";
+} from "./brand-logos";
+import { HeroIllustration } from "./hero-illustration";
 import { buttonVariants } from "@/components/ui/button";
 
 export function HeroSection() {

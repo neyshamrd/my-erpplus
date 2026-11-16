@@ -1,5 +1,5 @@
 import React from "react";
-import { SecurityCertBadges, CloudUptimeBadge } from "./BrandLogos";
+import { SecurityCertBadges, CloudUptimeBadge } from "./brand-logos";
 
 export function AnnouncementBanner() {
   return (

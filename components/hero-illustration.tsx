@@ -13,7 +13,7 @@ import {
   Wallet,
   Boxes,
 } from "lucide-react";
-import { VideoModal } from "./VideoModal";
+import { VideoModal } from "./video-modal";
 
 export function HeroIllustration() {
   const [videoOpen, setVideoOpen] = useState(false);

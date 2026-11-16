@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Globe, ChevronDown, MapPin } from "lucide-react";
-import { MyErpPlusLogo } from "./BrandLogos";
+import { MyErpPlusLogo } from "./brand-logos";
 
 export function Footer() {
   const [currentLang, setCurrentLang] = useState<"ID" | "EN">("ID");

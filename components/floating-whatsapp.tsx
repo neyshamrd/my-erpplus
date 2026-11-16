@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { WhatsAppIcon } from "./BrandLogos";
+import { WhatsAppIcon } from "./brand-logos";
 import { X } from "lucide-react";
 
 export function FloatingWhatsApp() {

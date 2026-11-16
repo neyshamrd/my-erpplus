@@ -8,7 +8,7 @@ import {
   SastroBogaLogo,
   NusantaraMedikaLogo,
   KaryaMultiNiagaLogo,
-} from "./BrandLogos";
+} from "./brand-logos";
 
 interface Testimonial {
   id: string;
