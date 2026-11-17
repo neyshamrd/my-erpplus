@@ -264,4 +264,73 @@ export const siteConfig = {
       },
     ],
   },
+  modul: {
+    badge: "Ekosistem Modular Terpadu",
+    title: "6 Pilar Fonddasi Sistem MyERP Plus",
+    subtitle:
+      "Setiap modul terhubung langsung ke buku besar akuntansi dan persediaan dalam satu database tunggal tanpa input ulang.",
+    ctaText: "Pelajari Detail Modul",
+        items: [
+      {
+        id: "finansial",
+        accent: "emerald",
+        title: "Finansial & Akuntansi",
+        description:
+          "General Ledger otomatis tanpa input ganda. Penyajian laporan keuangan terpusat (Laba Rugi, Neraca, Arus Kas) secara real-time & kepatuhan regulasi pajak Indonesia.",
+        chips: ["General Ledger Otomatis", "Laporan Keuangan Real-Time", "e-Faktur & e-Bupot"],
+        integration: "Terhubung ke Pembelian, Gudang & Penjualan",
+        href: "/modul/finansial",
+      },
+      {
+        id: "manufaktur",
+        accent: "indigo",
+        title: "Manufaktur & Produksi",
+        description:
+          "Kelola alur produksi dari BOM, Work in Progress (WIP) hingga Finished Goods (FG) beserta kalkulasi HPP aktual yang akurat.",
+        chips: ["Multi-Level BOM", "Work Order & Routing", "HPP Aktual per Batch"],
+        integration: "Terhubung ke Stok Bahan Baku & Jurnal Biaya",
+        href: "/modul/manufaktur",
+      },
+      {
+        id: "pembelian",
+        accent: "amber",
+        title: "Pembelian & Rantai Pasok",
+        description:
+          "Mencakup alur Purchase Request (PR), Purchase Order (PO), Goods Receipt Note (GRN), dan Purchase Invoice (PI). Terhubung langsung dengan persediaan dan hutang usaha, sehingga stok dan hutang tercatat otomatis.",
+        chips: ["PR → PO → GRN → PI", "3-Way Matching", "Approval Bertingkat"],
+        integration: "Terhubung ke Hutang Dagang (AP) & GRN Gudang",
+        href: "/modul/pembelian",
+      },
+      {
+        id: "penjualan",
+        accent: "cyan",
+        title: "Penjualan & Distribusi",
+        description:
+          "Alur Sales Quotation (SQ), Sales Order (SO), Delivery Order (DO), dan Sales Invoice (SI). Terhubung langsung dengan persediaan barang dan piutang usaha (AR).",
+        chips: ["SQ → SO → DO → SI", "Reservasi Stok", "Aging Piutang (AR)"],
+        integration: "Terhubung ke Piutang Dagang (AR) & Reservasi Stok Gudang",
+        href: "/modul/penjualan",
+      },
+      {
+        id: "inventaris",
+        accent: "blue",
+        title: "Inventaris & Gudang",
+        description:
+          "Pelacakan stok multi-gudang, pengelolaan nomor lot/batch produksi, mutasi antar cabang/gudang, serta stock opname fisik untuk sinkronisasi fisik vs sistem.",
+        chips: ["Multi-Gudang", "Lot/Batch", "Mutasi Antar Gudang", "Stock Opname"],
+        integration: "Terhubung ke Manufaktur & Pengadaan (Saldo Stok Real-Time)",
+        href: "/modul/inventaris",
+      },
+      {
+        id: "aset",
+        accent: "purple",
+        title: "Manajemen Aset Tetap",
+        description:
+          "Kelola register mesin, kendaraan, dan bangunan dengan jadwal depresiasi otomatis serta pemeliharaan berkala untuk menjaga valuasi aset.",
+        chips: ["Asset Register", "Jadwal Depresiasi", "Pemeliharaan Berkala"],
+        integration: "Terhubung ke Jurnal Penyusutan & Modul Depresiasi Aset",
+        href: "/modul/aset",
+      },
+    ],
+  },
 };

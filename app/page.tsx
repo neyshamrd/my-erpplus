@@ -4,7 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/hero-section";
 import { TrustSection } from "@/components/trust-section";
 import { TestimonialSection } from "@/components/testimonial-section";
-import { FeaturesSection } from "@/components/modul";
+import { ModulSection } from "@/components/modul";
 import { IndustrySolutions } from "@/components/industry-solutions";
 import { FaqSection } from "@/components/faq-section";
 import { CtaBanner } from "@/components/cta-banner";
@@ -31,7 +31,7 @@ export default function Home() {
         <IndustrySolutions />
 
         {/* 6. Solusi Berbagai Industri (Industry Solutions Section) */}
-        <FeaturesSection /> 
+        <ModulSection /> 
           {/* 7. Testimoni Klien Section */}
           <TestimonialSection />
 
