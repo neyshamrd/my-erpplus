@@ -111,10 +111,10 @@ export function Navbar() {
                 <div
                   className={`bg-white shadow-2xl shadow-slate-900/10 rounded-2xl border border-slate-100 p-3.5 ${
                     item.sectionTitle
-                      ? "w-[540px]"
+                      ? "w-[680px]"
                       : item.items!.length > 3
-                      ? "w-[560px]"
-                      : "w-[380px]"
+                      ? "w-[700px]"
+                      : "w-[460px]"
                   }`}
                   role="menu"
                   aria-label={item.title}
