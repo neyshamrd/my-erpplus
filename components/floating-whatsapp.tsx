@@ -1,45 +1,107 @@
 "use client";
 
-import React, { useState } from "react";
-import { WhatsAppIcon } from "./brand-logos";
-import { X } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
+
+// Ikon WhatsApp (SVG langsung, tanpa impor dari brand-logos)
+function WhatsAppGlyph({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  );
+}
+
+// Link WhatsApp langsung ke konsultan
+const WA_LINK =
+  "https://wa.me/6281212122388?text=Halo%20MyERP%20Plus%2C%20saya%20ingin%20berkonsultasi%20mengenai%20implementasi%20sistem%20ERP%20untuk%20perusahaan%20saya";
 
 export function FloatingWhatsApp() {
-  const [showTooltip, setShowTooltip] = useState(true);
+  // Tombol back to top muncul setelah halaman digulir
+  const [showTop, setShowTop] = useState(false);
+  // Pill "Hubungi Kami" terbuka (slide) atau tertutup
+  const [expanded, setExpanded] = useState(false);
+
+  // Pantau posisi scroll
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 300);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Intro: pill terbuka sebentar saat halaman dimuat, lalu menutup sendiri
+  useEffect(() => {
+    const openTimer = setTimeout(() => setExpanded(true), 1500);
+    const closeTimer = setTimeout(() => setExpanded(false), 5500);
+    return () => {
+      clearTimeout(openTimer);
+      clearTimeout(closeTimer);
+    };
+  }, []);
+
+  // Gulir halus ke atas (mengikuti pengaturan reduce motion pengguna)
+  const scrollToTop = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+  };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
-      {/* Floating Tooltip Pill */}
-      {showTooltip && (
-        <div className="hidden sm:flex items-center gap-2 bg-white text-slate-800 text-xs font-semibold py-2 px-3.5 rounded-full shadow-lg border border-slate-200/80 animate-in fade-in slide-in-from-right-4 duration-300">
-          <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-          <span>Konsultasi ERP Gratis dengan Tim MyERP Plus</span>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowTooltip(false);
-            }}
-            className="text-slate-400 hover:text-slate-600 ml-1 p-0.5 rounded-full"
-            aria-label="Tutup pesan bantuan"
-          >
-            <X className="w-3 h-3" />
-          </button>
-        </div>
-      )}
+    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+      {/* Tombol back to top */}
+      <button
+        type="button"
+        onClick={scrollToTop}
+        aria-label="Kembali ke atas"
+        aria-hidden={!showTop}
+        tabIndex={showTop ? 0 : -1}
+        className={`flex h-12 w-12 items-center justify-center rounded-full bg-[#0B132B] text-white shadow-lg shadow-slate-900/25 transition-all duration-300 motion-reduce:transition-none ${
+          showTop
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none translate-y-3 opacity-0"
+        }`}
+      >
+        <ArrowUp className="h-5 w-5" />
+      </button>
 
-      {/* Floating WhatsApp Action Button */}
+      {/* Tombol WhatsApp: ikon di kiri, teks "Hubungi Kami" slide terbuka ke kanan */}
       <a
-        href="https://wa.me/6281212122388?text=Halo%20MyERP%20Plus%2C%20saya%20ingin%20berkonsultasi%20mengenai%20implementasi%20sistem%20ERP%20untuk%20perusahaan%20saya"
+        href={WA_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:shadow-[0_12px_28px_rgba(37,211,102,0.5)] transform hover:scale-108 active:scale-95 transition-all duration-300"
-        aria-label="Hubungi WhatsApp Sales MyERP Plus"
+        aria-label="Hubungi konsultan MyERP Plus lewat WhatsApp"
+        onMouseEnter={() => setExpanded(true)}
+        onMouseLeave={() => setExpanded(false)}
+        onFocus={() => setExpanded(true)}
+        onBlur={() => setExpanded(false)}
+        className="relative flex h-14 items-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.4)] transition-shadow duration-300 hover:shadow-[0_12px_28px_rgba(37,211,102,0.5)] motion-reduce:transition-none"
       >
-        {/* Radar ping ring */}
-        <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none" />
+        {/* Cincin ping hanya saat tertutup */}
+        {!expanded && (
+          <span className="pointer-events-none absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping motion-reduce:animate-none" />
+        )}
 
-        <WhatsAppIcon className="w-7 h-7 text-white drop-shadow-xs relative z-10" />
+        {/* Ikon */}
+        <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] ring-4 ring-white/90">
+          <WhatsAppGlyph className="h-7 w-7 text-white" />
+        </span>
+
+        {/* Teks yang slide terbuka */}
+        <span
+          className={`relative z-10 overflow-hidden transition-all duration-500 ease-out motion-reduce:transition-none ${
+            expanded ? "max-w-[150px] opacity-100" : "max-w-0 opacity-0"
+          }`}
+        >
+          <span className="block whitespace-nowrap pl-1 pr-5 text-sm font-bold">
+            Hubungi Kami
+          </span>
+        </span>
       </a>
     </div>
   );
