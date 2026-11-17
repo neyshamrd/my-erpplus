@@ -6,7 +6,7 @@ import { TrustSection } from "@/components/trust-section";
 import { WorkflowIntegritas } from "@/components/workflow-integritas";
 import { ModulSection } from "@/components/modul";
 import { IndustrySolutions } from "@/components/industry-solutions";
-import { FaqSection } from "@/components/faq-section";
+import { TestimoniSection } from "@/components/testimoni";
 import { CtaBanner } from "@/components/cta-banner";
 import { Footer } from "@/components/footer";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
@@ -36,7 +36,7 @@ export default function Home() {
           <WorkflowIntegritas />
 
         {/* 7. Pertanyaan yang Sering Diajukan (FAQ Section) */}
-        <FaqSection />
+        <TestimoniSection />
 
         {/* 8. Pre-Footer High-Converting CTA Banner */}
         <CtaBanner />

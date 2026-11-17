@@ -369,4 +369,40 @@ export const siteConfig = {
       },
     ],
   },
+    impact: {
+    badge: "Dampak Implementasi Terukur",
+    title: "Peningkatan Performa Operasional Nyata",
+    items: [
+      {
+        id: "stok",
+        accent: "emerald",
+        value: "99.8%",
+        label: "Akurasi Saldo Stok Multi-Gudang",
+      },
+      {
+        id: "pengadaan",
+        accent: "blue",
+        value: "-40%",
+        label: "Pemangkasan Siklus Pengadaan",
+      },
+      {
+        id: "tutup-buku",
+        accent: "cyan",
+        value: "1 Hari",
+        label: "Proses Tutup Buku Akhir Bulan",
+      },
+      {
+        id: "scrap",
+        accent: "amber",
+        value: "-35%",
+        label: "Reduksi Scrap & Susut Produksi",
+      },
+      {
+        id: "depresiasi",
+        accent: "purple",
+        value: "100%",
+        label: "Otomatisasi Depresiasi Aset Tetap",
+      },
+    ],
+  },
 };
