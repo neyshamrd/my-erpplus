@@ -188,7 +188,7 @@ export function Navbar() {
           : "opacity-0 invisible max-h-0"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 py-4">
+      <div className="max-w-[1480px] mx-auto px-5 sm:px-6 py-4">
         {siteConfig.nav.mainNav.map((item) => {
           const hasDropdown = Array.isArray(item.items) && item.items.length > 0;
 
@@ -233,7 +233,7 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 py-3">
+      <div className="max-w-[1480px] mx-auto flex items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 py-3">
         {BrandLogo}
 
         {desktopNav}

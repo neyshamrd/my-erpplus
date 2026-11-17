@@ -27,7 +27,7 @@ export function HeroSection() {
         backgroundSize: "24px 24px",
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-16">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0 items-center">
           {/* Kolom kiri */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">

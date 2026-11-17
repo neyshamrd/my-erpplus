@@ -27,7 +27,7 @@ export function WorkflowIntegritas() {
       id="workflow"
       className="w-full border-t border-slate-100 bg-white py-14 sm:py-16 lg:py-20"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
           <span className="mb-4 inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-[10px] font-bold uppercase tracking-wide text-blue-600 sm:text-[11px]">

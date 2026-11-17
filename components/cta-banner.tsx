@@ -19,7 +19,7 @@ export function CtaBanner({ onOpenDemo, onOpenFlowchart }: CtaBannerProps) {
       id="demo"
       className="w-full bg-white px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1480px]">
         <div className="flex flex-col gap-8 rounded-3xl bg-gradient-to-r from-[#2563eb] via-[#1e3a8a] to-[#0B132B] px-6 py-8 shadow-[0_24px_50px_-12px_rgba(15,23,42,0.35)] sm:px-10 sm:py-10 lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:px-12">
           {/* Kiri: teks */}
           <div className="max-w-xl">

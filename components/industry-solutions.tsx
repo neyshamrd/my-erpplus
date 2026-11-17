@@ -42,7 +42,7 @@ export function IndustrySolutions() {
       id="industri"
       className="w-full border-t border-slate-100 bg-white py-12 sm:py-14 lg:py-16"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 grid grid-cols-1 gap-4 lg:mb-10 lg:grid-cols-2 lg:items-end lg:gap-12">
           <div>

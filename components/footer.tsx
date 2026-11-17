@@ -15,7 +15,7 @@ export function Footer({ onOpenDemo }: FooterProps) {
 
   return (
     <footer className="w-full bg-[#0B132B] text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
         {/* Kolom utama */}
         <div className="grid grid-cols-1 gap-10 pb-12 pt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Kolom 1: logo + deskripsi + alamat */}

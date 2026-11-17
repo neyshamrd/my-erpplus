@@ -160,7 +160,7 @@ export function TrustSection() {
       `}</style>
 
       {/* Semua konten dibatasi lebar yang sama dengan hero section */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
         <h2 className="mb-7 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 sm:text-xs">
           {trustTitle}
         </h2>
