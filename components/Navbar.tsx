@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MyErpLogo } from "./myerp-logo";
 import { siteConfig } from "@/lib/content-data";
 import * as Lucide from "lucide-react";
+import { useDemoModal } from "./demo-modal";
 
 // Helper warna agar class Tailwind tidak terhapus saat build
 const getColorClasses = (colorName?: string) => {
@@ -47,12 +48,12 @@ const Icon = ({ name, className }: { name: string; className?: string }) => {
 export function Navbar() {
   // -1 = semua tertutup, >=0 = dropdown desktop terbuka, -2 = menu mobile terbuka
   const [open, setOpen] = useState<number>(-1);
+  const { openDemo } = useDemoModal();
 
   const toggleDropdown = (idx: number) => setOpen(open === idx ? -1 : idx);
   const closeAll = () => setOpen(-1);
   const isMobileOpen = open === -2;
 
-  // Logo diperbesar
   // Logo SVG, ukuran lebih besar dari mockup
   const BrandLogo = (
     <Link href="/" onClick={closeAll} className="flex items-center group shrink-0">
@@ -111,7 +112,7 @@ export function Navbar() {
                 <div
                   className={`bg-white shadow-2xl shadow-slate-900/10 rounded-2xl border border-slate-100 p-3.5 ${
                     item.sectionTitle
-                      ? "w-[680px]"
+                      ? "w-[680px]" // ukuran dropdown menu
                       : item.items!.length > 3
                       ? "w-[700px]"
                       : "w-[460px]"
@@ -206,7 +207,7 @@ export function Navbar() {
                 {item.sectionTitle || item.title}
               </div>
               <ul className="flex flex-col">
-                {item.items!.map((sub, subIdx) => (
+                {item.items!.map((sub) => (
                   <li key={sub.title}>
                     <Link
                       href={sub.href}
@@ -233,14 +234,17 @@ export function Navbar() {
         {desktopNav}
 
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          <Link
-            href={siteConfig.nav.ctaButton.href}
-            onClick={closeAll}
+          <button
+            type="button"
+            onClick={() => {
+              closeAll();
+              openDemo();
+            }}
             className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold whitespace-nowrap px-3.5 sm:px-4 py-2.5 rounded-xl shadow-md shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
           >
             <span>{siteConfig.nav.ctaButton.text}</span>
             <Lucide.ArrowRight className="h-4 w-4 stroke-[2.5]" />
-          </Link>
+          </button>
 
           <button
             type="button"

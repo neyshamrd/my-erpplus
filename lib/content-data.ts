@@ -450,4 +450,30 @@ export const siteConfig = {
     copyright: "© 2026 PT You profit Indonesia. Seluruh Hak Cipta Dilindungi.",
     security: "Keamanan Database Terenkripsi",
   },
+    demo: {
+    badge: "Sesi Demo 45 Menit",
+    title: "Jadwalkan Live Demo MyERP Plus",
+    subtitle:
+      "Isi data singkat di bawah ini untuk terhubung dengan Solution Architect kami.",
+    nameLabel: "Nama Lengkap",
+    namePlaceholder: "Contoh: Hendra Wijaya",
+    companyLabel: "Nama Perusahaan",
+    companyPlaceholder: "Contoh: PT Maju Jaya Manufaktur",
+    phoneLabel: "Nomor WhatsApp / Telepon",
+    phonePlaceholder: "0812-xxxx-xxxx",
+    focusLabel: "Fokus Proses Bisnis",
+    focusOptions: [
+      "Manufaktur & Produksi",
+      "Distribusi dan Perdagangan",
+      "Jasa Profesional dan Layanan (Services)",
+    ],
+    submitText: "Kirim Permintaan Jadwal Demo",
+    // Nomor tujuan WhatsApp konsultan (kode negara tanpa +, spasi, atau tanda hubung)
+    whatsapp: "6281212122388",
+    messageIntro: "Halo MyERP Plus, saya ingin menjadwalkan live demo.",
+    successTitle: "Satu langkah lagi",
+    successText:
+      "WhatsApp sudah terbuka dengan pesan yang terisi otomatis. Tekan tombol kirim di WhatsApp untuk menyelesaikan permintaan jadwal demo Anda.",
+    closeText: "Tutup",
+  },
 };

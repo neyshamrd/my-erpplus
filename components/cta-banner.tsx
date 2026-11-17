@@ -3,16 +3,16 @@
 import React from "react";
 import { Download } from "lucide-react";
 import { siteConfig } from "@/lib/content-data";
+import { useDemoModal } from "./demo-modal";
 
 type CtaBannerProps = {
-  // Dipanggil saat tombol "Jadwalkan Live Demo" diklik (untuk membuka pop up form nanti)
-  onOpenDemo?: () => void;
-  // Dipanggil saat tombol "Download Flowchart ERP" diklik (untuk membuka pop up download nanti)
+  // Dipanggil saat tombol "Download Flowchart ERP" diklik (untuk pop up download nanti)
   onOpenFlowchart?: () => void;
 };
 
-export function CtaBanner({ onOpenDemo, onOpenFlowchart }: CtaBannerProps) {
+export function CtaBanner({ onOpenFlowchart }: CtaBannerProps) {
   const data = siteConfig.cta;
+  const { openDemo } = useDemoModal();
 
   return (
     <section
@@ -38,7 +38,7 @@ export function CtaBanner({ onOpenDemo, onOpenFlowchart }: CtaBannerProps) {
           <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
             <button
               type="button"
-              onClick={onOpenDemo}
+              onClick={openDemo}
               className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-lg shadow-slate-900/10 transition-colors hover:bg-slate-100"
             >
               {data.demoText}
