@@ -266,7 +266,7 @@ export const siteConfig = {
   },
   modul: {
     badge: "Ekosistem Modular Terpadu",
-    title: "6 Pilar Fonddasi Sistem MyERP Plus",
+    title: "6 Pilar Fondasi Sistem MyERP Plus",
     subtitle:
       "Setiap modul terhubung langsung ke buku besar akuntansi dan persediaan dalam satu database tunggal tanpa input ulang.",
     ctaText: "Pelajari Detail Modul",
