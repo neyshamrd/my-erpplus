@@ -25,7 +25,7 @@ const WA_LINK =
 export function FloatingWhatsApp() {
   // Tombol back to top muncul setelah halaman digulir
   const [showTop, setShowTop] = useState(false);
-  // Pill "Hubungi Kami" terbuka (slide) atau tertutup
+  // Label "Hubungi Kami" terbuka saat kursor menyentuh atau tombol difokus
   const [expanded, setExpanded] = useState(false);
 
   // Pantau posisi scroll
@@ -36,16 +36,6 @@ export function FloatingWhatsApp() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Intro: pill terbuka sebentar saat halaman dimuat, lalu menutup sendiri
-  useEffect(() => {
-    const openTimer = setTimeout(() => setExpanded(true), 1500);
-    const closeTimer = setTimeout(() => setExpanded(false), 5500);
-    return () => {
-      clearTimeout(openTimer);
-      clearTimeout(closeTimer);
-    };
-  }, []);
-
   // Gulir halus ke atas (mengikuti pengaturan reduce motion pengguna)
   const scrollToTop = () => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -54,7 +44,7 @@ export function FloatingWhatsApp() {
 
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-      {/* Tombol back to top */}
+      {/* Tombol back to top: fade dan naik saat muncul */}
       <button
         type="button"
         onClick={scrollToTop}
@@ -70,7 +60,7 @@ export function FloatingWhatsApp() {
         <ArrowUp className="h-5 w-5" />
       </button>
 
-      {/* Tombol WhatsApp: ikon di kiri, teks "Hubungi Kami" slide terbuka ke kanan */}
+      {/* Tombol WhatsApp: label "Hubungi Kami" slide terbuka saat hover atau fokus */}
       <a
         href={WA_LINK}
         target="_blank"
@@ -82,11 +72,6 @@ export function FloatingWhatsApp() {
         onBlur={() => setExpanded(false)}
         className="relative flex h-14 items-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.4)] transition-shadow duration-300 hover:shadow-[0_12px_28px_rgba(37,211,102,0.5)] motion-reduce:transition-none"
       >
-        {/* Cincin ping hanya saat tertutup */}
-        {!expanded && (
-          <span className="pointer-events-none absolute -inset-1 rounded-full bg-[#25D366] opacity-30 animate-ping motion-reduce:animate-none" />
-        )}
-
         {/* Ikon */}
         <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] ring-4 ring-white/90">
           <WhatsAppGlyph className="h-7 w-7 text-white" />
