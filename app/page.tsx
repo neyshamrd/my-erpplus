@@ -9,7 +9,6 @@ import { IndustrySolutions } from "@/components/industry-solutions";
 import { FaqSection } from "@/components/faq-section";
 import { CtaBanner } from "@/components/cta-banner";
 import { Footer } from "@/components/footer";
-import { ScrollingTrustBar } from "@/components/scrolling-trust-bar";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 
 export default function Home() {
@@ -43,7 +42,6 @@ export default function Home() {
         <CtaBanner />
 
         {/* 9. Dynamic Scroll-Triggered Full-Width Trust-Badge Banner */}
-        <ScrollingTrustBar />
       </main>
 
       {/* 10. Comprehensive Footer with Multi-Column Nav, Offices, and Trust Badges */}
