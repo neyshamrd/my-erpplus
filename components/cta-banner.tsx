@@ -1,40 +1,57 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Download } from "lucide-react";
+import { siteConfig } from "@/lib/content-data";
 
-export function CtaBanner() {
+type CtaBannerProps = {
+  // Dipanggil saat tombol "Jadwalkan Live Demo" diklik (untuk membuka pop up form nanti)
+  onOpenDemo?: () => void;
+  // Dipanggil saat tombol "Download Flowchart ERP" diklik (untuk membuka pop up download nanti)
+  onOpenFlowchart?: () => void;
+};
+
+export function CtaBanner({ onOpenDemo, onOpenFlowchart }: CtaBannerProps) {
+  const data = siteConfig.cta;
+
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-8 select-none">
-      <div className="max-w-6xl mx-auto relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-r from-[#0052cc] via-[#085ee6] to-[#1d4ed8] shadow-[0_16px_40px_rgba(0,82,204,0.22)] p-8 sm:p-10 lg:p-12">
-        {/* Ambient Glows & Decorative Corner Cutouts */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-sky-300/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none" />
-
-        {/* Decorative Geometric Corner Swoosh matching reference screenshot */}
-        <div className="absolute -bottom-1 right-0 w-48 sm:w-64 h-12 sm:h-16 bg-gradient-to-l from-amber-400 via-sky-400 to-transparent opacity-90 rounded-tl-3xl pointer-events-none -z-0" />
-
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
-          {/* Left Column: Heading & Subheadline */}
-          <div className="max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-extrabold text-white tracking-tight leading-snug">
-              Kelola manajemen operasional & keuangan bisnis lebih cerdas dengan MyERP Plus
+    <section
+      id="demo"
+      className="w-full bg-white px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16"
+    >
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col gap-8 rounded-3xl bg-gradient-to-r from-[#2563eb] via-[#1e3a8a] to-[#0B132B] px-6 py-8 shadow-[0_24px_50px_-12px_rgba(15,23,42,0.35)] sm:px-10 sm:py-10 lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:px-12">
+          {/* Kiri: teks */}
+          <div className="max-w-xl">
+            <span className="mb-3 inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-[11px] font-bold text-white">
+              {data.badge}
+            </span>
+            <h2 className="text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-3xl lg:text-[34px]">
+              {data.title}
             </h2>
-            <p className="text-sm sm:text-base text-blue-100 font-normal mt-2.5 leading-relaxed">
-              Mulai akselerasikan pertumbuhan bisnis Anda bersama 55.000+ bisnis lainnya di Asia Tenggara.
+            <p className="mt-3 max-w-lg text-xs leading-relaxed text-blue-100 sm:text-sm">
+              {data.description}
             </p>
           </div>
 
-          {/* Right Column: CTA Button */}
-          <div className="shrink-0 w-full sm:w-auto">
-            <Link
-              href="#trial"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-[#0052cc] font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 active:scale-95 cursor-pointer"
+          {/* Kanan: dua tombol */}
+          <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
+            <button
+              type="button"
+              onClick={onOpenDemo}
+              className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-lg shadow-slate-900/10 transition-colors hover:bg-slate-100"
             >
-              <span>Coba gratis</span>
-              <ArrowRight className="w-4 h-4 text-[#0052cc]" />
-            </Link>
+              {data.demoText}
+            </button>
+
+            <button
+              type="button"
+              onClick={onOpenFlowchart}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-[#0B132B]/50 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#0B132B]/80"
+            >
+              <Download className="h-4 w-4" />
+              <span>{data.flowchartText}</span>
+            </button>
           </div>
         </div>
       </div>

@@ -405,4 +405,12 @@ export const siteConfig = {
       },
     ],
   },
+    cta: {
+    badge: "Konsultasi & Assessment Gratis",
+    title: "Siap Mengintegrasikan Operasional Perusahaan Anda?",
+    description:
+      "Jadwalkan sesi demo langsung selama 45 menit bersama Solution Architect PT You profit Indonesia untuk memetakan alur kerja bisnis Anda.",
+    demoText: "Jadwalkan Live Demo",
+    flowchartText: "Download Flowchart ERP",
+  },
 };
