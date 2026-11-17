@@ -1,21 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
 import { siteConfig } from "@/lib/content-data";
 import { HeroIllustration } from "./hero-illustration";
 
+// Pesan sukses setelah form dikirim
+const SUCCESS_MESSAGE =
+  "Terima kasih! Tim konsultan kami akan segera mengirimkan jadwal sesi demonstrasi ke email Anda.";
+
 export function HeroSection() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const { hero } = siteConfig;
 
-  // Kirim email ke halaman demo sebagai query
+  // Setelah dikirim: tampilkan pesan hijau, kosongkan kolom email, tanpa pindah halaman
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const query = email.trim() ? `?email=${encodeURIComponent(email.trim())}` : "";
-    router.push(`${siteConfig.nav.ctaButton.href}${query}`);
+    setSubmitted(true);
+    setEmail("");
   };
 
   return (
@@ -27,7 +30,7 @@ export function HeroSection() {
         backgroundSize: "24px 24px",
       }}
     >
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-16">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-12 sm:pt-16 sm:pb-14 lg:pt-20 lg:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-0 items-center">
           {/* Kolom kiri */}
           <div className="lg:col-span-6 flex flex-col items-start text-left">
@@ -66,7 +69,11 @@ export function HeroSection() {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    // Pesan sukses hilang saat pengunjung mengetik ulang
+                    if (submitted) setSubmitted(false);
+                  }}
                   placeholder={hero.form.placeholder}
                   className="flex-1 min-w-0 h-10 px-3.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-800 placeholder:text-slate-400 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition"
                 />
@@ -78,6 +85,17 @@ export function HeroSection() {
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </form>
+
+              {/* Pesan sukses (hijau) */}
+              {submitted && (
+                <p
+                  role="status"
+                  aria-live="polite"
+                  className="mt-3 text-[13px] font-medium leading-relaxed text-emerald-600"
+                >
+                  {SUCCESS_MESSAGE}
+                </p>
+              )}
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-3">
                 {hero.form.checks.map((text) => (
