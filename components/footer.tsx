@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { MyErpLogo } from "./myerp-logo";
 import { siteConfig } from "@/lib/content-data";
 
 type FooterProps = {
@@ -20,17 +20,12 @@ export function Footer({ onOpenDemo }: FooterProps) {
         <div className="grid grid-cols-1 gap-10 pb-12 pt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Kolom 1: logo + deskripsi + alamat */}
           <div className="max-w-xs">
-            <Link
+                        <Link
               href="/"
-              className="inline-flex rounded-xl bg-white px-3 py-1.5"
+              className="inline-flex rounded-xl bg-white px-4 py-2.5"
+              aria-label="MyERP Plus"
             >
-              <Image
-                src="/my-erp-logo.png"
-                alt="MYERP+ Logo"
-                width={160}
-                height={40}
-                className="h-8 w-auto object-contain"
-              />
+              <MyErpLogo className="h-9 w-auto" />
             </Link>
 
             <p className="mt-5 text-[13px] leading-relaxed text-slate-300">

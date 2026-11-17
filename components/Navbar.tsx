@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { MyErpLogo } from "./myerp-logo";
 import { siteConfig } from "@/lib/content-data";
 import * as Lucide from "lucide-react";
 
@@ -53,16 +53,10 @@ export function Navbar() {
   const isMobileOpen = open === -2;
 
   // Logo diperbesar
+  // Logo SVG, ukuran lebih besar dari mockup
   const BrandLogo = (
     <Link href="/" onClick={closeAll} className="flex items-center group shrink-0">
-      <Image
-        src="/my-erp-logo.png"
-        alt="MYERP+ Logo"
-        width={260}
-        height={70}
-        priority
-        className="h-10 sm:h-12 lg:h-14 w-auto object-contain transition-transform group-hover:scale-105"
-      />
+      <MyErpLogo className="h-9 sm:h-11 lg:h-12 w-auto transition-transform group-hover:scale-[1.02]" />
     </Link>
   );
 
