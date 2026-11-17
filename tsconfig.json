@@ -13,8 +13,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "baseUrl": "./", // adjusted for Windows UNC path
-    "ignoreDeprecations": "6.0",
     "plugins": [
       {
         "name": "next"
