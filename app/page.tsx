@@ -3,7 +3,7 @@ import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/hero-section";
 import { TrustSection } from "@/components/trust-section";
-import { TestimonialSection } from "@/components/testimonial-section";
+import { WorkflowIntegritas } from "@/components/workflow-integritas";
 import { ModulSection } from "@/components/modul";
 import { IndustrySolutions } from "@/components/industry-solutions";
 import { FaqSection } from "@/components/faq-section";
@@ -33,7 +33,7 @@ export default function Home() {
         {/* 6. Solusi Berbagai Industri (Industry Solutions Section) */}
         <ModulSection /> 
           {/* 7. Testimoni Klien Section */}
-          <TestimonialSection />
+          <WorkflowIntegritas />
 
         {/* 7. Pertanyaan yang Sering Diajukan (FAQ Section) */}
         <FaqSection />

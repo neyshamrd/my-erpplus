@@ -333,4 +333,40 @@ export const siteConfig = {
       },
     ],
   },
+    workflow: {
+    badge: "Arsitektur & Tata Kelola Sistem",
+    title: "4 Pilar Integritas Proses Bisnis",
+    subtitle:
+      "Fondasi kontrol internal yang menjaga validitas setiap transaksi dari lantai operasional hingga laporan keuangan standar audit.",
+    items: [
+      {
+        id: "validasi",
+        accent: "blue",
+        title: "Validasi dan Monitoring Transaksi",
+        description:
+          "Sistem memvalidasi setiap proses bisnis secara otomatis lintas dokumen untuk memastikan data operasional, persediaan, dan keuangan tercatat akurat tanpa selisih.",
+      },
+      {
+        id: "role",
+        accent: "indigo",
+        title: "Role Based User",
+        description:
+          "Pengaturan hak akses pengguna berdasarkan jabatan dan tanggung jawab, meliputi akses menu, laporan, serta kewenangan approval sesuai matriks otorisasi.",
+      },
+      {
+        id: "laporan",
+        accent: "emerald",
+        title: "Laporan Keuangan Standar Audit Akuntan Publik",
+        description:
+          "Laporan keuangan terbentuk otomatis dari setiap aktivitas operasional dengan jejak audit lengkap serta mendukung kepatuhan perpajakan Indonesia.",
+      },
+      {
+        id: "custom",
+        accent: "amber",
+        title: "Customizable Business Process",
+        description:
+          "Alur kerja, pengaturan modul, dan format dokumen dapat dikonfigurasi secara fleksibel mengikuti prosedur operasional dan kebijakan unik perusahaan Anda.",
+      },
+    ],
+  },
 };
