@@ -109,19 +109,20 @@ export function Navbar() {
                     : "opacity-0 scale-95 pointer-events-none -translate-y-2"
                 }`}
               >
+                {/* Ukuran kotak dropdown */}
                 <div
-                  className={`bg-white shadow-2xl shadow-slate-900/10 rounded-2xl border border-slate-100 p-3.5 ${
+                  className={`bg-white shadow-2xl shadow-slate-900/10 rounded-3xl border border-slate-100 p-4 ${
                     item.sectionTitle
-                      ? "w-[680px]" // ukuran dropdown menu
-                      : item.items!.length > 3
                       ? "w-[700px]"
-                      : "w-[460px]"
+                      : item.items!.length > 3
+                      ? "w-[640px]"
+                      : "w-[480px]"
                   }`}
                   role="menu"
                   aria-label={item.title}
                 >
                   {item.sectionTitle && (
-                    <div className="text-[10px] font-bold tracking-wider text-slate-400 uppercase mb-2 px-2">
+                    <div className="text-[11px] font-bold tracking-wider text-slate-400 uppercase mb-2.5 px-3">
                       {item.sectionTitle}
                     </div>
                   )}
@@ -143,20 +144,22 @@ export function Navbar() {
                           key={sub.title}
                           href={sub.href}
                           onClick={closeAll}
-                          className="group flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-50 transition-all duration-150"
+                          className="group flex items-center gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-all duration-150"
                         >
+                          {/* Kotak ikon */}
                           <div
-                            className={`flex items-center justify-center shrink-0 h-6 w-6 rounded-md ${colors.bg} ${colors.text} transition-transform duration-150 group-hover:scale-105`}
+                            className={`flex items-center justify-center shrink-0 h-9 w-9 rounded-lg ${colors.bg} ${colors.text} transition-transform duration-150 group-hover:scale-105`}
                           >
-                            <Icon name={sub.iconName} className="h-3.5 w-3.5 stroke-[2.2]" />
+                            <Icon name={sub.iconName} className="h-[18px] w-[18px] stroke-[2.2]" />
                           </div>
 
+                          {/* Judul dan deskripsi (deskripsi tampil penuh, boleh dua baris) */}
                           <div className="flex flex-col min-w-0 flex-1">
-                            <span className="text-[11.5px] font-semibold text-slate-700 truncate group-hover:text-blue-600 transition-colors">
+                            <span className="text-[13px] font-semibold leading-snug text-slate-800 group-hover:text-blue-600 transition-colors">
                               {sub.title}
                             </span>
                             {"description" in sub && sub.description && (
-                              <span className="text-[10.5px] text-slate-400 truncate">
+                              <span className="mt-0.5 text-[11.5px] leading-snug text-slate-500">
                                 {sub.description}
                               </span>
                             )}
