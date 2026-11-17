@@ -12,12 +12,12 @@ export const siteConfig = {
       text: "MYERP",
       tag: "+",
     },
-    // Menu Navigasi Utama
+    // Menu navigasi utama
     mainNav: [
       {
         title: "Modul ERP",
-        href: "#modul",
-        // Punya dropdown menu
+        // Klik menu utama: gulir ke section modul.tsx (id="modul")
+        href: "/#modul",
         items: [
           {
             title: "1. Finansial & Akuntansi",
@@ -57,7 +57,7 @@ export const siteConfig = {
           {
             title: "6. Manajemen Aset Tetap",
             description: "Asset Register, jadwal depresiasi & valuasi",
-            href: "modul/aset",
+            href: "/modul/aset",
             iconName: "Building2",
             color: "purple",
           },
@@ -65,7 +65,8 @@ export const siteConfig = {
       },
       {
         title: "Solusi Industri",
-        href: "#solusi",
+        // Klik menu utama: gulir ke section industry-solutions.tsx (id="industri")
+        href: "/#industri",
         items: [
           {
             title: "1. Manufaktur ",
@@ -183,16 +184,16 @@ export const siteConfig = {
     tittleLine2: "Seluruh",
     titleHighlight: "Rantai Operasional Bisnis",
     titleLine3: "di Satu Layar ERP",
-    description: 
-        "Satukan manufaktur, inventaris multi-lokasi, siklus pengadaan, dan buku besar akuntansi real-time dalam satu arsitektur terintegrasi tanpa rekonsiliasi manual.",
+    description:
+      "Satukan manufaktur, inventaris multi-lokasi, siklus pengadaan, dan buku besar akuntansi real-time dalam satu arsitektur terintegrasi tanpa rekonsiliasi manual.",
     form: {
-        title: "Dapatkan Assesment Alur Bisnis & Demo Sistem Gratis",
-        placeholder: "Masukkan email korporat Anda...",
-        buttonText: "Jadwalkan",
-        checks: ["Migrasi Data Aman & Tervalidasi", "Konsultan On-Site"],
+      title: "Dapatkan Assessment Alur Bisnis & Demo Sistem Gratis",
+      placeholder: "Masukkan email korporat Anda...",
+      buttonText: "Jadwalkan",
+      checks: ["Migrasi Data Aman & Tervalidasi", "Konsultan On-Site"],
     },
   },
-    trust: {
+  trust: {
     title: "Dipercaya oleh perusahaan manufaktur Indonesia",
     clients: [
       { id: "kawata", name: "PT Kawata Indonesia", logoSrc: "" },
@@ -217,7 +218,7 @@ export const siteConfig = {
       },
     ],
   },
-    industry: {
+  industry: {
     badge: "Spesialisasi Operasional Industri",
     title: "Dirancang Khusus untuk Kompleksitas Proses Bisnis Sektor Riil",
     introBefore: "Setiap industri memiliki alur bisnis yang unik.",
@@ -270,7 +271,7 @@ export const siteConfig = {
     subtitle:
       "Setiap modul terhubung langsung ke buku besar akuntansi dan persediaan dalam satu database tunggal tanpa input ulang.",
     ctaText: "Pelajari Detail Modul",
-        items: [
+    items: [
       {
         id: "finansial",
         accent: "emerald",
@@ -333,7 +334,7 @@ export const siteConfig = {
       },
     ],
   },
-    workflow: {
+  workflow: {
     badge: "Arsitektur & Tata Kelola Sistem",
     title: "4 Pilar Integritas Proses Bisnis",
     subtitle:
@@ -369,7 +370,7 @@ export const siteConfig = {
       },
     ],
   },
-    impact: {
+  impact: {
     badge: "Dampak Implementasi Terukur",
     title: "Peningkatan Performa Operasional Nyata",
     items: [
@@ -405,7 +406,7 @@ export const siteConfig = {
       },
     ],
   },
-    cta: {
+  cta: {
     badge: "Konsultasi & Assessment Gratis",
     title: "Siap Mengintegrasikan Operasional Perusahaan Anda?",
     description:
@@ -413,7 +414,7 @@ export const siteConfig = {
     demoText: "Jadwalkan Live Demo",
     flowchartText: "Download Flowchart ERP",
   },
-    footer: {
+  footer: {
     descBefore: "Solusi perangkat lunak Enterprise Resource Planning terintegrasi oleh",
     descBrand: "PT You profit Indonesia",
     descAfter: "untuk perusahaan manufaktur, distribusi, dan jasa profesional.",
@@ -450,7 +451,7 @@ export const siteConfig = {
     copyright: "© 2026 PT You profit Indonesia. Seluruh Hak Cipta Dilindungi.",
     security: "Keamanan Database Terenkripsi",
   },
-    demo: {
+  demo: {
     badge: "Sesi Demo 45 Menit",
     title: "Jadwalkan Live Demo MyERP Plus",
     subtitle:

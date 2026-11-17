@@ -50,7 +50,6 @@ export function Navbar() {
   const [open, setOpen] = useState<number>(-1);
   const { openDemo } = useDemoModal();
 
-  const toggleDropdown = (idx: number) => setOpen(open === idx ? -1 : idx);
   const closeAll = () => setOpen(-1);
   const isMobileOpen = open === -2;
 
@@ -76,9 +75,10 @@ export function Navbar() {
             onMouseLeave={() => hasDropdown && setOpen(-1)}
           >
             {hasDropdown ? (
-              <button
-                type="button"
-                onClick={() => toggleDropdown(idx)}
+              // Klik menu utama: gulir ke section tujuan. Dropdown tetap terbuka lewat hover
+              <Link
+                href={item.href || "#"}
+                onClick={closeAll}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-150 ${
                   isOpen
                     ? "bg-slate-100/80 text-slate-900"
@@ -91,7 +91,7 @@ export function Navbar() {
                     isOpen ? "rotate-180 text-slate-700" : ""
                   }`}
                 />
-              </button>
+              </Link>
             ) : (
               <Link
                 href={item.href || "#"}
@@ -206,9 +206,14 @@ export function Navbar() {
 
           return (
             <div key={item.title} className="py-3 border-b border-slate-100">
-              <div className="text-[11px] font-bold tracking-wider text-slate-400 uppercase mb-2">
+              {/* Judul section bisa diklik: gulir ke section tujuan */}
+              <Link
+                href={item.href || "#"}
+                onClick={closeAll}
+                className="block text-[11px] font-bold tracking-wider text-slate-400 uppercase mb-2 hover:text-blue-600 transition-colors"
+              >
                 {item.sectionTitle || item.title}
-              </div>
+              </Link>
               <ul className="flex flex-col">
                 {item.items!.map((sub) => (
                   <li key={sub.title}>
