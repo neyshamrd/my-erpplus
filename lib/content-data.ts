@@ -413,4 +413,41 @@ export const siteConfig = {
     demoText: "Jadwalkan Live Demo",
     flowchartText: "Download Flowchart ERP",
   },
+    footer: {
+    descBefore: "Solusi perangkat lunak Enterprise Resource Planning terintegrasi oleh",
+    descBrand: "PT You profit Indonesia",
+    descAfter: "untuk perusahaan manufaktur, distribusi, dan jasa profesional.",
+    address: "Ruko Modern Kav A16-A17, Lowokwaru, Kota Malang 65143",
+    columns: [
+      {
+        title: "Modul ERP",
+        links: [
+          { title: "1. Finansial & Akuntansi", href: "/modul/finansial" },
+          { title: "2. Manufaktur & Produksi", href: "/modul/manufaktur" },
+          { title: "3. Pembelian & Rantai Pasok", href: "/modul/pembelian" },
+          { title: "4. Penjualan & Distribusi", href: "/modul/penjualan" },
+          { title: "5. Inventaris & Gudang", href: "/modul/inventaris" },
+          { title: "6. Manajemen Aset Tetap", href: "/modul/aset" },
+        ],
+      },
+      {
+        title: "Solusi Industri",
+        links: [
+          { title: "Manufaktur & Pabrikasi", href: "/solusi/manufaktur" },
+          { title: "Distribusi dan Perdagangan", href: "/solusi/distribusi" },
+          { title: "Jasa Profesional dan Layanan", href: "/solusi/jasa" },
+          { title: "Studi Kasus 11 Sektor", href: "#studi-kasus" },
+        ],
+      },
+    ],
+    companyTitle: "Perusahaan & Lisensi",
+    companyLinks: [
+      { title: "Beranda Utama", href: "/" },
+      { title: "Paket Lisensi & Harga", href: "/harga" },
+      { title: "Hubungi Kami", href: "/kontak" },
+    ],
+    demoText: "Jadwalkan Live Demo",
+    copyright: "© 2026 PT You profit Indonesia. Seluruh Hak Cipta Dilindungi.",
+    security: "Keamanan Database Terenkripsi",
+  },
 };
