@@ -545,6 +545,282 @@ export const siteConfig = {
           "Laporan Keuangan & Pajak Siap Audit",
         ],
       },
+            manufaktur: {
+        number: 2,
+        eyebrow: "Modul Inti 02 • Produksi & Manufaktur",
+        title: "Manufaktur & Produksi",
+        description:
+          "Kelola alur produksi dari Multi-level BOM, Work in Progress (WIP) hingga Finished Goods (FG) beserta kalkulasi HPP aktual yang akurat.",
+        image: "/modul/manufaktur.jpg",
+        imageCaption:
+          "Dari perencanaan bahan baku hingga hasil produksi dengan biaya aktual yang terukur.",
+        integrationLabel: "Integrasi Lintas Modul:",
+        integration: [
+          { text: "Terhubung otomatis ke " },
+          { text: "Stok Bahan Baku", highlight: true },
+          { text: " & " },
+          { text: "Jurnal Biaya Produksi Akuntansi", highlight: true },
+        ],
+        features: [
+          {
+            title: "Multi-Level BOM",
+            description:
+              "Susunan bahan baku bertingkat dari barang jadi, barang setengah jadi, hingga komponen dasar dalam satu struktur terpadu.",
+          },
+          {
+            title: "Work Order & Routing",
+            description:
+              "Perintah produksi dengan urutan proses dan work center yang jelas, lengkap dengan status pengerjaan tiap tahap.",
+          },
+          {
+            title: "Monitoring Work in Progress (WIP)",
+            description:
+              "Pantau nilai dan posisi barang dalam proses produksi secara real-time tanpa rekap manual.",
+          },
+          {
+            title: "Kalkulasi HPP Aktual per Batch",
+            description:
+              "Harga pokok produksi dihitung otomatis dari pemakaian bahan, tenaga kerja, dan biaya overhead aktual.",
+          },
+          {
+            title: "Pengendalian Scrap & Susut",
+            description:
+              "Pencatatan sisa dan susut produksi untuk membandingkan pemakaian bahan terhadap standar BOM.",
+          },
+          {
+            title: "Hasil Produksi ke Finished Goods",
+            description:
+              "Hasil produksi masuk ke persediaan barang jadi secara otomatis dan siap dijual atau didistribusikan.",
+          },
+        ],
+        workflow: [
+          "Bill of Materials & Routing",
+          "Work Order & Pemakaian Bahan Baku",
+          "Pencatatan WIP & Hasil Produksi (FG)",
+          "HPP Aktual & Jurnal Biaya Otomatis",
+        ],
+      },
+      pembelian: {
+        number: 3,
+        eyebrow: "Modul Inti 03 • Pengadaan & Rantai Pasok",
+        title: "Pembelian & Rantai Pasok",
+        description:
+          "Alur Purchase Request (PR), Purchase Order (PO), Goods Receipt Note (GRN), dan Purchase Invoice (PI). Terhubung langsung dengan stok persediaan dan hutang usaha (AP).",
+        image: "/modul/pembelian.jpg",
+        imageCaption:
+          "Proses pengadaan terdokumentasi dari permintaan hingga pembayaran hutang.",
+        integrationLabel: "Integrasi Lintas Modul:",
+        integration: [
+          { text: "Terhubung otomatis ke " },
+          { text: "Hutang Dagang (AP)", highlight: true },
+          { text: " & " },
+          { text: "Penerimaan Barang Gudang (GRN)", highlight: true },
+        ],
+        features: [
+          {
+            title: "Purchase Request (PR)",
+            description:
+              "Permintaan pembelian dari tiap divisi tercatat rapi dan dapat dilacak statusnya sampai disetujui.",
+          },
+          {
+            title: "Purchase Order (PO)",
+            description:
+              "Penerbitan PO ke pemasok dengan harga, kuantitas, dan syarat pembayaran yang terdokumentasi.",
+          },
+          {
+            title: "Penerimaan Barang (GRN)",
+            description:
+              "Barang yang diterima langsung menambah stok gudang dan dicocokkan dengan PO terkait.",
+          },
+          {
+            title: "Purchase Invoice & Hutang (AP)",
+            description:
+              "Faktur pembelian membentuk hutang usaha otomatis lengkap dengan jadwal jatuh tempo.",
+          },
+          {
+            title: "3-Way Matching",
+            description:
+              "Validasi otomatis kecocokan antara PO, GRN, dan faktur pemasok sebelum hutang diakui.",
+          },
+          {
+            title: "Approval Bertingkat",
+            description:
+              "Persetujuan pembelian berjenjang sesuai batas kewenangan dan matriks otorisasi perusahaan.",
+          },
+        ],
+        workflow: [
+          "Purchase Request (PR)",
+          "Purchase Order (PO)",
+          "Goods Receipt Note (GRN)",
+          "Purchase Invoice (PI) & Hutang",
+        ],
+      },
+      penjualan: {
+        number: 4,
+        eyebrow: "Modul Inti 04 • Penjualan & Distribusi",
+        title: "Penjualan & Distribusi",
+        description:
+          "Alur Sales Quotation (SQ), Sales Order (SO), Delivery Order (DO), dan Sales Invoice (SI). Terhubung langsung dengan persediaan barang dan piutang usaha (AR).",
+        image: "/modul/penjualan.jpg",
+        imageCaption:
+          "Dari penawaran hingga penagihan, semua terhubung ke stok dan piutang secara real-time.",
+        integrationLabel: "Integrasi Lintas Modul:",
+        integration: [
+          { text: "Terhubung otomatis ke " },
+          { text: "Piutang Dagang (AR)", highlight: true },
+          { text: " & " },
+          { text: "Reservasi Stok Gudang", highlight: true },
+        ],
+        features: [
+          {
+            title: "Sales Quotation (SQ)",
+            description:
+              "Penawaran harga ke pelanggan yang dapat langsung dikonversi menjadi pesanan penjualan.",
+          },
+          {
+            title: "Sales Order (SO) & Reservasi Stok",
+            description:
+              "Pesanan penjualan otomatis mengunci stok gudang agar tidak terjual ganda.",
+          },
+          {
+            title: "Delivery Order (DO) & Surat Jalan",
+            description:
+              "Penerbitan surat jalan cepat yang langsung mengurangi stok dan menjadi dasar jurnal otomatis.",
+          },
+          {
+            title: "Sales Invoice (SI)",
+            description:
+              "Faktur penjualan terbit dari DO dan membentuk piutang usaha tanpa input ulang.",
+          },
+          {
+            title: "Piutang & Aging (AR)",
+            description:
+              "Pemantauan umur piutang pelanggan beserta pengingat penagihan saat jatuh tempo.",
+          },
+          {
+            title: "Harga, Diskon & Batas Kredit",
+            description:
+              "Pengaturan harga bertingkat, diskon, dan batas kredit pelanggan yang divalidasi saat transaksi.",
+          },
+        ],
+        workflow: [
+          "Sales Quotation (SQ)",
+          "Sales Order (SO) & Reservasi Stok",
+          "Delivery Order (DO) & Surat Jalan",
+          "Sales Invoice (SI) & Piutang",
+        ],
+      },
+      inventaris: {
+        number: 5,
+        eyebrow: "Modul Inti 05 • Persediaan & Gudang",
+        title: "Inventaris & Gudang",
+        description:
+          "Pelacakan stok multi-gudang, pengelolaan nomor lot/batch produksi, mutasi antar cabang/gudang, serta stock opname fisik untuk sinkronisasi fisik vs sistem.",
+        image: "/modul/inventaris.jpg",
+        imageCaption:
+          "Saldo stok akurat di setiap gudang dan cabang, diperbarui pada setiap transaksi.",
+        integrationLabel: "Integrasi Lintas Modul:",
+        integration: [
+          { text: "Terhubung otomatis ke " },
+          { text: "Manufaktur", highlight: true },
+          { text: " & " },
+          { text: "Pengadaan", highlight: true },
+          { text: " (Update Saldo Stok Real-Time)" },
+        ],
+        features: [
+          {
+            title: "Stok Multi-Gudang",
+            description:
+              "Saldo stok terpisah per gudang dan cabang, dapat dilihat secara terpusat maupun per lokasi.",
+          },
+          {
+            title: "Lot / Batch",
+            description:
+              "Pelacakan nomor lot atau batch produksi dari penerimaan hingga pengeluaran barang.",
+          },
+          {
+            title: "Mutasi Antar Gudang",
+            description:
+              "Perpindahan barang antar cabang atau gudang tercatat lengkap dengan status pengiriman.",
+          },
+          {
+            title: "Stock Opname",
+            description:
+              "Pencocokan stok fisik dengan stok sistem, dengan selisih yang langsung tercatat dan dijurnal.",
+          },
+          {
+            title: "Metode Penilaian Stok",
+            description:
+              "Valuasi persediaan dengan metode FIFO atau rata-rata sesuai kebijakan akuntansi perusahaan.",
+          },
+          {
+            title: "Kartu Stok & Saldo Real-Time",
+            description:
+              "Riwayat keluar masuk barang dan saldo terkini tersedia kapan saja tanpa rekap manual.",
+          },
+        ],
+        workflow: [
+          "Penerimaan Barang (GRN) & Hasil Produksi",
+          "Pencatatan Lot/Batch per Gudang",
+          "Mutasi Antar Gudang & Pengeluaran (DO)",
+          "Stock Opname & Sinkronisasi Saldo",
+        ],
+      },
+      aset: {
+        number: 6,
+        eyebrow: "Modul Inti 06 • Aset & Depresiasi",
+        title: "Manajemen Aset Tetap",
+        description:
+          "Kelola register mesin, kendaraan, dan bangunan dengan jadwal depresiasi otomatis serta pemeliharaan berkala untuk menjaga valuasi aset.",
+        image: "/modul/aset.jpg",
+        imageCaption:
+          "Seluruh aset perusahaan tercatat, tersusutkan otomatis, dan terpantau nilainya.",
+        integrationLabel: "Integrasi Lintas Modul:",
+        integration: [
+          { text: "Terhubung otomatis ke " },
+          { text: "Jurnal Akuntansi Penyusutan", highlight: true },
+          { text: " & " },
+          { text: "Modul Depresiasi Aset", highlight: true },
+        ],
+        features: [
+          {
+            title: "Asset Register",
+            description:
+              "Daftar induk mesin, kendaraan, dan bangunan lengkap dengan nilai perolehan, lokasi, dan penanggung jawab.",
+          },
+          {
+            title: "Jadwal Depresiasi Otomatis",
+            description:
+              "Penyusutan dihitung otomatis per periode sesuai metode dan umur ekonomis yang ditetapkan.",
+          },
+          {
+            title: "Jurnal Penyusutan Otomatis",
+            description:
+              "Beban penyusutan terposting ke buku besar tiap periode tanpa input jurnal manual.",
+          },
+          {
+            title: "Pemeliharaan Berkala",
+            description:
+              "Jadwal dan riwayat perawatan aset tercatat untuk menjaga kondisi dan umur pakai.",
+          },
+          {
+            title: "Valuasi & Nilai Buku",
+            description:
+              "Nilai buku aset terkini tersedia kapan saja untuk kebutuhan laporan dan audit.",
+          },
+          {
+            title: "Mutasi & Pelepasan Aset",
+            description:
+              "Perpindahan lokasi, penjualan, atau penghapusan aset tercatat lengkap dengan dampaknya pada jurnal.",
+          },
+        ],
+        workflow: [
+          "Registrasi Aset (Mesin, Kendaraan, Bangunan)",
+          "Penetapan Metode & Jadwal Depresiasi",
+          "Jurnal Penyusutan Otomatis Bulanan",
+          "Pemeliharaan & Valuasi Aset",
+        ],
+      },
     },
   },
 };
