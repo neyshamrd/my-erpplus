@@ -823,4 +823,74 @@ export const siteConfig = {
       },
     },
   },
+    solusiDetail: {
+    subNavLabel: "Kelompok Industri:",
+    challengesTitle: "Tantangan Operasional Umum",
+    workflowTitle: "Alur Proses Bisnis Terintegrasi",
+    capabilitiesTitle: "Kapabilitas Utama MyERP Plus untuk",
+    capabilitiesSubtitle:
+      "Fitur operasional yang dirancang untuk mengendalikan proses bisnis",
+    ctaTitle: "Konsultasikan Alur",
+    ctaTitleSuffix: "Perusahaan Anda",
+    ctaText:
+      "Dapatkan pemetaan proses bisnis langsung bersama Solution Architect PT You profit Indonesia.",
+    demoButton: "Jadwalkan Live Demo",
+    backButton: "Kembali ke Beranda",
+    items: {
+      manufaktur: {
+        eyebrow: "Kelompok Proses Bisnis 01 • Pabrikasi & Proses Produksi Terpadu",
+        title: "Manufaktur",
+        sectorName: "Manufaktur",
+        description:
+          "Multi-Level BOM bertingkat, alur work order presisi, pengelolaan bahan baku, serta kalkulasi HPP aktual otomatis hingga per unit produk.",
+        configText: "Konfigurasi alur operasional siap pakai untuk sektor",
+        image: "/industri/manufaktur.jpg",
+        imageCaption:
+          "Pengendalian lantai pabrik, struktur Multi-Level BOM bertingkat, dan kalkulasi HPP aktual per unit produksi.",
+        challenges: [
+          "Perhitungan Harga Pokok Produksi (HPP) sering meleset karena biaya overhead dan susut bahan baku tidak tercatat per batch.",
+          "Keterlambatan pemenuhan pesanan akibat jadwal pembelian bahan baku tidak sinkron dengan kapasitas lini produksi.",
+          "Sulit melacak posisi barang setengah jadi (Work in Progress) di lantai pabrik.",
+        ],
+        workflow: [
+          "Production Formula & Material Order",
+          "Penerbitan Work Order (WO)",
+          "Material Slip & Proses Produksi",
+          "Material Return & Production Slip",
+        ],
+        features: [
+          {
+            title: "Production Formula",
+            description:
+              "Penyusunan resep dan komposisi bahan baku bertingkat (Bill of Materials) beserta standar kebutuhan material dan rasio rendemen per produk.",
+          },
+          {
+            title: "Material Order",
+            description:
+              "Pengajuan permintaan kebutuhan bahan baku (MRP) secara terstruktur berdasarkan jadwal produksi untuk memastikan ketersediaan stok material tepat waktu.",
+          },
+          {
+            title: "Work Order",
+            description:
+              "Penerbitan surat perintah kerja produksi per lini atau mesin guna mengendalikan jadwal pengerjaan, target output, dan status proses di lantai pabrik.",
+          },
+          {
+            title: "Material Slip",
+            description:
+              "Pencatatan pengeluaran bahan baku dari gudang menuju lantai produksi secara akurat sehingga mutasi dan pemakaian material terpantau real-time.",
+          },
+          {
+            title: "Material Return",
+            description:
+              "Pengelolaan pengembalian sisa bahan baku yang tidak terpakai dari lantai produksi kembali ke gudang untuk menjaga akurasi saldo stok dan HPP batch.",
+          },
+          {
+            title: "Production Slip",
+            description:
+              "Pelaporan hasil penyelesaian barang jadi (Finished Goods) maupun setengah jadi dari lini produksi yang langsung memperbarui stok gudang dan jurnal HPP aktual.",
+          },
+        ],
+      },
+    },
+  },
 };
