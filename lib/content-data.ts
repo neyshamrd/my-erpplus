@@ -891,6 +891,114 @@ export const siteConfig = {
           },
         ],
       },
+      distribusi: {
+        eyebrow: "Kelompok Proses Bisnis 02 • Rantai Pasok & Grosir",
+        title: "Distribusi dan Perdagangan",
+        sectorName: "Distribusi dan Perdagangan",
+        description:
+          "Manajemen multi-gudang antar cabang, penerbitan surat jalan cepat, hingga pemantauan penagihan piutang dagang terintegrasi.",
+        configText: "Konfigurasi alur operasional siap pakai untuk sektor",
+        image: "/industri/distribusi.jpg",
+        imageCaption:
+          "Manajemen multi-gudang antar cabang, penerbitan surat jalan cepat, hingga pemantauan penagihan piutang dagang terintegrasi.",
+        challenges: [
+          "Ketidaksesuaian saldo stok barang fisik dan sistem akibat mutasi antar cabang dan multi-gudang yang lambat tercatat.",
+          "Penerbitan surat jalan manual yang memperlambat pengiriman serta memicu risiko salah kirim barang ke pelanggan.",
+          "Piutang dagang menumpuk dan sulit tertagih tepat waktu karena tidak adanya pemantauan aging schedule otomatis.",
+        ],
+        workflow: [
+          "Sales Order & Alokasi Multi-Gudang",
+          "Surat Jalan Otomatis & Pengiriman",
+          "Faktur Penjualan (Sales Invoice)",
+          "Manajemen Aging Piutang Dagang",
+        ],
+        features: [
+          {
+            title: "Multi-Warehouse Transfer",
+            description:
+              "Pengelolaan dan pemantauan perpindahan barang antar gudang dan cabang secara terpusat dengan status mutasi yang terpantau real-time.",
+          },
+          {
+            title: "Surat Jalan Otomatis",
+            description:
+              "Penerbitan dokumen surat jalan (Delivery Order) otomatis dan instan yang langsung mengurangi saldo stok persediaan gudang.",
+          },
+          {
+            title: "Aging Piutang Dagang",
+            description:
+              "Pemantauan umur piutang usaha (AR Aging) lengkap dengan analisis jatuh tempo dan peringatan penagihan piutang pelanggan.",
+          },
+          {
+            title: "Manajemen Multi-Cabang",
+            description:
+              "Sentralisasi operasional dan stok barang di seluruh cabang dan titik distribusi dalam satu database terpadu.",
+          },
+          {
+            title: "Validasi Batas Kredit",
+            description:
+              "Kontrol otomatis limit piutang dan histori pembayaran pelanggan sebelum pesanan penjualan diproses dan dikirim.",
+          },
+          {
+            title: "Faktur & Pajak Terintegrasi",
+            description:
+              "Penerbitan faktur komersial dan faktur pajak langsung dari data surat jalan tanpa input manual ganda.",
+          },
+        ],
+      },
+      jasa: {
+        eyebrow: "Kelompok Proses Bisnis 03 • Jasa Umum & Layanan Bisnis",
+        title: "Jasa Profesional dan Layanan (Services)",
+        sectorName: "Jasa Profesional dan Layanan",
+        description:
+          "Dirancang fleksibel untuk industri jasa dan layanan umum dengan kendali manajemen hutang piutang berbasis aging, analisis laporan laba rugi per jenis jasa atau pelanggan, serta pembukuan buku besar tersegragasi secara akurat.",
+        configText: "Konfigurasi alur operasional siap pakai untuk sektor",
+        image: "/industri/jasa.jpg",
+        imageCaption:
+          "Kendali hutang piutang berbasis aging, analisis laporan laba rugi per jenis jasa, serta pembukuan buku besar terpadu.",
+        challenges: [
+          "Sulit mengetahui profitabilitas riil karena pendapatan dan beban operasional tidak teralokasi per jenis layanan atau pelanggan.",
+          "Arus kas terganggu akibat keterlambatan penagihan piutang jasa dan jadwal pembayaran hutang vendor yang tidak terpantau.",
+          "Pencatatan pembukuan buku besar yang tercampur tanpa pemisahan akun biaya dan pendapatan per divisi jasa.",
+        ],
+        workflow: [
+          "Penerbitan Penawaran & Kontrak Jasa",
+          "Pencatatan Biaya & Beban Layanan",
+          "Invoicing & Aging Hutang Piutang",
+          "Laba Rugi & Buku Besar per Jasa",
+        ],
+        features: [
+          {
+            title: "Manajemen Hutang Piutang dengan Aging",
+            description:
+              "Pengendalian jadwal tagihan invoice pelanggan dan kewajiban hutang vendor berbasis umur piutang/hutang (aging schedule) secara presisi.",
+          },
+          {
+            title: "Laba Rugi per Jasa atau Pelanggan",
+            description:
+              "Laporan laba rugi analitis yang menyajikan pendapatan berbanding biaya langsung untuk tiap jenis layanan maupun akun pelanggan.",
+          },
+          {
+            title: "Buku Besar per Jasa atau Pelanggan",
+            description:
+              "Pembukuan buku besar tersegragasi secara akurat sehingga setiap transaksi teralokasi ke pusat biaya dan lini layanan yang tepat.",
+          },
+          {
+            title: "Penagihan Termin & Milestone",
+            description:
+              "Fleksibilitas penerbitan tagihan bertahap sesuai progres pengerjaan layanan, termin kontrak, atau kesepakatan retainer.",
+          },
+          {
+            title: "Alokasi Beban Operasional",
+            description:
+              "Pencatatan pengeluaran operasional dan biaya tenaga kerja langsung yang dapat dibebankan ke masing-masing proyek layanan.",
+          },
+          {
+            title: "Faktur Pajak & Bukti Potong PPh",
+            description:
+              "Kepatuhan perpajakan industri jasa terotomasi, termasuk pemotongan PPh Pasal 23/21 dan pelaporan PPN yang siap lapor.",
+          },
+        ],
+      },
     },
   },
 };
