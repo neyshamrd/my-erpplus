@@ -201,8 +201,8 @@ export const siteConfig = {
       { id: "ikuyo", name: "PT Ikuyo Indonesia", logoSrc: "/logos/ikuyo.png" },
       { id: "motasa", name: "PT Motasa Indonesia", logoSrc: "/logos/motasa.png" },
       { id: "narumi", name: "PT Narumi Indonesia Mfg (NIM)", logoSrc: "/logos/narumi.png" },
-      { id: "pci", name: "PT Prima Copper Industri", logoSrc: "/logos/pci.png" },
-      { id: "ujs", name: "PT Unggul Jaya Sejahtera", logoSrc: "/logos/ujs.png" },
+      { id: "pci", name: "PT Prima Copper Industri", logoSrc: "/logos/pci.jpg" },
+      { id: "ujs", name: "PT Unggul Jaya Sejahtera", logoSrc: "/logos/ujs.jpg" },
       { id: "npt", name: "PT Nanda Persada Transport", logoSrc: "/logos/npt.png" },
     ],
     notes: [
