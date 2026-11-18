@@ -477,4 +477,74 @@ export const siteConfig = {
       "WhatsApp sudah terbuka dengan pesan yang terisi otomatis. Tekan tombol kirim di WhatsApp untuk menyelesaikan permintaan jadwal demo Anda.",
     closeText: "Tutup",
   },
+  modulDetail: {
+    subNavLabel: "Modul ERP:",
+    featuresTitle: "Ruang Lingkup & Fitur Utama",
+    featuresSubtitle: "Fungsionalitas standar yang tersedia di dalam modul",
+    workflowTitle: "Alur Kerja & Siklus Dokumen",
+    ctaTitle: "Diskusikan Kebutuhan Modul",
+    ctaText: "Jadwalkan sesi demonstrasi langsung bersama tim konsultan PT You profit Indonesia.",
+    demoButton: "Jadwalkan Demo Modul",
+    backButton: "Kembali ke Beranda",
+    items: {
+      finansial: {
+        number: 1,
+        eyebrow: "Modul Inti 01 • Akuntansi & Keuangan",
+        title: "Finansial & Akuntansi",
+        description:
+          "General Ledger otomatis tanpa input ganda. Penyajian laporan keuangan terpusat (Laba Rugi, Neraca, Arus Kas) secara real-time & kepatuhan regulasi pajak Indonesia.",
+        image: "/modul/finansial.jpg",
+        imageCaption:
+          "Rekonsiliasi buku besar, laporan laba rugi, dan kepatuhan perpajakan korporat dalam satu sistem.",
+        integrationLabel: "Integrasi Lintas Modul:",
+        integration: [
+          { text: "Terhubung otomatis ke " },
+          { text: "Pembelian", highlight: true },
+          { text: ", " },
+          { text: "Gudang", highlight: true },
+          { text: ", & " },
+          { text: "Penjualan", highlight: true },
+          { text: " (Jurnal Otomatis dari DO & GRN)" },
+        ],
+        features: [
+          {
+            title: "General Ledger & Jurnal Otomatis",
+            description:
+              "Setiap transaksi operasional dari gudang, pembelian, dan penjualan langsung membentuk jurnal akuntansi secara seketika.",
+          },
+          {
+            title: "Laporan Keuangan Real-Time",
+            description:
+              "Neraca, Laba Rugi, Arus Kas, dan Buku Besar dapat ditarik kapan saja tanpa menunggu proses posting manual akhir bulan.",
+          },
+          {
+            title: "Kepatuhan Pajak Indonesia",
+            description:
+              "Mendukung ekspor faktur pajak keluaran/masukan standar e-Faktur serta pencatatan bukti potong PPh (e-Bupot).",
+          },
+          {
+            title: "Manajemen Hutang & Piutang (AP/AR)",
+            description:
+              "Pemantauan umur piutang (Aging Schedule), pelunasan multi-invoice, hingga pengingat jatuh tempo tagihan.",
+          },
+          {
+            title: "Multi-Currency & Selisih Kurs",
+            description:
+              "Pencatatan transaksi valuta asing lengkap dengan perhitungan otomatis selisih kurs terealisasi maupun belum terealisasi.",
+          },
+          {
+            title: "Audit Trail Lengkap",
+            description:
+              "Mencatat rekam jejak waktu, pengguna, dan nilai sebelum-sesudah untuk setiap perubahan dokumen keuangan.",
+          },
+        ],
+        workflow: [
+          "Transaksi Operasional (GRN / DO / Invoice)",
+          "Validasi Mapping Akun Otomatis",
+          "Posting Jurnal Buku Besar Real-Time",
+          "Laporan Keuangan & Pajak Siap Audit",
+        ],
+      },
+    },
+  },
 };
