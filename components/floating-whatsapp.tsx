@@ -60,7 +60,7 @@ export function FloatingWhatsApp() {
         <ArrowUp className="h-5 w-5" />
       </button>
 
-      {/* Tombol WhatsApp: label "Hubungi Kami" slide terbuka saat hover atau fokus */}
+      {/* Tombol WhatsApp: ikon bulat + pill ramping "Hubungi Kami" yang slide keluar dari belakang ikon */}
       <a
         href={WA_LINK}
         target="_blank"
@@ -70,20 +70,20 @@ export function FloatingWhatsApp() {
         onMouseLeave={() => setExpanded(false)}
         onFocus={() => setExpanded(true)}
         onBlur={() => setExpanded(false)}
-        className="relative flex h-14 items-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.4)] transition-shadow duration-300 hover:shadow-[0_12px_28px_rgba(37,211,102,0.5)] motion-reduce:transition-none"
+        className="relative flex items-center"
       >
-        {/* Ikon */}
-        <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] ring-4 ring-white/90">
-          <WhatsAppGlyph className="h-7 w-7 text-white" />
+        {/* Ikon bulat dengan cincin putih */}
+        <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_6px_18px_rgba(37,211,102,0.4)] ring-4 ring-white">
+          <WhatsAppGlyph className="h-6 w-6 text-white" />
         </span>
 
-        {/* Teks yang slide terbuka */}
+        {/* Pill ramping: menyelip di belakang ikon, slide terbuka ke kanan */}
         <span
-          className={`relative z-10 overflow-hidden transition-all duration-500 ease-out motion-reduce:transition-none ${
-            expanded ? "max-w-[150px] opacity-100" : "max-w-0 opacity-0"
+          className={`relative z-0 overflow-hidden transition-all duration-500 ease-out motion-reduce:transition-none ${
+            expanded ? "-ml-6 max-w-[180px] opacity-100" : "ml-0 max-w-0 opacity-0"
           }`}
         >
-          <span className="block whitespace-nowrap pl-1 pr-5 text-sm font-bold">
+          <span className="flex h-9 items-center whitespace-nowrap rounded-full bg-[#25D366] pl-8 pr-5 text-[13px] font-bold text-white shadow-md shadow-emerald-500/20">
             Hubungi Kami
           </span>
         </span>
