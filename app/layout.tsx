@@ -9,12 +9,38 @@ const inter = Inter({
   display: "swap",
 });
 
+// Alamat dasar website untuk membuat link gambar pratinjau yang lengkap.
+// Urutan: NEXT_PUBLIC_SITE_URL (jika diisi) -> alamat produksi Vercel -> localhost
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
+const siteTitle = "MyERP Plus | Solusi ERP Terintegrasi untuk Manufaktur & Distribusi";
+const siteDescription =
+  "Solusi ERP cloud untuk bisnis, manufaktur, dan distributor di Indonesia.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "MyERP Plus",
     template: "%s - MyERP Plus",
   },
-  description: "Solusi ERP cloud untuk bisnis, manufaktur, dan distributor di Indonesia.",
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    siteName: "MyERP Plus",
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
