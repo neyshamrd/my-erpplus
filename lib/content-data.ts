@@ -896,59 +896,59 @@ export const siteConfig = {
         title: "Distribusi dan Perdagangan",
         sectorName: "Distribusi dan Perdagangan",
         description:
-          "Manajemen multi-gudang antar cabang, penerbitan surat jalan cepat, hingga pemantauan penagihan piutang dagang terintegrasi.",
+          "Manajemen multi-gudang antar cabang, penerbitan surat jalan cepat, hingga pemantauan penagihan piutang dagang.",
         configText: "Konfigurasi alur operasional siap pakai untuk sektor",
         image: "/industri/distribusi.jpg",
         imageCaption:
           "Manajemen multi-gudang antar cabang, penerbitan surat jalan cepat, hingga pemantauan penagihan piutang dagang terintegrasi.",
         challenges: [
-          "Ketidaksesuaian saldo stok barang fisik dan sistem akibat mutasi antar cabang dan multi-gudang yang lambat tercatat.",
-          "Penerbitan surat jalan manual yang memperlambat pengiriman serta memicu risiko salah kirim barang ke pelanggan.",
-          "Piutang dagang menumpuk dan sulit tertagih tepat waktu karena tidak adanya pemantauan aging schedule otomatis.",
+          "Selisih stok antara gudang pusat, gudang cabang, dan barang dalam perjalanan pengiriman.",
+          "Kebocoran piutang tak tertagih akibat pesanan tetap diproses meski pelanggan melewati batas kredit.",
+          "Keterlambatan penerbitan tagihan karena dokumen surat jalan (Delivery Order) tidak terintegrasi dengan faktur.",
         ],
         workflow: [
-          "Sales Order & Alokasi Multi-Gudang",
-          "Surat Jalan Otomatis & Pengiriman",
-          "Faktur Penjualan (Sales Invoice)",
-          "Manajemen Aging Piutang Dagang",
+          "Sales Quotation & SO",
+          "Multi-Warehouse Transfer",
+          "Delivery Order & Potong Stok",
+          "Sales Invoice & Aging AR",
         ],
         features: [
           {
             title: "Multi-Warehouse Transfer",
             description:
-              "Pengelolaan dan pemantauan perpindahan barang antar gudang dan cabang secara terpusat dengan status mutasi yang terpantau real-time.",
+            "Pengelolaan mutasi barang antar cabang lengkap dengan kontrol barang dalam transit.",
           },
           {
-            title: "Surat Jalan Otomatis",
+            title: "Surat Jalan (DO) Otomatis",
             description:
-              "Penerbitan dokumen surat jalan (Delivery Order) otomatis dan instan yang langsung mengurangi saldo stok persediaan gudang.",
+            "Penerbitan dokumen pengiriman langsung dari Sales Order yang seketika memotong saldo stok.",
           },
           {
-            title: "Aging Piutang Dagang",
+            title: "Aging Piutang Dagang & Credit Limit",
             description:
-              "Pemantauan umur piutang usaha (AR Aging) lengkap dengan analisis jatuh tempo dan peringatan penagihan piutang pelanggan.",
+            "Pemblokiran otomatis SO jika pelanggan melampaui batas plafon kredit atau jatuh tempo.",
           },
           {
-            title: "Manajemen Multi-Cabang",
+            title: "Konversi Multi-Satuan",
             description:
-              "Sentralisasi operasional dan stok barang di seluruh cabang dan titik distribusi dalam satu database terpadu.",
+            "Transaksi fleksibel dalam satuan karton, dus, maupun eceran tanpa selisih konversi.",
           },
           {
-            title: "Validasi Batas Kredit",
+            title: "Siklus SQ → SO → DO → SI",
             description:
-              "Kontrol otomatis limit piutang dan histori pembayaran pelanggan sebelum pesanan penjualan diproses dan dikirim.",
+            "Alur penjualan berantai yang memastikan setiap pengiriman tertagih akurat.",
           },
           {
-            title: "Faktur & Pajak Terintegrasi",
+            title: "Analisis Profitabilitas Pelanggan & Wilayah",
             description:
-              "Penerbitan faktur komersial dan faktur pajak langsung dari data surat jalan tanpa input manual ganda.",
+            "Laporan margin penjualan per cabang, kategori produk, dan tenaga penjual.",
           },
         ],
       },
       jasa: {
         eyebrow: "Kelompok Proses Bisnis 03 • Jasa Umum & Layanan Bisnis",
         title: "Jasa Profesional dan Layanan (Services)",
-        sectorName: "Jasa Profesional dan Layanan",
+        sectorName: "Jasa Profesional dan Layanan (Services)",
         description:
           "Dirancang fleksibel untuk industri jasa dan layanan umum dengan kendali manajemen hutang piutang berbasis aging, analisis laporan laba rugi per jenis jasa atau pelanggan, serta pembukuan buku besar tersegragasi secara akurat.",
         configText: "Konfigurasi alur operasional siap pakai untuk sektor",
@@ -956,46 +956,46 @@ export const siteConfig = {
         imageCaption:
           "Kendali hutang piutang berbasis aging, analisis laporan laba rugi per jenis jasa, serta pembukuan buku besar terpadu.",
         challenges: [
-          "Sulit mengetahui profitabilitas riil karena pendapatan dan beban operasional tidak teralokasi per jenis layanan atau pelanggan.",
-          "Arus kas terganggu akibat keterlambatan penagihan piutang jasa dan jadwal pembayaran hutang vendor yang tidak terpantau.",
-          "Pencatatan pembukuan buku besar yang tercampur tanpa pemisahan akun biaya dan pendapatan per divisi jasa.",
+          "Sulit mengetahui profitabilitas bersih dari masing-masing jenis jasa atau kontrak pelanggan secara terpisah.",
+          "Penagihan termin jasa dan pemantauan umur piutang/hutang usaha tersebar di banyak file manual.",
+          "Pencatatan biaya operasional per klien tercampur dalam satu buku besar umum.",
         ],
         workflow: [
-          "Penerbitan Penawaran & Kontrak Jasa",
-          "Pencatatan Biaya & Beban Layanan",
-          "Invoicing & Aging Hutang Piutang",
+          "Penawaran & Kontrak Jasa",
+          "Aging Hutang & Piutang",
+          "Penagihan Invoice & Termin",
           "Laba Rugi & Buku Besar per Jasa",
         ],
         features: [
           {
             title: "Manajemen Hutang Piutang dengan Aging",
             description:
-              "Pengendalian jadwal tagihan invoice pelanggan dan kewajiban hutang vendor berbasis umur piutang/hutang (aging schedule) secara presisi.",
+            "Pemantauan jadwal jatuh tempo tagihan pelanggan dan kewajiban pemasok berdasarkan kelompok umur hari.",
           },
           {
             title: "Laba Rugi per Jasa atau Pelanggan",
             description:
-              "Laporan laba rugi analitis yang menyajikan pendapatan berbanding biaya langsung untuk tiap jenis layanan maupun akun pelanggan.",
+            "Penyajian laporan pendapatan, biaya langsung, dan margin laba bersih terperinci per jenis layanan atau klien.",
           },
           {
             title: "Buku Besar per Jasa atau Pelanggan",
             description:
-              "Pembukuan buku besar tersegragasi secara akurat sehingga setiap transaksi teralokasi ke pusat biaya dan lini layanan yang tepat.",
+            "Segregasi mutasi akun buku besar yang memudahkan penelusuran transaksi per segmen layanan maupun pelanggan."
           },
           {
-            title: "Penagihan Termin & Milestone",
+            title: "Penagihan Termin & Berulang",
             description:
-              "Fleksibilitas penerbitan tagihan bertahap sesuai progres pengerjaan layanan, termin kontrak, atau kesepakatan retainer.",
+            "Penerbitan invoice jasa berdasarkan progres penyelesaian layanan maupun jadwal kontrak berkala.",
           },
           {
-            title: "Alokasi Beban Operasional",
+            title: "Kontrol Biaya Operasional & Pengadaan",
             description:
-              "Pencatatan pengeluaran operasional dan biaya tenaga kerja langsung yang dapat dibebankan ke masing-masing proyek layanan.",
+            "Alur persetujuan pembelian dan pembebanan biaya langsung ke masing-masing layanan.",
           },
           {
-            title: "Faktur Pajak & Bukti Potong PPh",
+            title: "Laporan Keuangan Standar Audit",
             description:
-              "Kepatuhan perpajakan industri jasa terotomasi, termasuk pemotongan PPh Pasal 23/21 dan pelaporan PPN yang siap lapor.",
+            "Konsolidasi otomatis seluruh segmen jasa menjadi laporan keuangan perusahaan yang siap diaudit.",
           },
         ],
       },
