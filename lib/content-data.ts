@@ -195,15 +195,15 @@ export const siteConfig = {
   },
   trust: {
     title: "Dipercaya oleh perusahaan manufaktur Indonesia",
-    clients: [
-      { id: "kawata", name: "PT Kawata Indonesia", logoSrc: "" },
-      { id: "topla", name: "PT Topla Abadi Jaya", logoSrc: "" },
-      { id: "ikuyo", name: "PT Ikuyo Indonesia", logoSrc: "" },
-      { id: "motasa", name: "PT Motasa Indonesia", logoSrc: "" },
-      { id: "narumi", name: "PT Narumi Indonesia Mfg (NIM)", logoSrc: "" },
-      { id: "pci", name: "PT Prima Copper Industri", logoSrc: "" },
-      { id: "ujs", name: "PT Unggul Jaya Sejahtera", logoSrc: "" },
-      { id: "npt", name: "PT Nanda Persada Transport", logoSrc: "" },
+        clients: [
+      { id: "kawata", name: "PT Kawata Indonesia", logoSrc: "/logos/kawata.png" },
+      { id: "topla", name: "PT Topla Abadi Jaya", logoSrc: "/logos/topla.png" },
+      { id: "ikuyo", name: "PT Ikuyo Indonesia", logoSrc: "/logos/ikuyo.png" },
+      { id: "motasa", name: "PT Motasa Indonesia", logoSrc: "/logos/motasa.png" },
+      { id: "narumi", name: "PT Narumi Indonesia Mfg (NIM)", logoSrc: "/logos/narumi.png" },
+      { id: "pci", name: "PT Prima Copper Industri", logoSrc: "/logos/pci.png" },
+      { id: "ujs", name: "PT Unggul Jaya Sejahtera", logoSrc: "/logos/ujs.png" },
+      { id: "npt", name: "PT Nanda Persada Transport", logoSrc: "/logos/npt.png" },
     ],
     notes: [
       {
