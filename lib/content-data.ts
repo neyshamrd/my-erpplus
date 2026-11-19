@@ -437,7 +437,7 @@ export const siteConfig = {
           { title: "Manufaktur & Pabrikasi", href: "/solusi/manufaktur" },
           { title: "Distribusi dan Perdagangan", href: "/solusi/distribusi" },
           { title: "Jasa Profesional dan Layanan", href: "/solusi/jasa" },
-          { title: "Studi Kasus 11 Sektor", href: "#studi-kasus" },
+          { title: "Studi Kasus 11 Sektor", href: "studi-kasus/logam" },
         ],
       },
     ],
@@ -997,6 +997,46 @@ export const siteConfig = {
             description:
             "Konsolidasi otomatis seluruh segmen jasa menjadi laporan keuangan perusahaan yang siap diaudit.",
           },
+        ],
+      },
+    },
+  },
+    studiKasusDetail: {
+    sectorBarLabel: "Pilih Sektor:",
+    challengesTitle: "Titik Kritis Operasional (Bottleneck)",
+    solutionsTitle: "Solusi Terintegrasi MyERP Plus",
+    modulesLabel: "Modul Inti yang Diimplementasikan",
+    ctaButton: "Diskusikan Studi Kasus Ini",
+    items: {
+      logam: {
+        sectorName: "Manufaktur Pengolahan Logam",
+        badge: "Smelting, Casting, Extrusion & Wire Drawing",
+        title: "Manufaktur Pengolahan Logam (seperti besi, baja, aluminium, tembaga, dan timah)",
+        description:
+          "Smelting, Casting, Extrusion & Wire Drawing (Bahan baku Ingot, Billet, Katoda & Scrap Logam -> Wire, Batangan, Plat & Profil Logam). Mengelola volatilitas harga pasar bursa logam (LME) dan rendemen peleburan terpadu.",
+        capacityText:
+          "Kapasitas output harian 120+ Ton olahan logam dengan siklus peleburan tungku kontinu 24 jam non-stop.",
+        stats: [
+          { value: "99.1%", label: "Akurasi Metal Balance & Susut Tungku" },
+          { value: "Harian", label: "Presisi Kalkulasi HPP per Batch Logam" },
+          { value: "-18%", label: "Efisiensi Biaya Dies & Refractory" },
+        ],
+        challenges: [
+          "Fluktuasi harga komoditas logam (LME & bursa lokal) harian menyulitkan penetapan harga jual dan valuasi stok.",
+          "Rendemen peleburan scrap serta susut pembakaran (melting loss) tidak terpantau real-time per batch.",
+          "Konsumsi energi tungku peleburan (furnace) dan biaya cetakan (dies) belum teralokasi akurat ke HPP.",
+        ],
+        solutions: [
+          "BOM peleburan dinamis yang mengakomodasi campuran ingot, katoda, dan scrap daur ulang.",
+          "Alokasi biaya energi listrik furnace dan penyusutan dies/cetakan langsung ke perhitungan HPP batch.",
+          "Pencatatan berat timbangan riil di setiap tahap casting, rolling, hingga wire drawing.",
+        ],
+        modules: [
+          "Manufaktur & Produksi",
+          "Inventaris & Gudang",
+          "Finansial & Akuntansi",
+          "Pembelian & Rantai Pasok",
+          "Manajemen Aset Tetap",
         ],
       },
     },
