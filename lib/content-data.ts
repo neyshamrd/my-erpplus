@@ -437,7 +437,7 @@ export const siteConfig = {
           { title: "Manufaktur & Pabrikasi", href: "/solusi/manufaktur" },
           { title: "Distribusi dan Perdagangan", href: "/solusi/distribusi" },
           { title: "Jasa Profesional dan Layanan", href: "/solusi/jasa" },
-          { title: "Studi Kasus 11 Sektor", href: "studi-kasus/logam" },
+          { title: "Studi Kasus 11 Sektor", href: "/studi-kasus/logam" },
         ],
       },
     ],
