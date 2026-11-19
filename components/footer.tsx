@@ -35,7 +35,13 @@ export function Footer({ onOpenDemo }: FooterProps) {
             </p>
 
             <p className="mt-4 text-[13px] leading-snug text-slate-300">
-              {data.address}
+              <Link
+                href="/kontak"
+                className="hover:text-white transition-colors"
+                title="Kunjungi Kantor Kami"
+              >
+                {data.address}
+              </Link>
             </p>
           </div>
 

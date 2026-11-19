@@ -445,7 +445,7 @@ export const siteConfig = {
     companyLinks: [
       { title: "Beranda Utama", href: "/" },
       { title: "Paket Lisensi & Harga", href: "/harga" },
-      { title: "Hubungi Kami", href: "/kontak" },
+      { title: "Kontak", href: "/kontak" },
     ],
     demoText: "Jadwalkan Live Demo",
     copyright: "© 2026 PT You profit Indonesia. Seluruh Hak Cipta Dilindungi.",
@@ -1590,6 +1590,50 @@ export const siteConfig = {
           "Tersedia pada edisi Corporate Custom. Tim Solution Architect PT You profit Indonesia dapat menyesuaikan alur persetujuan (approval matrix), format dokumen cetak, hingga opsi deployment di server lokal (On-Premise) maupun Private Cloud perusahaan Anda",
         },
       ],
+    },
+  },
+  kontak: {
+    badge: "HUBUNGI KONSULTAN KAMI",
+    titleLine1: "Kunjungi Kantor Kami atau",
+    titleLine2: "Konsultasi Online",
+    subtitle:
+      "Tim spesialis solusi ERP kami siap membantu analisis alur kerja dan implementasi sistem di perusahaan Anda.",
+    company: {
+      badge: "Kantor Pusat Operasional",
+      name: "PT You profit Indonesia",
+      tagline: "Enterprise Solution Center & Technical Hub",
+      addressTitle: "Alamat Kantor:",
+      address:
+        "Ruko Modern Kav A16 - A17, Tasikmadu, Kec. Lowokwaru, Kota Malang, Jawa Timur 65143",
+      hoursTitle: "Jam Operasional:",
+      hoursWeekdays: "Senin - Jumat: 08.30 - 17.00 WIB",
+      hoursWeekend: "Sabtu & Minggu: Layanan Darurat On-Call Enterprise",
+      serviceTitle: "Layanan Cepat & Email:",
+      whatsapp: "WhatsApp: +62 811-9283-8899",
+      whatsappNumber: "+62 811-9283-8899",
+      whatsappRaw: "6281192838899",
+      whatsappLink:
+        "https://wa.me/6281192838899?text=Halo%20PT%20You%20profit%20Indonesia%2C%20saya%20ingin%20berkonsultasi%20mengenai%20implementasi%20ERP",
+      email: "Email: info@youprofit.co.id",
+      emailRaw: "info@youprofit.co.id",
+      mapsUrl: "https://maps.app.goo.gl/9R7JGkvZmHn8ae8D9",
+      mapsButtonText: "Buka di Google Maps",
+      chatButtonText: "Chat WA Sekarang",
+    },
+    map: {
+      title: "Peta Lokasi Kantor PT You profit Indonesia",
+      routeText: "Rute Langsung",
+      mapsUrl: "https://maps.app.goo.gl/9R7JGkvZmHn8ae8D9",
+      pinLabel: "Ruko Modern Kav A16-A17, Kota Malang",
+    },
+    form: {
+      title: "Kirim Pesan atau Pertanyaan Teknis ERP",
+      responseTime: "Dibalas dalam < 2 jam kerja",
+      namePlaceholder: "Nama Lengkap...",
+      companyPlaceholder: "Nama Perusahaan...",
+      buttonText: "Kirim Pertanyaan",
+      successMessage:
+        "Pesan Anda telah diteruskan ke tim konsultan PT You profit Indonesia. Kami akan segera menghubungi Anda.",
     },
   },
 };
