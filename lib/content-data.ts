@@ -489,7 +489,7 @@ export const siteConfig = {
     items: {
       finansial: {
         number: 1,
-        eyebrow: "Modul Inti 01 • Akuntansi & Keuangan",
+        eyebrow: "01 • Akuntansi & Keuangan",
         title: "Finansial & Akuntansi",
         description:
           "General Ledger otomatis tanpa input ganda. Penyajian laporan keuangan terpusat (Laba Rugi, Neraca, Arus Kas) secara real-time & kepatuhan regulasi pajak Indonesia.",
@@ -547,7 +547,7 @@ export const siteConfig = {
       },
             manufaktur: {
         number: 2,
-        eyebrow: "Modul Inti 02 • Produksi & Manufaktur",
+        eyebrow: "02 • Produksi & Manufaktur",
         title: "Manufaktur & Produksi",
         description:
           "Kelola alur produksi dari Multi-level BOM, Work in Progress (WIP) hingga Finished Goods (FG) beserta kalkulasi HPP aktual yang akurat.",
@@ -602,7 +602,7 @@ export const siteConfig = {
       },
       pembelian: {
         number: 3,
-        eyebrow: "Modul Inti 03 • Pengadaan & Rantai Pasok",
+        eyebrow: "03 • Pengadaan & Rantai Pasok",
         title: "Pembelian & Rantai Pasok",
         description:
           "Alur Purchase Request (PR), Purchase Order (PO), Goods Receipt Note (GRN), dan Purchase Invoice (PI). Terhubung langsung dengan stok persediaan dan hutang usaha (AP).",
@@ -657,7 +657,7 @@ export const siteConfig = {
       },
       penjualan: {
         number: 4,
-        eyebrow: "Modul Inti 04 • Penjualan & Distribusi",
+        eyebrow: "04 • Penjualan & Distribusi",
         title: "Penjualan & Distribusi",
         description:
           "Alur Sales Quotation (SQ), Sales Order (SO), Delivery Order (DO), dan Sales Invoice (SI). Terhubung langsung dengan persediaan barang dan piutang usaha (AR).",
@@ -712,7 +712,7 @@ export const siteConfig = {
       },
       inventaris: {
         number: 5,
-        eyebrow: "Modul Inti 05 • Persediaan & Gudang",
+        eyebrow: "05 • Persediaan & Gudang",
         title: "Inventaris & Gudang",
         description:
           "Pelacakan stok multi-gudang, pengelolaan nomor lot/batch produksi, mutasi antar cabang/gudang, serta stock opname fisik untuk sinkronisasi fisik vs sistem.",
@@ -768,7 +768,7 @@ export const siteConfig = {
       },
       aset: {
         number: 6,
-        eyebrow: "Modul Inti 06 • Aset & Depresiasi",
+        eyebrow: "06 • Aset & Depresiasi",
         title: "Manajemen Aset Tetap",
         description:
           "Kelola register mesin, kendaraan, dan bangunan dengan jadwal depresiasi otomatis serta pemeliharaan berkala untuk menjaga valuasi aset.",
@@ -838,7 +838,7 @@ export const siteConfig = {
     backButton: "Kembali ke Beranda",
     items: {
       manufaktur: {
-        eyebrow: "Kelompok Proses Bisnis 01 • Pabrikasi & Proses Produksi Terpadu",
+        eyebrow: "01 • Pabrikasi & Proses Produksi Terpadu",
         title: "Manufaktur",
         sectorName: "Manufaktur",
         description:
@@ -892,7 +892,7 @@ export const siteConfig = {
         ],
       },
       distribusi: {
-        eyebrow: "Kelompok Proses Bisnis 02 • Rantai Pasok & Grosir",
+        eyebrow: "02 • Rantai Pasok & Grosir",
         title: "Distribusi dan Perdagangan",
         sectorName: "Distribusi dan Perdagangan",
         description:
@@ -946,7 +946,7 @@ export const siteConfig = {
         ],
       },
       jasa: {
-        eyebrow: "Kelompok Proses Bisnis 03 • Jasa Umum & Layanan Bisnis",
+        eyebrow: "03 • Jasa Umum & Layanan Bisnis",
         title: "Jasa Profesional dan Layanan (Services)",
         sectorName: "Jasa Profesional dan Layanan (Services)",
         description:
@@ -1037,6 +1037,326 @@ export const siteConfig = {
           "Finansial & Akuntansi",
           "Pembelian & Rantai Pasok",
           "Manajemen Aset Tetap",
+        ],
+      },
+      plastik: {
+        sectorName: "Manufaktur Plastik Injeksi",
+        badge: "Injection Moulding & Rigid Packaging",
+        title: "Manufaktur Plastik Injeksi",
+        description:
+          "Precision Injection Moulding & Tooling untuk komponen otomotif dan elektronik.",
+        capacityText: "32 mesin injeksi dengan clamp force 50-650T.",
+        stats: [
+          { value: "-30%", label: "Pemborosan Biji Plastik" },
+          { value: "100%", label: "Visibilitas Depresiasi Mould ke Unit Produk" },
+          { value: "+22%", label: "OEE Mesin Injeksi" },
+          { value: "Per Cavity", label: "Presisi Kalkulasi HPP" },
+        ],
+        challenges: [
+          "Kerusakan mould mendadak hentikan lini produksi.",
+          "Pencampuran virgin vs regrind/crusher tidak terkontrol.",
+          "Cacat produk (flash, short shot) kaburkan HPP.",
+        ],
+        solutions: [
+          "BOM rasio resin virgin + masterbatch + regrind.",
+          "Shot-count mould otomatis & depresiasi cetakan per ketukan.",
+          "Work order tracking mesin & toleransi scrap runner/sprue.",
+        ],
+        modules: [
+          "Manufaktur & Produksi",
+          "Inventaris & Gudang",
+          "Manajemen Aset Tetap",
+          "Finansial & Akuntansi",
+        ],
+      },
+      tembakau: {
+        sectorName: "Manufaktur Olahan Tembakau (Rokok)",
+        badge: "SKT & SKM • Pita Cukai & Saus Rahasia",
+        title: "Manufaktur Olahan Tembakau (Rokok)",
+        description:
+          "SKT & SKM dengan serialisasi pita cukai nasional dan pengelolaan saus rahasia.",
+        capacityText: "Kapasitas produksi 35 juta batang per bulan.",
+        stats: [
+          { value: "100%", label: "Akurasi Rekonsiliasi Pita Cukai (Zero Selisih Audit)" },
+          { value: "Konsisten", label: "Rasa Konsisten & Resep Saus Rahasia Terproteksi" },
+          { value: "Per Pack", label: "Presisi HPP hingga per Pack Rokok" },
+          { value: "+24%", label: "Efisiensi Maker" },
+        ],
+        challenges: [
+          "Risiko selisih stok & audit ketat pita cukai fisik.",
+          "Formula saus rahasia rentan bocor/inkonsisten.",
+          "Susut tembakau krosok ke rajangan.",
+          "Keausan pisau rajang & maker.",
+        ],
+        solutions: [
+          "Enkripsi resep saus & auto weighing dispenser.",
+          "Serialisasi mutasi pita cukai (masuk, pasang, sisa, rusak).",
+          "Perhitungan susut bertahap krosok ke rajangan.",
+          "Monitoring jam jalan pisau & suku cadang maker.",
+        ],
+        modules: [
+          "Manufaktur & Produksi",
+          "Inventaris & Gudang",
+          "Finansial & Akuntansi",
+          "Manajemen Aset Tetap",
+          "Penjualan & Distribusi",
+        ],
+      },
+      tekstil: {
+        sectorName: "Industri Manufaktur Tekstil Terpadu",
+        badge: "Weaving, Dyeing, Printing & Finishing",
+        title: "Industri Manufaktur Tekstil Terpadu",
+        description:
+          "Weaving, Dyeing, Printing & Finishing dalam satu rantai produksi terpadu.",
+        capacityText: "Kapasitas weaving 850.000 meter per bulan dengan 48 dyeing vat.",
+        stats: [
+          { value: "-40%", label: "Cacat Warna (Re-dyeing Rate)" },
+          { value: "100%", label: "Akurasi Konversi Kg ke Meter tanpa Selisih Opname" },
+          { value: "Per Meter", label: "Presisi HPP hingga Desimal Rupiah" },
+          { value: "-22%", label: "Downtime Mesin" },
+        ],
+        challenges: [
+          "Belang warna (shade variation) resep celup meleset.",
+          "Selisih stok konversi Kg ke Meter/Yard.",
+          "Biaya energi boiler/uap tidak masuk HPP.",
+          "Putus benang mendadak di mesin tenun (loom).",
+        ],
+        solutions: [
+          "Penguncian formula celup & liquor ratio otomatis.",
+          "Konversi Kg ke Meter dengan toleransi susut rajut/tenun.",
+          "Alokasi biaya uap boiler & listrik ke batch kain.",
+          "Preventive maintenance jarum & sisir mesin tenun.",
+        ],
+        modules: [
+          "Manufaktur & Produksi",
+          "Inventaris & Gudang",
+          "Finansial & Akuntansi",
+          "Manajemen Aset Tetap",
+          "Penjualan & Distribusi",
+        ],
+      },
+      bangunan: {
+        sectorName: "Distributor Bahan Bangunan",
+        badge: "Grosir Semen, Besi, Keramik & Pipa",
+        title: "Distributor Bahan Bangunan",
+        description:
+          "Grosir semen, besi, keramik, dan pipa untuk ritel dan proyek.",
+        capacityText: "Melayani 1.200+ ritel & proyek dengan 45 armada truk harian.",
+        stats: [
+          { value: "-32%", label: "Piutang Macet (Bad Debt)" },
+          { value: "99.4%", label: "Akurasi Stok Multi-Satuan Gudang" },
+          { value: "+20%", label: "Efisiensi Muatan Armada & Rute" },
+          { value: "Nol", label: "Keterlambatan Uji KIR/STNK Armada" },
+        ],
+        challenges: [
+          "Jebolnya plafon kredit toko & piutang macet (AR).",
+          "Satuan ganda rumit (Ton/Zak, Dus/m², Ikat/Batang).",
+          "Semen mengeras & barang pecah di gudang.",
+          "Kendala KIR/servis truk di perjalanan.",
+        ],
+        solutions: [
+          "Credit Limit Control otomatis (kunci SO jika overlimit/menunggak).",
+          "Konversi multi-satuan otomatis pada SO & stok.",
+          "Karantina barang rusak & klaim pabrikan.",
+          "Reminder servis armada truk & optimasi tonase rute.",
+        ],
+        modules: [
+          "Penjualan & Distribusi",
+          "Inventaris & Gudang",
+          "Pembelian & Rantai Pasok",
+          "Finansial & Akuntansi",
+          "Manajemen Aset Tetap",
+        ],
+      },
+            "general-dist": {
+        sectorName: "General Distributor",
+        badge: "Distribusi Multi-Cabang",
+        title: "General Distributor",
+        description:
+          "Distribusi multi-cabang untuk mitra ritel dengan jaringan hub regional.",
+        capacityText: "Melayani 1.800+ mitra ritel melalui 6 hub regional.",
+        stats: [
+          { value: "-35%", label: "Durasi Billing Cycle Penagihan" },
+          { value: "Nol", label: "Selisih Stok Mutasi Antar Cabang/Kanvas" },
+          { value: "99.6%", label: "Ketepatan Pemenuhan DO Tepat Waktu" },
+          { value: "Real-Time", label: "Aging Piutang Sinkron ke Neraca" },
+        ],
+        challenges: [
+          "Stok gantung antar cabang & transit kanvas tidak terlacak.",
+          "Kebocoran penagihan piutang tanpa batas kredit otomatis.",
+          "Lambatnya konsolidasi order sales ke jadwal gudang.",
+        ],
+        solutions: [
+          "Otomatisasi alur SQ -> SO -> DO -> SI terhubung stok & piutang.",
+          "Multi-Warehouse Transfer dengan barcode & status in-transit.",
+          "Matriks batas kredit & laporan aging piutang dinamis.",
+        ],
+        modules: [
+          "Penjualan & Distribusi",
+          "Inventaris & Gudang",
+          "Finansial & Akuntansi",
+          "Pembelian & Rantai Pasok",
+        ],
+      },
+      alkes: {
+        sectorName: "Distributor Alat Kesehatan",
+        badge: "PBF & Alkes • Regulasi CDAKB",
+        title: "Distributor Alat Kesehatan",
+        description:
+          "PBF / Alkes (BMHP, reagen, elektromedik) dengan kepatuhan regulasi CDAKB.",
+        capacityText: "Melayani 85 fasilitas kesehatan dan rumah sakit.",
+        stats: [
+          { value: "< 1 Menit", label: "Penelusuran Batch untuk Recall" },
+          { value: "-85%", label: "Kerugian Barang Expired" },
+          { value: "-25 Hari", label: "Siklus Penagihan RS Lebih Cepat (Hari Kerja)" },
+          { value: "100%", label: "Transparansi Stok Konsinyasi RS" },
+        ],
+        challenges: [
+          "Lambatnya audit recall batch penarikan produk.",
+          "Reagen kedaluwarsa akibat langgar alur FEFO.",
+          "Stok konsinyasi di RS tidak terkontrol.",
+          "Penagihan RS tertunda karena berkas BAST tercecer.",
+        ],
+        solutions: [
+          "Alur ketat Lot, Serial Number & picking FEFO otomatis.",
+          "Pelacakan lokasi stok konsinyasi & unit demo RS.",
+          "Lampiran izin edar AKL/AKD & BAST otomatis di faktur.",
+          "Penjadwalan kalibrasi berkala unit elektromedik.",
+        ],
+        modules: [
+          "Inventaris & Gudang",
+          "Penjualan & Distribusi",
+          "Pembelian & Rantai Pasok",
+          "Finansial & Akuntansi",
+          "Manajemen Aset Tetap",
+        ],
+      },
+      rempah: {
+        sectorName: "Manufaktur Bahan Rempah",
+        badge: "Pengolahan Rempah & Bumbu",
+        title: "Manufaktur Bahan Rempah",
+        description:
+          "Pengolahan jahe, lada, kayu manis, dan cengkeh menjadi powder, flakes, dan ekstrak bumbu.",
+        capacityText: "Kapasitas pengolahan 250 ton per bulan.",
+        stats: [
+          { value: "99%", label: "Presisi HPP hingga Level Mesh Size" },
+          { value: "Menit", label: "Traceability Lot Mutu Ekspor Selesai" },
+          { value: "-30%", label: "Rework Akibat Kehalusan Non-Standar" },
+          { value: "Terjaga", label: "Minyak Atsiri di Gudang Suhu Kontrol (Cegah Degradasi)" },
+        ],
+        challenges: [
+          "Susut rendemen bertahap tidak transparan.",
+          "HPP bias akibat harga bahan basah fluktuatif.",
+          "Ketertelusuran lot mikroba/kebun sulit dilacak manual.",
+          "Saringan mesh mesin pin mill robek tanpa terdeteksi.",
+        ],
+        solutions: [
+          "Multi-step BOM (Cuci, Kering, Giling, Ayak).",
+          "Penyerapan biaya susut & energi oven langsung ke HPP.",
+          "Pencatatan Lot kebun, tanggal sterilisasi & status QC.",
+          "Warning jam jalan penggantian saringan mesh pin mill.",
+        ],
+        modules: [
+          "Manufaktur & Produksi",
+          "Inventaris & Gudang",
+          "Finansial & Akuntansi",
+          "Pembelian & Rantai Pasok",
+          "Manajemen Aset Tetap",
+        ],
+      },
+      ekspedisi: {
+        sectorName: "Ekspedisi",
+        badge: "Kargo Darat FTL/LTL",
+        title: "Jasa Ekspedisi & Logistik",
+        description:
+          "Kargo darat FTL/LTL Jawa-Bali-Sumatera dengan armada tronton dan wingbox B2B.",
+        capacityText: "Mengoperasikan 120 armada tronton/wingbox untuk rute Jawa-Bali-Sumatera.",
+        stats: [
+          { value: "-45%", label: "Durasi Billing Penagihan" },
+          { value: "98%", label: "Akurasi Pengendalian Biaya Jalan" },
+          { value: "-35%", label: "Angka Mogok Armada di Jalan" },
+          { value: "Per Nopol", label: "Transparansi Laba Rugi Bersih per Armada" },
+        ],
+        challenges: [
+          "Kebocoran uang jalan supir, BBM, dan biaya tol.",
+          "Invoice tertunda akibat Surat Jalan Balik (POD) lambat.",
+          "Truk mogok di jalan karena servis berkala terlewat.",
+          "Stok ban dan sparepart pool bengkel bocor.",
+        ],
+        solutions: [
+          "Standarisasi plafon uang jalan & verifikasi nota riil.",
+          "Monitoring kepulangan POD & penerbitan invoice instan.",
+          "Jadwal servis & ganti ban berbasis odometer/KM.",
+          "Alokasi part/ban bengkel per nomor polisi truk.",
+        ],
+        modules: [
+          "Penjualan & Distribusi",
+          "Finansial & Akuntansi",
+          "Manajemen Aset Tetap",
+          "Inventaris & Gudang",
+          "Pembelian & Rantai Pasok",
+        ],
+      },
+      mesin: {
+        sectorName: "Manufaktur Mesin Produksi",
+        badge: "Fabrikasi Mesin Industri ETO & MTO",
+        title: "Manufaktur Mesin Produksi",
+        description:
+          "Fabrikasi mesin industri ETO & MTO dengan komponen mekanikal, elektrikal, dan subkontraktor.",
+        capacityText: "Mengelola lebih dari 2.500 komponen mekanikal, elektrikal, dan subkon.",
+        stats: [
+          { value: "100%", label: "Visibilitas Biaya Proyek & Margin Laba Real-Time" },
+          { value: "-38%", label: "Rework Perakitan" },
+          { value: "+30%", label: "Ketepatan Pengiriman Mesin (OTD)" },
+          { value: "Presisi", label: "Toleransi Sesuai Standar Gambar Teknik" },
+        ],
+        challenges: [
+          "Biaya proyek membengkak (project cost overrun).",
+          "Revisi desain (Engineering Change Order) kacau di bengkel.",
+          "Komponen impor elektrikal terlambat tiba (lead time panjang).",
+          "Penurunan akurasi mesin CNC karena kalibrasi terlewat.",
+        ],
+        solutions: [
+          "Multi-level BOM ETO bertingkat & kontrol revisi desain.",
+          "Sinkronisasi PO komponen impor dengan perakitan.",
+          "Reservasi stok material per nomor proyek/SPK.",
+          "Akumulasi biaya WIP real-time (bahan, subkon, tenaga kerja).",
+        ],
+        modules: [
+          "Manufaktur & Produksi",
+          "Pembelian & Rantai Pasok",
+          "Inventaris & Gudang",
+          "Finansial & Akuntansi",
+          "Manajemen Aset Tetap",
+        ],
+      },
+      jasa: {
+        sectorName: "Jasa & Layanan",
+        badge: "Konsultan Bisnis, IT & Teknis",
+        title: "Jasa Profesional & Layanan",
+        description:
+          "Konsultan bisnis, IT/teknis, dan maintenance berbasis kontrak termin dan SLA.",
+        capacityText: "Pengelolaan layanan berbasis kontrak termin & SLA.",
+        stats: [
+          { value: "Nol", label: "Invoice Termin Terlewat atau Telat Ditagihkan" },
+          { value: "100%", label: "Transparansi Profitabilitas per Kontrak/Klien" },
+          { value: "-28%", label: "Days Sales Outstanding (DSO)" },
+          { value: "Audit-Ready", label: "Laporan Keuangan tanpa Rekap Manual" },
+        ],
+        challenges: [
+          "Penagihan termin terlewat & piutang aging menumpuk.",
+          "Margin laba rugi per jenis layanan/klien tidak jelas.",
+          "Beban operasional tercecer tanpa buku besar tersegregasi.",
+        ],
+        solutions: [
+          "Manajemen AR/AP dengan aging dinamis (30/60/90+ hari).",
+          "Laporan Laba Rugi terpusat per jenis jasa atau pelanggan.",
+          "General Ledger tersegregasi otomatis per kontrak/klien.",
+        ],
+        modules: [
+          "Finansial & Akuntansi",
+          "Penjualan & Distribusi",
+          "Pembelian & Rantai Pasok",
         ],
       },
     },

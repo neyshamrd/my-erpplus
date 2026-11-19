@@ -40,6 +40,12 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
 
   if (!detail) return null;
 
+  // 4 kartu: 4 kolom di desktop; 3 kartu: 3 kolom
+  const statCols =
+    detail.stats.length >= 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3";
+  const statSize =
+    detail.stats.length >= 4 ? "text-2xl sm:text-3xl" : "text-3xl sm:text-4xl";
+
   return (
     <main className="w-full bg-[#f8fafc]">
       {/* Pilih sektor */}
@@ -93,14 +99,14 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
         </section>
 
         {/* Tiga metrik: font monospace seperti testimoni.tsx */}
-        <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <section className={`grid grid-cols-1 gap-4 ${statCols}`}>
           {detail.stats.map((stat) => (
             <div
               key={stat.label}
               className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-6 text-center"
             >
               <p
-                className="text-3xl font-bold tracking-tight text-blue-600 sm:text-4xl"
+                className={`font-bold tracking-tight text-blue-600 ${statSize}`}
                 style={{ fontFamily: monoFont }}
               >
                 {stat.value}
