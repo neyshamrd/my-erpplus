@@ -1011,7 +1011,7 @@ export const siteConfig = {
       logam: {
         sectorName: "Manufaktur Pengolahan Logam",
         badge: "Smelting, Casting, Extrusion & Wire Drawing",
-        title: "Manufaktur Pengolahan Logam (seperti besi, baja, aluminium, tembaga, dan timah)",
+        title: "Manufaktur Pengolahan Logam",
         description:
           "Smelting, Casting, Extrusion & Wire Drawing (Bahan baku Ingot, Billet, Katoda & Scrap Logam -> Wire, Batangan, Plat & Profil Logam). Mengelola volatilitas harga pasar bursa logam (LME) dan rendemen peleburan terpadu.",
         capacityText:
