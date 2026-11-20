@@ -21,6 +21,9 @@ type Cycle = {
   short: string;
 };
 
+type MenuItem = { code: string; name: string };
+type MenuGroup = { title: string; items: MenuItem[] };
+
 type Plan = {
   id: string;
   tag: string;
@@ -33,20 +36,31 @@ type Plan = {
   stepPrice: string;
   seatLabel: string;
   userBase: number | null;
-  warehouseBase: number | null;
-  moduleScope: string;
+  inherits: string | null;
+  inheritLabel: string;
+  menuGroups: MenuGroup[];
   features: string[];
   addOnsEnabled: boolean;
   addOnNote: string;
   pill: string;
   estimateNote: string;
   estimateValue: string;
-  waButton: string;
   popular: boolean;
 };
 
-type WarehouseOption = { count: number; label: string; price: number };
-type Extension = { id: string; name: string; price: number };
+type MenuBundle = {
+  id: string;
+  name: string;
+  price: number;
+  items: MenuItem[];
+};
+
+type ServiceItem = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+};
 
 // Font monospace untuk angka (sama dengan testimoni.tsx)
 const monoFont =
@@ -55,15 +69,15 @@ const monoStyle = { fontFamily: monoFont };
 
 // Format rupiah dengan titik pemisah ribuan (hasil sama di server dan browser)
 const formatRupiah = (value: number) =>
-  "Rp " + Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  "Rp" + Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 export function HargaKalkulator() {
   const { openDemo } = useDemoModal();
   const data = siteConfig.harga;
   const plans: Plan[] = data.plans;
   const cycles: Cycle[] = data.cycles;
-  const warehouses: WarehouseOption[] = data.addOns.warehouses;
-  const extensions: Extension[] = data.addOns.extensions;
+  const menus: MenuBundle[] = data.addOns.menus;
+  const services: ServiceItem[] = data.addOns.services;
   const userAddOn = data.addOns.user;
   const summaryText = data.summary;
   const faq = data.faq;
@@ -71,8 +85,8 @@ export function HargaKalkulator() {
   const [planId, setPlanId] = useState<string>(data.defaultPlan);
   const [cycleId, setCycleId] = useState<string>(data.defaultCycle);
   const [extraUsers, setExtraUsers] = useState<number>(0);
-  const [extraWarehouses, setExtraWarehouses] = useState<number>(0);
-  const [selectedExt, setSelectedExt] = useState<string[]>([]);
+  const [selectedMenus, setSelectedMenus] = useState<string[]>([]);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const calculatorRef = useRef<HTMLDivElement>(null);
 
   // Data turunan dari pilihan saat ini
@@ -81,39 +95,61 @@ export function HargaKalkulator() {
   const isPaid = plan.priceType === "paid";
   const addOnsOn = plan.addOnsEnabled;
 
-  // Harga bulanan paket setelah diskon siklus
-  const priceFor = (p: Plan) => Math.round(p.monthlyPrice * (1 - cycle.discount));
+  // Potongan siklus: paket dasar selalu, add-on mengikuti pengaturan discountAddOns
+  const cycleFactor = 1 - cycle.discount;
+  const addOnFactor = data.discountAddOns ? cycleFactor : 1;
+  const priceFor = (p: Plan) => Math.round(p.monthlyPrice * cycleFactor);
+  const addOnPrice = (value: number) => Math.round(value * addOnFactor);
   const packagePrice = isPaid ? priceFor(plan) : 0;
 
-  // Add-on hanya dihitung untuk edisi yang mendukung (pilihan tetap tersimpan)
-  const usersExtra = addOnsOn ? extraUsers : 0;
-  const warehouseExtra = addOnsOn ? extraWarehouses : 0;
-  const activeExt = addOnsOn
-    ? extensions.filter((e) => selectedExt.includes(e.id))
+  // Kumpulkan kode menu yang sudah termasuk paket (termasuk paket di bawahnya)
+  const findPlan = (id: string) => plans.find((p) => p.id === id);
+  const includedCodes = new Set<string>();
+  const visited = new Set<string>();
+  let cursor: string | null = plan.id;
+  while (cursor !== null && !visited.has(cursor)) {
+    visited.add(cursor);
+    const current = findPlan(cursor);
+    if (!current) break;
+    current.menuGroups.forEach((group) =>
+      group.items.forEach((item) => includedCodes.add(item.code))
+    );
+    cursor = current.inherits;
+  }
+
+  // Menu tambahan yang seluruh isinya sudah termasuk paket tidak ditagih
+  const isMenuIncluded = (menu: MenuBundle) =>
+    addOnsOn && menu.items.every((item) => includedCodes.has(item.code));
+
+  const chargeableMenus = addOnsOn
+    ? menus.filter((m) => selectedMenus.includes(m.id) && !isMenuIncluded(m))
     : [];
+  const menuCost = chargeableMenus.reduce((sum, m) => sum + addOnPrice(m.price), 0);
 
-  const userCost = usersExtra * userAddOn.price;
-  const warehouseCost =
-    warehouses.find((w) => w.count === warehouseExtra)?.price ?? 0;
-  const extCost = activeExt.reduce((sum, e) => sum + e.price, 0);
-  const addOnTotal = userCost + warehouseCost + extCost;
-  const total = packagePrice + addOnTotal;
+  const usersExtra = addOnsOn ? extraUsers : 0;
+  const userUnit = addOnPrice(userAddOn.price);
+  const userCost = usersExtra * userUnit;
 
-  // Label kapasitas di ringkasan
+  const activeServices = addOnsOn
+    ? services.filter((s) => selectedServices.includes(s.id))
+    : [];
+  const serviceCost = activeServices.reduce((sum, s) => sum + s.price, 0);
+
+  // Biaya berulang per bulan (layanan sekali bayar dihitung terpisah)
+  const monthlyTotal = packagePrice + menuCost + userCost;
+
+  // Label ringkasan
   const totalUsersLabel =
-    plan.userBase === null ? "Unlimited" : `${plan.userBase + usersExtra} Pengguna`;
-  const warehouseLabel =
-    plan.warehouseBase === null
-      ? warehouseExtra > 0
-        ? `Multi-Gudang +${warehouseExtra}`
-        : "Multi-Gudang"
-      : `${plan.warehouseBase + warehouseExtra} Lokasi`;
+    plan.userBase === null ? "Unlimited" : `${plan.userBase + usersExtra} User`;
+  const menuCountLabel = addOnsOn ? `${chargeableMenus.length} Menu` : "-";
+  const baseText =
+    plan.userBase === null
+      ? `${userAddOn.baseLabel} ${plan.name}: ${userAddOn.baseUnlimited}.`
+      : `${userAddOn.baseLabel} ${plan.name}: ${userAddOn.baseUser} ${plan.userBase}.`;
 
   // Link WhatsApp membawa seluruh hasil perhitungan
   let waText: string;
-  if (plan.priceType === "free") {
-    waText = `Halo PT You profit Indonesia, saya ingin mencoba ${plan.name} MyERP Plus (14 hari). Mohon informasi akses dan panduan awalnya.`;
-  } else if (plan.priceType === "custom") {
+  if (plan.priceType === "custom") {
     waText = `Halo PT You profit Indonesia, saya tertarik dengan paket ${plan.name} MyERP Plus. Mohon dijadwalkan konsultasi untuk kebutuhan perusahaan kami.`;
   } else {
     const lines = [
@@ -121,12 +157,17 @@ export function HargaKalkulator() {
       `- Edisi: ${plan.name}`,
       `- Siklus: ${cycle.id}`,
       `- Extra User: +${usersExtra}`,
-      `- Extra Gudang: +${warehouseExtra}`,
     ];
-    if (activeExt.length > 0) {
-      lines.push(`- Modul Ekstensi: ${activeExt.map((e) => e.name).join(", ")}`);
+    if (chargeableMenus.length > 0) {
+      lines.push(`- Menu Tambahan: ${chargeableMenus.map((m) => m.name).join(", ")}`);
     }
-    lines.push(`- Estimasi: ${formatRupiah(total)} per bulan`);
+    if (activeServices.length > 0) {
+      lines.push(`- Layanan: ${activeServices.map((s) => s.name).join(", ")}`);
+    }
+    lines.push(`- Estimasi: ${formatRupiah(monthlyTotal)} per bulan`);
+    if (serviceCost > 0) {
+      lines.push(`- Biaya Sekali Bayar: ${formatRupiah(serviceCost)}`);
+    }
     lines.push("Mohon informasi penawaran resminya.");
     waText = lines.join("\n");
   }
@@ -151,8 +192,13 @@ export function HargaKalkulator() {
     });
   };
 
-  const toggleExt = (id: string) =>
-    setSelectedExt((prev) =>
+  const toggleMenu = (id: string) =>
+    setSelectedMenus((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+
+  const toggleService = (id: string) =>
+    setSelectedServices((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     );
 
@@ -160,8 +206,8 @@ export function HargaKalkulator() {
     setPlanId(data.defaultPlan);
     setCycleId(data.defaultCycle);
     setExtraUsers(0);
-    setExtraWarehouses(0);
-    setSelectedExt([]);
+    setSelectedMenus([]);
+    setSelectedServices([]);
   };
 
   return (
@@ -229,7 +275,7 @@ export function HargaKalkulator() {
             <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
               {/* Kolom kiri: langkah 1 dan 2 */}
               <div className="space-y-5">
-                {/* Langkah 1: pilih edisi */}
+                {/* Langkah 1: paket dasar */}
                 <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-6">
                   <div className="flex items-center gap-3">
                     <span className="rounded-md bg-blue-600 px-2 py-1 text-[10px] font-bold text-white">
@@ -260,7 +306,7 @@ export function HargaKalkulator() {
                           }`}
                         >
                           <span
-                            className={`text-[9px] font-bold uppercase tracking-wide ${
+                            className={`block min-h-[12px] text-[9px] font-bold uppercase tracking-wide ${
                               selected ? "text-blue-100" : "text-blue-600"
                             }`}
                           >
@@ -294,7 +340,7 @@ export function HargaKalkulator() {
                   </div>
                 </div>
 
-                {/* Langkah 2: add-on */}
+                {/* Langkah 2: menu tambahan, kapasitas, layanan */}
                 <div className="rounded-3xl border border-slate-200 bg-white p-5 sm:p-6">
                   <div className="flex items-center gap-3">
                     <span className="rounded-md bg-indigo-600 px-2 py-1 text-[10px] font-bold text-white">
@@ -315,105 +361,151 @@ export function HargaKalkulator() {
                   )}
 
                   <div className={`mt-4 space-y-3 ${addOnsOn ? "" : "opacity-50"}`}>
-                    {/* 1. Tambah pengguna */}
-                    <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
-                      <div>
-                        <p className="text-xs font-bold text-slate-900">
-                          {userAddOn.title}
-                        </p>
-                        <p className="mt-0.5 text-[11px] text-slate-500">
-                          {formatRupiah(userAddOn.price)} / user / bulan •{" "}
-                          {userAddOn.hintSuffix}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => setExtraUsers((v) => Math.max(0, v - 1))}
-                          disabled={!addOnsOn || extraUsers === 0}
-                          aria-label="Kurangi pengguna"
-                          className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          <Minus className="h-4 w-4" />
-                        </button>
-                        <span
-                          className="min-w-[78px] rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-center text-xs font-bold text-blue-600"
-                          style={monoStyle}
-                          aria-live="polite"
-                        >
-                          +{usersExtra} User
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setExtraUsers((v) => Math.min(userAddOn.max, v + 1))
-                          }
-                          disabled={!addOnsOn || extraUsers >= userAddOn.max}
-                          aria-label="Tambah pengguna"
-                          className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          <Plus className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* 2. Ekspansi gudang */}
+                    {/* 1. Menu tambahan */}
                     <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
                       <p className="text-xs font-bold text-slate-900">
-                        {data.addOns.warehouseTitle}
+                        {data.addOns.menuTitle}
                       </p>
                       <p className="mt-0.5 text-[11px] text-slate-500">
-                        {data.addOns.warehouseHint}
+                        {data.addOns.menuHint}
                       </p>
-                      <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-                        {warehouses.map((w) => {
-                          const active = warehouseExtra === w.count;
+                      <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                        {menus.map((menu) => {
+                          const included = isMenuIncluded(menu);
+                          const checked =
+                            addOnsOn && (included || selectedMenus.includes(menu.id));
+                          const disabled = !addOnsOn || included;
                           return (
-                            <button
-                              key={w.count}
-                              type="button"
-                              onClick={() => setExtraWarehouses(w.count)}
-                              disabled={!addOnsOn}
-                              aria-pressed={active}
-                              className={`rounded-xl border p-3 text-left disabled:cursor-not-allowed ${
-                                active
-                                  ? "border-blue-600 bg-blue-600 text-white"
-                                  : "border-slate-200 bg-white text-slate-900 hover:border-blue-300"
+                            <label
+                              key={menu.id}
+                              className={`flex items-start gap-2.5 rounded-xl border p-3 ${
+                                disabled ? "cursor-not-allowed" : "cursor-pointer"
+                              } ${
+                                included
+                                  ? "border-emerald-300 bg-emerald-50/60"
+                                  : checked
+                                  ? "border-blue-500 bg-blue-50/70"
+                                  : "border-slate-200 bg-white"
                               }`}
                             >
-                              <span className="block text-xs font-bold">
-                                {w.label}
+                              <input
+                                type="checkbox"
+                                checked={checked}
+                                disabled={disabled}
+                                onChange={() => toggleMenu(menu.id)}
+                                className="mt-0.5 h-4 w-4 shrink-0 accent-blue-600"
+                              />
+                              <span className="flex min-w-0 flex-1 flex-col">
+                                <span className="flex items-start justify-between gap-2">
+                                  <span className="text-xs font-semibold text-slate-900">
+                                    {menu.name}
+                                  </span>
+                                  <span
+                                    className={`shrink-0 text-[10px] ${
+                                      included ? "text-emerald-600" : "text-blue-600"
+                                    }`}
+                                    style={monoStyle}
+                                  >
+                                    {included
+                                      ? data.addOns.menuIncluded
+                                      : `+${formatRupiah(addOnPrice(menu.price))}/bln`}
+                                  </span>
+                                </span>
+                                <span className="mt-2 flex flex-wrap gap-1.5">
+                                  {menu.items.map((item) => {
+                                    const itemIncluded =
+                                      addOnsOn && includedCodes.has(item.code);
+                                    return (
+                                      <span
+                                        key={item.code}
+                                        className={`rounded border px-1.5 py-0.5 text-[10px] ${
+                                          itemIncluded
+                                            ? "border-emerald-300 bg-emerald-100 text-emerald-700"
+                                            : "border-slate-200 bg-slate-50 text-slate-600"
+                                        }`}
+                                      >
+                                        <b className="font-bold">{item.code}</b>{" "}
+                                        {item.name}
+                                      </span>
+                                    );
+                                  })}
+                                </span>
                               </span>
-                              <span
-                                className={`mt-0.5 block text-[10px] ${
-                                  active ? "text-blue-100" : "text-slate-500"
-                                }`}
-                                style={monoStyle}
-                              >
-                                {w.price === 0
-                                  ? data.addOns.warehouseIncluded
-                                  : `${formatRupiah(w.price)}/bln`}
-                              </span>
-                            </button>
+                            </label>
                           );
                         })}
                       </div>
                     </div>
 
-                    {/* 3. Modul ekstensi */}
+                    {/* 2. Kapasitas: tambah user aktif */}
                     <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
                       <p className="text-xs font-bold text-slate-900">
-                        {data.addOns.extensionTitle}
+                        {userAddOn.title}
                       </p>
                       <p className="mt-0.5 text-[11px] text-slate-500">
-                        {data.addOns.extensionHint}
+                        {userAddOn.hint}
+                      </p>
+
+                      <p className="mt-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-[11px] text-slate-500">
+                        {baseText}
+                      </p>
+
+                      <div className="mt-2.5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-3">
+                        <div>
+                          <p className="text-xs font-bold text-slate-900">
+                            {userAddOn.label}
+                          </p>
+                          <p className="mt-0.5 text-[11px] text-slate-500">
+                            {formatRupiah(userUnit)} {userAddOn.perUser}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setExtraUsers((v) => Math.max(0, v - 1))}
+                            disabled={!addOnsOn || extraUsers === 0}
+                            aria-label="Kurangi user aktif"
+                            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            <Minus className="h-4 w-4" />
+                          </button>
+                          <span
+                            className="min-w-[78px] rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-center text-xs font-bold text-blue-600"
+                            style={monoStyle}
+                            aria-live="polite"
+                          >
+                            +{usersExtra} User
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setExtraUsers((v) => Math.min(userAddOn.max, v + 1))
+                            }
+                            disabled={!addOnsOn || extraUsers >= userAddOn.max}
+                            aria-label="Tambah user aktif"
+                            className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            <Plus className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 3. Layanan sekali bayar */}
+                    <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
+                      <p className="text-xs font-bold text-slate-900">
+                        {data.addOns.serviceTitle}
+                      </p>
+                      <p className="mt-0.5 text-[11px] text-slate-500">
+                        {data.addOns.serviceHint}
                       </p>
                       <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
-                        {extensions.map((ext) => {
-                          const checked = addOnsOn && selectedExt.includes(ext.id);
+                        {services.map((service) => {
+                          const checked =
+                            addOnsOn && selectedServices.includes(service.id);
                           return (
                             <label
-                              key={ext.id}
+                              key={service.id}
                               className={`flex items-start gap-2.5 rounded-xl border p-3 ${
                                 addOnsOn ? "cursor-pointer" : "cursor-not-allowed"
                               } ${
@@ -426,18 +518,21 @@ export function HargaKalkulator() {
                                 type="checkbox"
                                 checked={checked}
                                 disabled={!addOnsOn}
-                                onChange={() => toggleExt(ext.id)}
+                                onChange={() => toggleService(service.id)}
                                 className="mt-0.5 h-4 w-4 shrink-0 accent-blue-600"
                               />
-                              <span className="flex flex-col">
+                              <span className="flex min-w-0 flex-col">
                                 <span className="text-xs font-semibold text-slate-900">
-                                  {ext.name}
+                                  {service.name}
+                                </span>
+                                <span className="mt-0.5 text-[10px] leading-snug text-slate-500">
+                                  {service.description}
                                 </span>
                                 <span
-                                  className="mt-0.5 text-[10px] text-blue-600"
+                                  className="mt-1.5 text-[10px] text-blue-600"
                                   style={monoStyle}
                                 >
-                                  +{formatRupiah(ext.price)}/bln
+                                  {formatRupiah(service.price)}
                                 </span>
                               </span>
                             </label>
@@ -449,7 +544,7 @@ export function HargaKalkulator() {
                 </div>
               </div>
 
-              {/* Kolom kanan: ringkasan paket */}
+              {/* Kolom kanan: ringkasan */}
               <aside
                 aria-label={summaryText.label}
                 className="rounded-3xl bg-[#0B132B] p-5 text-white shadow-xl shadow-slate-900/20 lg:sticky lg:top-28"
@@ -491,38 +586,52 @@ export function HargaKalkulator() {
                   </div>
                   <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2.5">
                     <p className="text-[9px] text-slate-400">
-                      {summaryText.warehouseLabel}
+                      {summaryText.menuCountLabel}
                     </p>
                     <p
                       className="mt-1 text-xs font-bold"
                       style={monoStyle}
                       aria-live="polite"
                     >
-                      {warehouseLabel}
+                      {menuCountLabel}
                     </p>
                   </div>
                 </div>
 
                 <dl className="mt-5 space-y-2 border-t border-white/10 pt-4 text-[11px]">
                   <div className="flex items-start justify-between gap-3">
-                    <dt className="text-slate-400">{summaryText.scopeLabel}</dt>
-                    <dd className="text-right font-bold">{plan.moduleScope}</dd>
-                  </div>
-                  <div className="flex items-start justify-between gap-3">
-                    <dt className="text-slate-400">{summaryText.packageLabel}</dt>
+                    <dt className="text-slate-400">
+                      {summaryText.packageLabel} {plan.name}
+                    </dt>
                     <dd className="text-right font-bold" style={monoStyle}>
                       {isPaid ? formatRupiah(packagePrice) : plan.headline}
                     </dd>
                   </div>
                   <div className="flex items-start justify-between gap-3">
-                    <dt className="text-slate-400">{summaryText.addOnLabel}</dt>
+                    <dt className="text-slate-400">{summaryText.menuLabel}</dt>
                     <dd
                       className="text-right font-bold text-emerald-400"
                       style={monoStyle}
                     >
-                      {addOnsOn
-                        ? formatRupiah(addOnTotal)
-                        : summaryText.addOnUnavailable}
+                      {addOnsOn ? formatRupiah(menuCost) : summaryText.unavailable}
+                    </dd>
+                  </div>
+                  <div className="flex items-start justify-between gap-3">
+                    <dt className="text-slate-400">{summaryText.userLabel}</dt>
+                    <dd
+                      className="text-right font-bold text-emerald-400"
+                      style={monoStyle}
+                    >
+                      {addOnsOn ? formatRupiah(userCost) : summaryText.unavailable}
+                    </dd>
+                  </div>
+                  <div className="flex items-start justify-between gap-3">
+                    <dt className="text-slate-400">{summaryText.serviceLabel}</dt>
+                    <dd
+                      className="text-right font-bold text-emerald-400"
+                      style={monoStyle}
+                    >
+                      {addOnsOn ? formatRupiah(serviceCost) : summaryText.unavailable}
                     </dd>
                   </div>
                 </dl>
@@ -536,12 +645,10 @@ export function HargaKalkulator() {
                     style={monoStyle}
                     aria-live="polite"
                   >
-                    {isPaid ? formatRupiah(total) : plan.estimateValue}
+                    {isPaid ? formatRupiah(monthlyTotal) : plan.estimateValue}
                   </p>
                   <p className="mt-1.5 text-[10px] text-slate-400">
-                    {isPaid
-                      ? `${cycle.short} • ${plan.estimateNote}`
-                      : plan.estimateNote}
+                    {plan.estimateNote}
                   </p>
                 </div>
 
@@ -553,7 +660,7 @@ export function HargaKalkulator() {
                     className="flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 text-xs font-bold text-white hover:bg-emerald-700"
                   >
                     <MessageCircle className="h-4 w-4" />
-                    <span>{plan.waButton}</span>
+                    <span>{summaryText.waButton}</span>
                   </a>
                   <button
                     type="button"
@@ -597,13 +704,19 @@ export function HargaKalkulator() {
                       : "border-slate-200 bg-white text-slate-900"
                   } ${selected ? "ring-2 ring-blue-500 ring-offset-2" : ""}`}
                 >
-                  <span
-                    className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide ${
-                      dark ? "bg-blue-600 text-white" : "bg-slate-100 text-blue-700"
-                    }`}
-                  >
-                    {p.tag}
-                  </span>
+                  <div className="min-h-[24px]">
+                    {p.tag && (
+                      <span
+                        className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wide ${
+                          dark
+                            ? "bg-blue-600 text-white"
+                            : "bg-slate-100 text-blue-700"
+                        }`}
+                      >
+                        {p.tag}
+                      </span>
+                    )}
+                  </div>
                   <h3 className="mt-4 text-xl font-extrabold tracking-tight">
                     {p.name}
                   </h3>
@@ -623,9 +736,7 @@ export function HargaKalkulator() {
                     {p.priceType === "paid" ? (
                       <>
                         <p
-                          className={`min-h-[16px] text-[11px] line-through ${
-                            dark ? "text-slate-400" : "text-slate-400"
-                          }`}
+                          className="min-h-[16px] text-[11px] text-slate-400 line-through"
                           style={monoStyle}
                         >
                           {cycle.discount > 0
@@ -664,24 +775,68 @@ export function HargaKalkulator() {
                     )}
                   </div>
 
-                  <ul className="mt-4 flex-1 space-y-2.5">
-                    {p.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2.5">
-                        <CheckCircle2
-                          className={`mt-0.5 h-4 w-4 shrink-0 ${
-                            dark ? "text-emerald-400" : "text-blue-600"
-                          }`}
-                        />
-                        <span
-                          className={`text-xs leading-snug ${
-                            dark ? "text-slate-100" : "text-slate-700"
-                          }`}
-                        >
-                          {feature}
-                        </span>
-                      </li>
+                  <div className="mt-4 flex-1 space-y-4">
+                    {p.inherits && (
+                      <p
+                        className={`flex items-center gap-1.5 text-xs font-semibold ${
+                          dark ? "text-emerald-400" : "text-emerald-600"
+                        }`}
+                      >
+                        <Check className="h-3.5 w-3.5 shrink-0" />
+                        <span>{p.inheritLabel}</span>
+                      </p>
+                    )}
+
+                    {p.menuGroups.map((group) => (
+                      <div key={group.title}>
+                        <p className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">
+                          {group.title}
+                        </p>
+                        <ul className="mt-1.5 space-y-1.5">
+                          {group.items.map((item) => (
+                            <li
+                              key={item.code}
+                              className="flex gap-2 text-xs leading-snug"
+                            >
+                              <span
+                                className={`w-14 shrink-0 font-bold ${
+                                  dark ? "text-white" : "text-slate-900"
+                                }`}
+                              >
+                                {item.code}
+                              </span>
+                              <span
+                                className={dark ? "text-slate-300" : "text-slate-500"}
+                              >
+                                {item.name}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ))}
-                  </ul>
+
+                    {p.features.length > 0 && (
+                      <ul className="space-y-2.5">
+                        {p.features.map((feature) => (
+                          <li key={feature} className="flex items-start gap-2.5">
+                            <CheckCircle2
+                              className={`mt-0.5 h-4 w-4 shrink-0 ${
+                                dark ? "text-emerald-400" : "text-blue-600"
+                              }`}
+                            />
+                            <span
+                              className={`text-xs leading-snug ${
+                                dark ? "text-slate-100" : "text-slate-700"
+                              }`}
+                            >
+                              {feature}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
 
                   <button
                     type="button"
