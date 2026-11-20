@@ -47,7 +47,48 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
     detail.stats.length >= 4 ? "text-2xl sm:text-3xl" : "text-3xl sm:text-4xl";
 
   return (
-    <main className="w-full bg-[#f8fafc]">
+    <main className="relative isolate w-full overflow-hidden bg-white">
+       {/* Animasi latar: cahaya biru tipis bergerak pelan */}
+      <style>{`
+        @keyframes myerp-modul-blob-1 {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(60px, 40px, 0) scale(1.12); }
+          100% { transform: translate3d(20px, 80px, 0) scale(0.95); }
+        }
+        @keyframes myerp-modul-blob-2 {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(-70px, 50px, 0) scale(1.1); }
+          100% { transform: translate3d(-20px, -20px, 0) scale(0.96); }
+        }
+        @keyframes myerp-modul-blob-3 {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(80px, -40px, 0) scale(1.15); }
+          100% { transform: translate3d(-60px, -10px, 0) scale(1); }
+        }
+        .myerp-modul-blob-1 { animation: myerp-modul-blob-1 18s ease-in-out infinite alternate; will-change: transform; }
+        .myerp-modul-blob-2 { animation: myerp-modul-blob-2 22s ease-in-out infinite alternate; will-change: transform; }
+        .myerp-modul-blob-3 { animation: myerp-modul-blob-3 26s ease-in-out infinite alternate; will-change: transform; }
+        @media (prefers-reduced-motion: reduce) {
+          .myerp-modul-blob-1, .myerp-modul-blob-2, .myerp-modul-blob-3 {
+            animation: none;
+          }
+        }
+      `}</style>
+
+      {/* Lapisan latar (di belakang konten) */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#f6f9ff] via-white to-white">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(148,163,184,0.2) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        <div className="myerp-modul-blob-1 absolute -left-24 -top-32 h-[420px] w-[420px] rounded-full bg-blue-500/15 blur-3xl sm:h-[520px] sm:w-[520px]" />
+        <div className="myerp-modul-blob-2 absolute -right-28 -top-16 h-[380px] w-[380px] rounded-full bg-sky-400/15 blur-3xl sm:h-[480px] sm:w-[480px]" />
+        <div className="myerp-modul-blob-3 absolute left-1/3 top-[30%] h-[360px] w-[360px] rounded-full bg-indigo-400/10 blur-3xl sm:h-[460px] sm:w-[460px]" />
+      </div>
       {/* Pilih sektor */}
       <div className="w-full border-b border-slate-200 bg-white">
         <div className={`${containerClass} flex flex-col gap-2 py-3 sm:flex-row sm:items-start sm:gap-3`}>
