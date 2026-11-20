@@ -1636,4 +1636,11 @@ export const siteConfig = {
         "Pesan Anda telah diteruskan ke tim konsultan PT You profit Indonesia. Kami akan segera menghubungi Anda.",
     },
   },
+  video: {
+    url: "https://youtu.be/YNyfInLWsnc?si=Fd2mTjsNWbTH40zB",
+    title: "Tour MyERP Plus",
+    closeLabel: "Tutup video",
+    invalidText:
+    "Video belum tersedia. Periksa kembali link YouTube pada pengaturan video."
+  },
 };

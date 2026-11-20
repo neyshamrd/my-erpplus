@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { DemoModalProvider } from "@/components/demo-modal";
+import { VideoModalProvider } from "@/components/video-modal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -50,7 +51,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} font-sans h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <DemoModalProvider>{children}</DemoModalProvider>
+        <DemoModalProvider>
+          <VideoModalProvider>{children}</VideoModalProvider>
+        </DemoModalProvider>
       </body>
     </html>
   );

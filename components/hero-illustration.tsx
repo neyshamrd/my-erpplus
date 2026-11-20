@@ -2,13 +2,16 @@
 
 import React from "react";
 import { CheckCircle2, FileText, Play } from "lucide-react";
+import { useVideoModal } from "./video-modal";
 
 type HeroIllustrationProps = {
-  // Dipanggil saat tombol "Putar Video" diklik
+  // Opsional: jika diisi, menggantikan pop up video bawaan
   onPlayVideo?: () => void;
 };
 
 export function HeroIllustration({ onPlayVideo }: HeroIllustrationProps) {
+  const { openVideo } = useVideoModal();
+
   return (
     // Digeser ke kanan di layar lg ke atas
     <div className="relative w-full lg:translate-x-6 xl:translate-x-8">
@@ -58,10 +61,10 @@ export function HeroIllustration({ onPlayVideo }: HeroIllustrationProps) {
             {/* Badan */}
             <div className="relative -mt-3 h-[92px] w-[106px] rounded-[26px] bg-[#0B132B]" />
 
-            {/* Tombol Putar Video */}
+            {/* Tombol Putar Video: membuka pop up video */}
             <button
               type="button"
-              onClick={onPlayVideo}
+              onClick={onPlayVideo ?? openVideo}
               aria-label="Putar Video Tour ERP"
               className="absolute top-[74px] z-20 flex items-center"
             >
