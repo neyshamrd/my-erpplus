@@ -36,6 +36,15 @@ type Plan = {
   stepPrice: string;
   seatLabel: string;
   userBase: number | null;
+  // Harga tambah user per paket (null = pakai harga bawaan addOns.user.price)
+  userPrice: number | null;
+  // ID menu tambahan yang sudah termasuk di paket ini (tidak ditagih)
+  includedMenus: string[];
+  // ID layanan yang sudah termasuk di paket ini (tidak ditagih)
+  includedServices: string[];
+  // Harga layanan sekali bayar per paket (id layanan -> harga).
+  // Layanan yang tidak tercantum memakai harga bawaan di addOns.services.
+  servicePrices: Partial<Record<string, number>>;
   inherits: string | null;
   inheritLabel: string;
   menuGroups: MenuGroup[];
@@ -102,9 +111,11 @@ export function HargaKalkulator() {
   const addOnPrice = (value: number) => Math.round(value * addOnFactor);
   const packagePrice = isPaid ? priceFor(plan) : 0;
 
-  // Kumpulkan kode menu yang sudah termasuk paket (termasuk paket di bawahnya)
+  // Kumpulkan kode menu dan ID menu tambahan yang sudah termasuk paket
+  // (termasuk paket di bawahnya)
   const findPlan = (id: string) => plans.find((p) => p.id === id);
   const includedCodes = new Set<string>();
+  const includedMenuIds = new Set<string>();
   const visited = new Set<string>();
   let cursor: string | null = plan.id;
   while (cursor !== null && !visited.has(cursor)) {
@@ -114,26 +125,39 @@ export function HargaKalkulator() {
     current.menuGroups.forEach((group) =>
       group.items.forEach((item) => includedCodes.add(item.code))
     );
+    current.includedMenus.forEach((id) => includedMenuIds.add(id));
     cursor = current.inherits;
   }
 
-  // Menu tambahan yang seluruh isinya sudah termasuk paket tidak ditagih
+  // Menu tambahan yang sudah termasuk di paket ini tidak ditagih
   const isMenuIncluded = (menu: MenuBundle) =>
-    addOnsOn && menu.items.every((item) => includedCodes.has(item.code));
+    addOnsOn && includedMenuIds.has(menu.id);
 
   const chargeableMenus = addOnsOn
     ? menus.filter((m) => selectedMenus.includes(m.id) && !isMenuIncluded(m))
     : [];
   const menuCost = chargeableMenus.reduce((sum, m) => sum + addOnPrice(m.price), 0);
 
+  // Harga tambah user mengikuti paket yang dipilih
   const usersExtra = addOnsOn ? extraUsers : 0;
-  const userUnit = addOnPrice(userAddOn.price);
+  const userUnit = addOnPrice(plan.userPrice ?? userAddOn.price);
   const userCost = usersExtra * userUnit;
 
+  // Layanan sekali bayar: harga mengikuti paket, yang sudah termasuk tidak ditagih
+  const isServiceIncluded = (service: ServiceItem) =>
+    addOnsOn && plan.includedServices.includes(service.id);
+  const servicePriceFor = (service: ServiceItem) =>
+    plan.servicePrices[service.id] ?? service.price;
+
   const activeServices = addOnsOn
-    ? services.filter((s) => selectedServices.includes(s.id))
+    ? services.filter(
+        (s) => selectedServices.includes(s.id) && !isServiceIncluded(s)
+      )
     : [];
-  const serviceCost = activeServices.reduce((sum, s) => sum + s.price, 0);
+  const serviceCost = activeServices.reduce(
+    (sum, s) => sum + servicePriceFor(s),
+    0
+  );
 
   // Biaya berulang per bulan (layanan sekali bayar dihitung terpisah)
   const monthlyTotal = packagePrice + menuCost + userCost;
@@ -414,7 +438,8 @@ export function HargaKalkulator() {
                                 <span className="mt-2 flex flex-wrap gap-1.5">
                                   {menu.items.map((item) => {
                                     const itemIncluded =
-                                      addOnsOn && includedCodes.has(item.code);
+                                      addOnsOn &&
+                                      (included || includedCodes.has(item.code));
                                     return (
                                       <span
                                         key={item.code}
@@ -501,15 +526,20 @@ export function HargaKalkulator() {
                       </p>
                       <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
                         {services.map((service) => {
+                          const included = isServiceIncluded(service);
                           const checked =
-                            addOnsOn && selectedServices.includes(service.id);
+                            addOnsOn &&
+                            (included || selectedServices.includes(service.id));
+                          const disabled = !addOnsOn || included;
                           return (
                             <label
                               key={service.id}
                               className={`flex items-start gap-2.5 rounded-xl border p-3 ${
-                                addOnsOn ? "cursor-pointer" : "cursor-not-allowed"
+                                disabled ? "cursor-not-allowed" : "cursor-pointer"
                               } ${
-                                checked
+                                included
+                                  ? "border-emerald-300 bg-emerald-50/60"
+                                  : checked
                                   ? "border-blue-500 bg-blue-50/70"
                                   : "border-slate-200 bg-white"
                               }`}
@@ -517,7 +547,7 @@ export function HargaKalkulator() {
                               <input
                                 type="checkbox"
                                 checked={checked}
-                                disabled={!addOnsOn}
+                                disabled={disabled}
                                 onChange={() => toggleService(service.id)}
                                 className="mt-0.5 h-4 w-4 shrink-0 accent-blue-600"
                               />
@@ -529,10 +559,14 @@ export function HargaKalkulator() {
                                   {service.description}
                                 </span>
                                 <span
-                                  className="mt-1.5 text-[10px] text-blue-600"
+                                  className={`mt-1.5 text-[10px] ${
+                                    included ? "text-emerald-600" : "text-blue-600"
+                                  }`}
                                   style={monoStyle}
                                 >
-                                  {formatRupiah(service.price)}
+                                  {included
+                                    ? data.addOns.serviceIncluded
+                                    : formatRupiah(servicePriceFor(service))}
                                 </span>
                               </span>
                             </label>

@@ -1361,7 +1361,7 @@ export const siteConfig = {
       },
     },
   },
-    harga: {
+  harga: {
     badge: "Kalkulator Lisensi & Harga",
     title: "Susun paket MyERP+ Anda",
     subtitle:
@@ -1402,6 +1402,8 @@ export const siteConfig = {
       menuTitle: "1. Menu tambahan",
       menuHint: "Menu yang sudah termasuk paket ditandai hijau.",
       menuIncluded: "Sudah termasuk paket",
+      // Harga menu sama untuk semua paket. Menu yang sudah termasuk ditentukan
+      // per paket lewat plans[].includedMenus.
       menus: [
         {
           id: "siklus",
@@ -1459,6 +1461,7 @@ export const siteConfig = {
         hint: "Tambah kapasitas bila kuota bawaan paket tidak mencukupi.",
         label: "Tambah user aktif",
         perUser: "per user / bulan",
+        // Harga bawaan (cadangan). Harga sebenarnya per paket: plans[].userPrice
         price: 175000,
         max: 50,
         baseLabel: "Bawaan paket",
@@ -1467,6 +1470,10 @@ export const siteConfig = {
       },
       serviceTitle: "3. Layanan",
       serviceHint: "Biaya sekali bayar, tidak terpengaruh siklus tagihan.",
+      // Teks untuk layanan yang sudah termasuk paket (sama dengan teks menu)
+      serviceIncluded: "Sudah termasuk paket",
+      // Harga di bawah adalah harga bawaan (cadangan).
+      // Harga sebenarnya per paket: plans[].servicePrices dan plans[].includedServices
       services: [
         {
           id: "implementasi",
@@ -1522,6 +1529,15 @@ export const siteConfig = {
         stepPrice: "",
         seatLabel: "2 user aktif",
         userBase: 2,
+        // Harga & isi paket (BULANAN)
+        userPrice: 175000,
+        includedMenus: [],
+        includedServices: [],
+        servicePrices: {
+          implementasi: 4000000,
+          migrasi: 2500000,
+          training: 750000,
+        },
         inherits: null,
         inheritLabel: "",
         menuGroups: [
@@ -1569,6 +1585,15 @@ export const siteConfig = {
         stepPrice: "",
         seatLabel: "5 user aktif",
         userBase: 5,
+        // Harga & isi paket (BULANAN)
+        userPrice: 150000,
+        includedMenus: ["siklus"],
+        includedServices: [],
+        servicePrices: {
+          implementasi: 6000000,
+          migrasi: 3500000,
+          training: 750000,
+        },
         inherits: "starter",
         inheritLabel: "Semua menu Starter Edition",
         menuGroups: [
@@ -1618,6 +1643,20 @@ export const siteConfig = {
         stepPrice: "",
         seatLabel: "10 user aktif",
         userBase: 10,
+        // Harga & isi paket (BULANAN)
+        userPrice: 125000,
+        includedMenus: [
+          "siklus",
+          "procurement",
+          "produksi",
+          "penjualan",
+          "inventori",
+        ],
+        includedServices: ["implementasi"],
+        servicePrices: {
+          migrasi: 5000000,
+          training: 750000,
+        },
         inherits: "growth",
         inheritLabel: "Semua menu Growth Edition",
         menuGroups: [
@@ -1672,6 +1711,12 @@ export const siteConfig = {
         stepPrice: "Hubungi Kami",
         seatLabel: "Unlimited User Seats",
         userBase: null,
+        // Corporate Custom: tanpa add-on, harga disepakati lewat konsultasi.
+        // userPrice null = pakai harga bawaan (hanya untuk tampilan kartu yang nonaktif).
+        userPrice: null,
+        includedMenus: [],
+        includedServices: [],
+        servicePrices: {},
         inherits: null,
         inheritLabel: "",
         menuGroups: [],
