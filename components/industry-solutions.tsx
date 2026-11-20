@@ -40,7 +40,7 @@ export function IndustrySolutions() {
   return (
     <section
       id="industri"
-      className="w-full border-t border-slate-100 bg-white py-12 sm:py-14 lg:py-16"
+      className="w-full bg-gradient-to-b from-white via-[#f5f8ff] to-white py-12 sm:py-14 lg:py-16"
     >
       <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
         {/* Header */}

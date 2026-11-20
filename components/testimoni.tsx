@@ -20,7 +20,7 @@ export function TestimoniSection() {
   return (
     <section
       id="testimoni"
-      className="w-full bg-[#0B132B] py-14 sm:py-16 lg:py-20"
+      className="w-full bg-gradient-to-br from-[#0B132B] via-[#0B132B] to-[#10265c] py-14 sm:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
         {/* Header */}

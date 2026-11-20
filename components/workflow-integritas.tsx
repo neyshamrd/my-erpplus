@@ -25,7 +25,7 @@ export function WorkflowIntegritas() {
   return (
     <section
       id="workflow"
-      className="w-full border-t border-slate-100 bg-white py-14 sm:py-16 lg:py-20"
+      className="w-full bg-gradient-to-b from-white via-[#f5f8ff] to-white py-14 sm:py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -50,7 +50,7 @@ export function WorkflowIntegritas() {
             return (
               <div
                 key={item.id}
-                className="flex flex-col rounded-3xl border border-slate-200 bg-slate-50/70 p-6"
+                className="flex flex-col rounded-3xl border border-slate-200 bg-white p-6"
               >
                 <span
                   className={`mb-5 flex h-11 w-11 items-center justify-center rounded-xl text-white ${iconBg}`}

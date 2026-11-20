@@ -138,7 +138,7 @@ export function TrustSection() {
   return (
     <section
       id="trust"
-      className="w-full select-none overflow-hidden border-t border-slate-100 bg-white py-10 sm:py-12"
+      className="w-full select-none overflow-hidden bg-white py-10 sm:py-12"
     >
       {/* Keyframes marquee: 3 set berurutan, geser 1/3 lalu ulang agar mulus */}
       <style>{`

@@ -73,7 +73,7 @@ export function ModulSection() {
   return (
     <section
       id="modul"
-      className="w-full border-t border-slate-100 bg-white py-14 sm:py-16 lg:py-20"
+      className="w-full bg-white py-14 sm:py-16 lg:py-20"
     >
       {/* Container sedikit lebih lebar agar kartu lebih lebar */}
       <div className="mx-auto max-w-[1480px] px-4 sm:px-6 lg:px-8">
