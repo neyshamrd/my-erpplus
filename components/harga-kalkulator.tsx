@@ -80,6 +80,10 @@ const monoStyle = { fontFamily: monoFont };
 const formatRupiah = (value: number) =>
   "Rp" + Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
+// Teks rincian layanan sekali bayar di kartu ringkasan
+const ONE_TIME_TITLE = "Biaya sekali bayar";
+const ONE_TIME_TOTAL_LABEL = "Total sekali bayar";
+
 export function HargaKalkulator() {
   const { openDemo } = useDemoModal();
   const data = siteConfig.harga;
@@ -685,6 +689,45 @@ export function HargaKalkulator() {
                     {plan.estimateNote}
                   </p>
                 </div>
+
+                {/* Rincian biaya sekali bayar: hanya tampil bila ada layanan berbayar yang dipilih */}
+                {activeServices.length > 0 && (
+                  <div className="mt-5 border-t border-white/10 pt-4">
+                    <p className="text-[10px] text-slate-400">{ONE_TIME_TITLE}</p>
+                    <ul className="mt-2 space-y-2.5">
+                      {activeServices.map((service) => (
+                        <li key={service.id}>
+                          <div className="flex items-start justify-between gap-3 text-[11px]">
+                            <span className="font-semibold text-slate-200">
+                              {service.name}
+                            </span>
+                            <span
+                              className="shrink-0 text-right font-bold"
+                              style={monoStyle}
+                            >
+                              {formatRupiah(servicePriceFor(service))}
+                            </span>
+                          </div>
+                          <p className="mt-0.5 text-[10px] leading-snug text-slate-400">
+                            {service.description}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-3 flex items-start justify-between gap-3 border-t border-white/10 pt-3 text-[11px]">
+                      <span className="font-bold text-white">
+                        {ONE_TIME_TOTAL_LABEL}
+                      </span>
+                      <span
+                        className="text-right font-bold text-white"
+                        style={monoStyle}
+                        aria-live="polite"
+                      >
+                        {formatRupiah(serviceCost)}
+                      </span>
+                    </div>
+                  </div>
+                )}
 
                 <div className="mt-5 space-y-2.5">
                   <a
