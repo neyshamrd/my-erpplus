@@ -20,7 +20,7 @@ function WhatsAppGlyph({ className }: { className?: string }) {
 
 // Link WhatsApp langsung ke konsultan
 const WA_LINK =
-  "https://wa.me/6281212122388?text=Halo%20MyERP%20Plus%2C%20saya%20ingin%20berkonsultasi%20mengenai%20implementasi%20sistem%20ERP%20untuk%20perusahaan%20saya";
+  "https://wa.me/6281192838899?text=Halo%20MyERP%20Plus%2C%20saya%20ingin%20berkonsultasi%20mengenai%20implementasi%20sistem%20ERP%20untuk%20perusahaan%20saya";
 
 export function FloatingWhatsApp() {
   // Tombol back to top muncul setelah halaman digulir

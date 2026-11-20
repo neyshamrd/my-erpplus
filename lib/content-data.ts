@@ -470,7 +470,7 @@ export const siteConfig = {
     ],
     submitText: "Kirim Permintaan Jadwal Demo",
     // Nomor tujuan WhatsApp konsultan (kode negara tanpa +, spasi, atau tanda hubung)
-    whatsapp: "6281212122388",
+    whatsapp: "6281192838899",
     messageIntro: "Halo MyERP Plus, saya ingin menjadwalkan live demo.",
     successTitle: "Satu langkah lagi",
     successText:
