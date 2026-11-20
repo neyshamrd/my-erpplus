@@ -96,7 +96,7 @@ export function IndustrySolutions() {
                 {/* Gambar: zoom out saat aktif, zoom in saat tidak aktif */}
                 <div
                   className={`absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    isActive ? "scale-100" : "scale-125 group-hover:scale-[1.18]"
+                    isActive ? "scale-100 group-hover:scale-110 group-active:scale-110" : "scale-125 group-hover:scale-[1.18]"
                   }`}
                 >
                   <Image
