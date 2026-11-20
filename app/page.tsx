@@ -1,5 +1,4 @@
 import React from "react";
-import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Navbar } from "@/components/navbar";
 import { HeroSection } from "@/components/hero-section";
 import { TrustSection } from "@/components/trust-section";
@@ -14,8 +13,6 @@ import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-100 selection:text-blue-900 font-sans antialiased">
-      {/* 1. Top Security & Official Partner Announcement Bar */}
-      <AnnouncementBanner />
 
       {/* 2. Main Sticky Navigation Bar */}
       <Navbar />

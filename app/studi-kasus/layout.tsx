@@ -1,5 +1,4 @@
 import React from "react";
-import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { FloatingWhatsApp } from "@/components/floating-whatsapp";
@@ -11,8 +10,6 @@ export default function StudiKasusLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-100 selection:text-blue-900 font-sans antialiased">
-      <AnnouncementBanner />
-
       <Navbar />
 
       <div className="flex-1">{children}</div>

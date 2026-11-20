@@ -1,6 +1,5 @@
 import React from "react";
 import type { Metadata } from "next";
-import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Navbar } from "@/components/navbar";
 import { SolusiDetail } from "@/components/solusi-detail";
 import { Footer } from "@/components/footer";
@@ -18,8 +17,6 @@ export const metadata: Metadata = {
 export default function SolusiJasaPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-blue-100 selection:text-blue-900 font-sans antialiased">
-      <AnnouncementBanner />
-
       <Navbar />
 
       <div className="flex-1">
