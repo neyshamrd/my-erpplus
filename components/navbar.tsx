@@ -113,7 +113,7 @@ export function Navbar() {
                 <div
                   className={`bg-white shadow-2xl shadow-slate-900/10 rounded-3xl border border-slate-100 p-4 ${
                     item.sectionTitle
-                      ? "w-[700px]"
+                      ? "w-[660px]"
                       : item.items!.length > 3
                       ? "w-[640px]"
                       : "w-[480px]"
@@ -128,7 +128,7 @@ export function Navbar() {
                   )}
 
                   <div
-                    className={`grid gap-1 ${
+                    className={`grid gap-0 ${
                       item.sectionTitle
                         ? "grid-flow-col grid-rows-6 grid-cols-2"
                         : item.items!.length > 3
@@ -144,7 +144,9 @@ export function Navbar() {
                           key={sub.title}
                           href={sub.href}
                           onClick={closeAll}
-                          className="group flex items-center gap-3.5 p-3 rounded-xl hover:bg-slate-50 transition-all duration-150"
+                          className={`group flex items-center gap-3.5 rounded-xl hover:bg-slate-50 transition-all duration-150 ${
+                            "description" in sub && sub.description ? "p-3" : "p-2"
+                          }`}
                         >
                           {/* Kotak ikon */}
                           <div
