@@ -25,7 +25,7 @@ export function Footer({ onOpenDemo }: FooterProps) {
               className="inline-flex rounded-xl bg-white px-4 py-2.5"
               aria-label="MyERP Plus"
             >
-              <MyErpLogo className="h-9 w-auto" />
+              <MyErpLogo className="h-7 w-auto" />
             </Link>
 
             <p className="mt-5 text-[13px] leading-relaxed text-slate-300">

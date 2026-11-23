@@ -56,7 +56,7 @@ export function Navbar() {
   // Logo SVG, ukuran lebih besar dari mockup
   const BrandLogo = (
     <Link href="/" onClick={closeAll} className="flex items-center group shrink-0">
-      <MyErpLogo className="h-9 sm:h-11 lg:h-12 w-auto transition-transform group-hover:scale-[1.02]" />
+      <MyErpLogo className="h-6 sm:h-7 lg:h-8 w-auto transition-transform group-hover:scale-[1.02]" />
     </Link>
   );
 

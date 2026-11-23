@@ -1,12 +1,6 @@
 // lib/content-data.ts
 
 export const siteConfig = {
-  announcement: {
-    realese: "Rilis v5.0 MRP II",
-    title: "Arsitektur Single Database Terintegrasi untuk Manufaktur & Distribusi Skala Nasional.",
-    ctaText: "Jadwalkan Demo Sistem",
-    serverStatus: "Tier-3 Cloud Jakarta Online",
-  },
   nav: {
     logo: {
       text: "MYERP",
