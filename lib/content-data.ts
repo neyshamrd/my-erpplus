@@ -188,7 +188,7 @@ export const siteConfig = {
     },
   },
   trust: {
-    title: "Dipercaya oleh perusahaan manufaktur Indonesia",
+    title: "Dipercaya oleh 250 Perusahaan Indonesia",
         clients: [
       { id: "kawata", name: "PT Kawata Indonesia", logoSrc: "/logos/kawata.png" },
       { id: "topla", name: "PT Topla Abadi Jaya", logoSrc: "/logos/topla.png" },
@@ -1806,5 +1806,22 @@ export const siteConfig = {
     closeLabel: "Tutup video",
     invalidText:
     "Video belum tersedia. Periksa kembali link YouTube pada pengaturan video."
+  },
+    heroVisual: {
+    videoLabel: "Putar Video",
+    videoSub: "Tour ERP",
+    videoAria: "Putar Video Tour ERP",
+    images: [
+      {
+        id: "penjualan",
+        src: "/hero/interface-penjualan.jpg",
+        alt: "Antarmuka MyERP Plus: daftar Invoice Penjualan, grafik Top 10 Barang Penjualan Terbesar, dan form Pembayaran Piutang",
+      },
+      {
+        id: "pembelian",
+        src: "/hero/interface-pembelian.jpg",
+        alt: "Antarmuka MyERP Plus: form Order Pembelian, daftar PO, cetak PO, dan grafik Order vs Pembelian",
+      },
+    ],
   },
 };

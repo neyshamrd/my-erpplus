@@ -153,7 +153,7 @@ export function HeroSection() {
           </div>
 
           {/* Kolom kanan: digeser ke kanan lewat padding kiri */}
-          <div className="lg:col-span-6 lg:pl-12 xl:pl-20">
+          <div className="lg:col-span-6 lg:pl-8 xl:pl-10 xl:-mr-6 2xl:-mr-12">
             <HeroIllustration />
           </div>
         </div>
