@@ -1776,7 +1776,7 @@ export const siteConfig = {
       address:
         "Ruko Modern Kav A16 - A17, Tasikmadu, Kec. Lowokwaru, Kota Malang, Jawa Timur 65143",
       hoursTitle: "Jam Operasional:",
-      hoursWeekdays: "Senin - Jumat: 08.30 - 17.00 WIB",
+      hoursWeekdays: "Senin - Jumat: 07.30 - 16.30 WIB",
       hoursWeekend: "Sabtu & Minggu: Layanan Darurat On-Call Enterprise",
       serviceTitle: "Layanan Cepat & Email:",
       whatsapp: "WhatsApp: +62 811-9283-8899",
