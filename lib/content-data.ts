@@ -408,6 +408,196 @@ export const siteConfig = {
     demoText: "Jadwalkan Live Demo",
     flowchartText: "Download Flowchart ERP",
   },
+  flowchart: {
+    // Pop up Flowchart ERP (dibuka dari tombol "Download Flowchart ERP" di cta-banner.tsx)
+    badge: "ERP",
+    title: "Flowchart Enterprise — MyERP Plus (5 Modul Terintegrasi)",
+    subtitle: "Purchasing • Production • Sales & Distribution • Inventory & Warehouse • Finance & Accounting",
+    downloadLabel: "Download Dokumen Lengkap",
+    // Dokumen lengkap (HTML) dibuka di tab baru; file ada di public/
+    downloadHref: "/flowchart-enterprise-myerp-plus.pdf",
+    moduleBadge: "MYERP Enterprise Version",
+    tablistLabel: "Pilih modul flowchart",
+    closeLabel: "Tutup pop up flowchart",
+    // Diagram berupa gambar SVG di public/flowcharts, penjelasan berupa kartu di bawah diagram
+    modules: [
+      {
+        id: "purchasing",
+        tab: "1. Purchasing",
+        title: "1. Purchasing (Enterprise Version)",
+        subtitle: "Alur Pengadaan Barang, Perbandingan Penawaran, QC Penerimaan hingga Pembayaran Hutang",
+        image: "/flowcharts/purchasing.png",
+        width: 960,
+        height: 520,
+        alt: "Diagram alur Purchasing MyERP Plus Enterprise",
+        steps: [
+          {
+            tag: "START → PR",
+            title: "Purchase Request (PR)",
+            description: "Permintaan Pembelian dari departemen operasional.",
+          },
+          {
+            tag: "DECISION",
+            title: "Quotation from supplier?",
+            description: "Jika Ya (Y) → Request for Quotation (RQ) → Comparing quotation? → Bidding Sheets (BS). Jika Tidak (N) → langsung ke PO.",
+          },
+          {
+            tag: "PO → DP",
+            title: "Purchase Order (PO) & Down Payment",
+            description: "Terbit Order Pembelian. Jika ada Down payment? (Y) → Advance Purchase (AP / Uang Muka Pembelian).",
+          },
+          {
+            tag: "GRN → RI",
+            title: "Good Receipt Note (GRN) → Receive Invoice (RI)",
+            description: "Penerimaan Barang di gudang lalu pencatatan Invoice Pembelian.",
+          },
+          {
+            tag: "QC → RETUR",
+            title: "Quality Control & Cek Reject",
+            description: "Jika There are rejected? (Y) → Delivery Note Return (DNR / Pengiriman Barang Retur) → Purchase Return (PRT / Retur Pembelian).",
+          },
+          {
+            tag: "VPP → VP",
+            title: "Vendor Payment Plan (VPP) → Vendor Payment (VP) → FINISH",
+            description: "Payment taken from AP, RI & PRT. Jika Planning payment? (Y) → Rencana Pembayaran Hutang (VPP) → Pembayaran Hutang (VP).",
+          },
+        ],
+      },
+      {
+        id: "production",
+        tab: "2. Production",
+        title: "2. Production (Enterprise Version)",
+        subtitle: "Alur Formula Produksi (BOM), Permintaan Produksi, Perintah Kerja (WO), Pengeluaran Bahan & QC Akhir",
+        image: "/flowcharts/production.png",
+        width: 960,
+        height: 440,
+        alt: "Diagram alur Production MyERP Plus Enterprise",
+        steps: [
+          {
+            tag: "START → BOM",
+            title: "Bill of Material (BOM)",
+            description: "Penentuan Formula Produksi standar.",
+          },
+          {
+            tag: "PDR → WO",
+            title: "Production Request (PDR) → Work Order (WO)",
+            description: "Permintaan Produksi diterbitkan menjadi Perintah Kerja (WO).",
+          },
+          {
+            tag: "MRS → QC",
+            title: "Material Release (MRS) → Material Quality Control",
+            description: "Pengeluaran Bahan Baku dari gudang dilanjutkan pemeriksaan kualitas bahan.",
+          },
+          {
+            tag: "REJECT → MRN",
+            title: "There are rejected? → Material Return (MRN)",
+            description: "Jika Ya (Y) → Retur Bahan Baku (MRN) kembali ke gudang/pengeluaran ulang. Jika Tidak (N) → lanjut ke Produksi.",
+          },
+          {
+            tag: "PD → FINAL QC",
+            title: "Production (PD) → Final Quality Control → FINISH",
+            description: "Proses Production, Assembly & Disassembly selesai lalu pemeriksaan kualitas produk jadi (Final QC).",
+          },
+        ],
+      },
+      {
+        id: "sales-distribution",
+        tab: "3. Sales & Distribution",
+        title: "3. Sales & Distribution (Enterprise Version)",
+        subtitle: "Alur Penawaran, Order Penjualan, Uang Muka, Packing List, Surat Jalan, Retur hingga Pelunasan Piutang",
+        image: "/flowcharts/sales-distribution.png",
+        width: 960,
+        height: 470,
+        alt: "Diagram alur Sales & Distribution MyERP Plus Enterprise",
+        steps: [
+          {
+            tag: "SQ → SO",
+            title: "Sales Quotation (SQ) → Approved? → Sales Order (SO)",
+            description: "Penawaran Penjualan disetujui menjadi Order Penjualan (SO).",
+          },
+          {
+            tag: "DP → PI",
+            title: "Down Payment (AS) & Proforma Invoice (PI)",
+            description: "Jika Down payment? (Y) → Advance Sales (AS). Jika Proforma invoice? (Y) → Proforma Invoice (PI).",
+          },
+          {
+            tag: "PL → DO → DR",
+            title: "Packing List (PL) → Delivery Order (DO) → Delivery Report (DR)",
+            description: "Pengepakan Barang (jika Packing? Y), Pengiriman Barang (DO), dan Laporan Pengiriman (DR).",
+          },
+          {
+            tag: "SI → RETUR",
+            title: "Sales Invoice (SI) → Receipt Note Return (RNR) → Sales Return (SR)",
+            description: "Terbit Invoice Penjualan. Jika There are returned? (Y) → Penerimaan Barang Retur (RNR) & Retur Penjualan (SR).",
+          },
+          {
+            tag: "IC → PV",
+            title: "Invoice Collector (IC) → Payment Receipt (PV) → FINISH",
+            description: "Payment taken from AS, SI & SR. Jika Collecting invoice? (Y) → Penagihan Piutang (IC) → Pembayaran Piutang (PV).",
+          },
+        ],
+      },
+      {
+        id: "inventory-warehouse",
+        tab: "4. Inventory & Warehouse",
+        title: "4. Inventory & Warehouse (Enterprise Version)",
+        subtitle: "Alur Permintaan & Mutasi Antar Gudang, Stock Opname, Penyesuaian Stok & Pengaturan Harga Jual",
+        image: "/flowcharts/inventory-warehouse.png",
+        width: 960,
+        height: 430,
+        alt: "Diagram alur Inventory & Warehouse MyERP Plus Enterprise",
+        steps: [
+          {
+            tag: "TR → TS → RS",
+            title: "Transfer Request (TR) → Transfer Stock (TS) → Receive Stock (RS)",
+            description: "Permintaan Barang antar gudang, Mutasi Barang, dan Terima Mutasi.",
+          },
+          {
+            tag: "INVENTORY",
+            title: "Inventory control? & Checking stock?",
+            description: "Jika Inventory control? (Y) → Checking stock? Jika Tidak (N) → Price List Adjustment (PA / Set Harga Jual).",
+          },
+          {
+            tag: "SP → SA",
+            title: "Stock Opname (SP) → Stock Adjustment (SA) → FINISH",
+            description: "Jika Stock opname? (Y) → Stok Opname (SP) lalu Penyesuaian Stok (SA). Jika (N) → langsung Penyesuaian Stok (SA).",
+          },
+        ],
+      },
+      {
+        id: "finance-accounting",
+        tab: "5. Finance & Accounting",
+        title: "5. Finance & Accounting (Enterprise Version)",
+        subtitle: "Alur Transaksi Kas, Bank, Giro Masuk/Keluar, Jurnal Penyesuaian & Jurnal Umum",
+        image: "/flowcharts/finance-accounting.png",
+        width: 960,
+        height: 470,
+        alt: "Diagram alur Finance & Accounting MyERP Plus Enterprise",
+        steps: [
+          {
+            tag: "CASH",
+            title: "Cash Receipt (CR) & Cash Disbursements (CD)",
+            description: "Pencatatan transaksi Kas Masuk (Incoming Y) dan Kas Keluar (Incoming N).",
+          },
+          {
+            tag: "BANK",
+            title: "Receive Money (RM) & Spend Money (SM)",
+            description: "Pencatatan mutasi rekening Bank Masuk (Incoming Y) dan Bank Keluar (Incoming N).",
+          },
+          {
+            tag: "GIRO",
+            title: "Receive Giro (RG) & Spend Giro (SG)",
+            description: "Pengelolaan Giro Masuk (Incoming Y) dan Giro Keluar (Incoming N).",
+          },
+          {
+            tag: "JOURNAL",
+            title: "Adjustment Journal (AJ) & General Journal (GJ) → FINISH",
+            description: "Pencatatan Jurnal Penyesuaian (AJ) dan Jurnal Umum (GJ) terintegrasi ke Buku Besar.",
+          },
+        ],
+      },
+    ],
+  },
   footer: {
     descBefore: "Solusi perangkat lunak Enterprise Resource Planning terintegrasi oleh",
     descBrand: "PT You profit Indonesia",

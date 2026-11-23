@@ -1,18 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Download } from "lucide-react";
 import { siteConfig } from "@/lib/content-data";
 import { useDemoModal } from "./demo-modal";
+import { FlowchartModal } from "./flowchart-modal";
 
 type CtaBannerProps = {
-  // Dipanggil saat tombol "Download Flowchart ERP" diklik (untuk pop up download nanti)
+  // Opsional: ikut dipanggil saat tombol "Download Flowchart ERP" diklik.
+  // Pop up flowchart sudah ditangani langsung oleh komponen ini.
   onOpenFlowchart?: () => void;
 };
 
 export function CtaBanner({ onOpenFlowchart }: CtaBannerProps) {
   const data = siteConfig.cta;
   const { openDemo } = useDemoModal();
+  const [flowchartOpen, setFlowchartOpen] = useState(false);
+
+  const handleOpenFlowchart = () => {
+    setFlowchartOpen(true);
+    onOpenFlowchart?.();
+  };
 
   return (
     <section
@@ -46,7 +54,7 @@ export function CtaBanner({ onOpenFlowchart }: CtaBannerProps) {
 
             <button
               type="button"
-              onClick={onOpenFlowchart}
+              onClick={handleOpenFlowchart}
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-[#0B132B]/50 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#0B132B]/80"
             >
               <Download className="h-4 w-4" />
@@ -55,6 +63,12 @@ export function CtaBanner({ onOpenFlowchart }: CtaBannerProps) {
           </div>
         </div>
       </div>
+
+      {/* Pop up flowchart (dirender lewat portal ke document.body) */}
+      <FlowchartModal
+        open={flowchartOpen}
+        onClose={() => setFlowchartOpen(false)}
+      />
     </section>
   );
 }
