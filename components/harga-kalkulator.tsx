@@ -95,11 +95,11 @@ export function HargaKalkulator() {
   const summaryText = data.summary;
   const faq = data.faq;
 
-  const [planId, setPlanId] = useState<string>(data.defaultPlan);
-  const [cycleId, setCycleId] = useState<string>(data.defaultCycle);
-  const [extraUsers, setExtraUsers] = useState<number>(0);
-  const [selectedMenus, setSelectedMenus] = useState<string[]>([]);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [planId, setPlanId] = useState<string>(data.defaultPlan);             //paket dipilih
+  const [cycleId, setCycleId] = useState<string>(data.defaultCycle);          // bulanan / tahunan
+  const [extraUsers, setExtraUsers] = useState<number>(0);                    // jumlah tambahan user
+  const [selectedMenus, setSelectedMenus] = useState<string[]>([]);           // id menu yang dicentang
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);     // id layanan yang dicentang
   const calculatorRef = useRef<HTMLDivElement>(null);
 
   // Data turunan dari pilihan saat ini
