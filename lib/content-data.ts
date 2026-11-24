@@ -383,7 +383,7 @@ export const siteConfig = {
         companyName: "PT Topla Abadi Jaya",
         shortName: "Topla",
         industry: "Plastik Injeksi",
-        location: "Indonesia",
+        location: "Kawasan Industri, Jl. Mm 2100 Jl. Sulawesi III No.2-37 Blok M 28, Gandamekar, Cikarang Barat, Kabupaten Bekasi, Jawa Barat.",
         logoSrc: "/logos/topla.png",
         headline:
           "PT Topla Abadi Jaya Meningkatkan Ketertiban Produksi & Stok dengan MyERP Plus",
@@ -427,7 +427,7 @@ export const siteConfig = {
         companyName: "PT Ikuyo Indonesia",
         shortName: "Ikuyo",
         industry: "Manufaktur Komponen",
-        location: "Indonesia",
+        location: "Kawasan Greenland, Batavia, Blok AB No. 48-49, Kota Deltamas, Sukamahi, Kec. Cikarang Pusat, Kabupaten Bekasi, Jawa Barat.",
         logoSrc: "/logos/ikuyo.png",
         headline:
           "PT Ikuyo Indonesia Menyelaraskan Pengadaan, Gudang & Produksi di MyERP Plus",
@@ -471,7 +471,7 @@ export const siteConfig = {
         companyName: "PT Motasa Indonesia",
         shortName: "Motasa",
         industry: "Manufaktur",
-        location: "Indonesia",
+        location: "Jl. A. Yani, Wonosari, Sumbertanggul, Kec. Mojosari, Kabupaten Mojokerto, Jawa Timur.",
         logoSrc: "/logos/motasa.png",
         headline:
           "PT Motasa Indonesia Memperkuat Koordinasi PPIC, Stok & Keuangan dengan MyERP Plus",
@@ -515,7 +515,7 @@ export const siteConfig = {
         companyName: "PT Narumi Indonesia Mfg (NIM)",
         shortName: "Narumi (NIM)",
         industry: "Manufaktur Keramik",
-        location: "Indonesia",
+        location: "EJIP Industrial Park Plot 7L-1 (dan Plot 7K-2 / Jl. Citanduy 6 No. Plot 7K-2), Desa Sukaresmi, Cikarang Selatan, Kabupaten Bekasi, Jawa Barat.",
         logoSrc: "/logos/narumi.png",
         headline:
           "PT Narumi Indonesia Mfg Meningkatkan Visibilitas Produksi & Keuangan dengan MyERP Plus",
@@ -559,7 +559,7 @@ export const siteConfig = {
         companyName: "PT Prima Copper Industri",
         shortName: "Prima Copper",
         industry: "Pengolahan Logam",
-        location: "Indonesia",
+        location: "Jl. Halim Perdana Kusuma No. 88, Batuceper, Tangerang, Banten, Indonesia",
         logoSrc: "/logos/pci.jpg",
         headline:
           "PT Prima Copper Industri Mengoptimalkan Stok, Penjualan & Akuntansi di MyERP Plus",
@@ -603,7 +603,7 @@ export const siteConfig = {
         companyName: "PT Unggul Jaya Sejahtera",
         shortName: "Unggul Jaya",
         industry: "Alat Kesehatan",
-        location: "Indonesia",
+        location: "Jl. K.H. Ahmad Dahlan No. 205, Samborejo, Kec. Tirto, Kota Pekalongan, Jawa Tengah.",
         logoSrc: "/logos/ujs.jpg",
         headline:
           "PT Unggul Jaya Sejahtera Menata Distribusi, Inventaris & Keuangan dengan MyERP Plus",
@@ -653,7 +653,7 @@ export const siteConfig = {
         companyName: "PT Nanda Persada Transport",
         shortName: "Nanda Persada",
         industry: "Ekspedisi & Logistik",
-        location: "Indonesia",
+        location: "Jl. Raya Bekasi KM. 18, No. 08, Jatinegara Kaum, Pulogadung, East Jakarta, DKI Jakarta.",
         logoSrc: "/logos/npt.png",
         headline:
           "PT Nanda Persada Transport Menyederhanakan Operasional & Keuangan dengan MyERP Plus",
