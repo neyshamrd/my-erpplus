@@ -5,7 +5,7 @@ import { ProfilKlienDetail } from "@/components/profil-klien-detail";
 import { siteConfig } from "@/lib/content-data";
 
 type PageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>;    // use slug
 };
 
 type ClientProfileSummary = {

@@ -4,8 +4,8 @@ export const siteConfig = {
       text: "MYERP",
       tag: "+",
     },
-    // Menu navigasi utama
-    mainNav: [
+    // Menu navigasi Utama
+    mainNav: [     
       {
         title: "Modul ERP",
         // Klik menu utama: gulir ke section modul.tsx (id="modul")

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react"; //update trus section
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";

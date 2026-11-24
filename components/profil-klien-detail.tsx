@@ -266,4 +266,4 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
       </div>
     </main>
   );
-}
+}    //profile klien data
