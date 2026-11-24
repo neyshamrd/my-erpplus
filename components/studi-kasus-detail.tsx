@@ -1,8 +1,17 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Activity, AlertCircle, Check, CheckCircle2, Factory } from "lucide-react";
+import {
+  Activity,
+  AlertCircle,
+  ArrowUpRight,
+  Building2,
+  Check,
+  CheckCircle2,
+  Factory,
+} from "lucide-react";
 import { siteConfig } from "@/lib/content-data";
 import { useDemoModal } from "./demo-modal";
 
@@ -18,11 +27,23 @@ type StudiKasusData = {
   modules: string[];
 };
 
+type TrustClientItem = {
+  id: string;
+  slug: string;
+  name: string;
+  industry: string;
+  logoSrc?: string;
+  caseStudySlugs?: string[];
+};
+
 // Data detail semua studi kasus, dicari berdasarkan slug
 const detailItems: Record<string, StudiKasusData | undefined> =
   siteConfig.studiKasusDetail.items;
 
-// Daftar 11 sektor untuk bar "Pilih Sektor", diambil dari dropdown navbar
+// Daftar klien dari siteConfig
+const trustClients = (siteConfig.trust.clients ?? []) as TrustClientItem[];
+
+// Daftar 11 sektor untuk topbar "Pilih Sektor", diambil dari dropdown navbar
 const studiNav = siteConfig.nav.mainNav.find((item) => item.title === "Studi Kasus");
 const sectors: { title: string; href: string }[] = studiNav?.items ?? [];
 
@@ -30,8 +51,15 @@ const sectors: { title: string; href: string }[] = studiNav?.items ?? [];
 const monoFont =
   "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
 
-// Lebar konten mengikuti mockup (sekitar 1026px)
+// Lebar konten utama
 const containerClass = "mx-auto w-full max-w-[1090px] px-4 sm:px-6 lg:px-8";
+
+// Hanya mengambil klien yang eksplisit terdaftar pada caseStudySlugs studi kasus ini
+function getMatchingClients(slug: string): TrustClientItem[] {
+  return trustClients.filter((client) =>
+    client.caseStudySlugs?.includes(slug)
+  );
+}
 
 export function StudiKasusDetail({ slug }: { slug: string }) {
   const { openDemo } = useDemoModal();
@@ -40,6 +68,8 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
 
   if (!detail) return null;
 
+  const matchingClients = getMatchingClients(slug);
+
   // 4 kartu: 4 kolom di desktop; 3 kartu: 3 kolom
   const statCols =
     detail.stats.length >= 4 ? "sm:grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3";
@@ -47,8 +77,8 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
     detail.stats.length >= 4 ? "text-2xl sm:text-3xl" : "text-3xl sm:text-4xl";
 
   return (
-    <main className="relative isolate w-full overflow-hidden bg-white">
-       {/* Animasi latar: cahaya biru tipis bergerak pelan */}
+    <main className="relative isolate w-full overflow-x-clip bg-white">
+      {/* Animasi latar: cahaya biru tipis bergerak pelan */}
       <style>{`
         @keyframes myerp-modul-blob-1 {
           0% { transform: translate3d(0, 0, 0) scale(1); }
@@ -76,7 +106,10 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
       `}</style>
 
       {/* Lapisan latar (di belakang konten) */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#f6f9ff] via-white to-white">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#f6f9ff] via-white to-white"
+      >
         <div
           className="absolute inset-0"
           style={{
@@ -89,13 +122,16 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
         <div className="myerp-modul-blob-2 absolute -right-28 -top-16 h-[380px] w-[380px] rounded-full bg-sky-400/15 blur-3xl sm:h-[480px] sm:w-[480px]" />
         <div className="myerp-modul-blob-3 absolute left-1/3 top-[30%] h-[360px] w-[360px] rounded-full bg-indigo-400/10 blur-3xl sm:h-[460px] sm:w-[460px]" />
       </div>
-      {/* Pilih sektor */}
-      <div className="w-full border-b border-slate-200 bg-white">
-        <div className={`${containerClass} flex flex-col gap-2 py-3 sm:flex-row sm:items-start sm:gap-3`}>
+
+      {/* Topbar Pilih Sektor */}
+      <div className="w-full border-b border-slate-200 bg-white/95 backdrop-blur-sm">
+        <div
+          className={`${containerClass} flex flex-col gap-2 py-3 sm:flex-row sm:items-start sm:gap-3`}
+        >
           <span className="shrink-0 pt-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
             {labels.sectorBarLabel}
           </span>
-          <div className="flex flex-wrap gap-2">
+          <nav aria-label={labels.sectorBarLabel} className="flex flex-wrap gap-2">
             {sectors.map((sector) => {
               const isActive = sector.href === `/studi-kasus/${slug}`;
               return (
@@ -103,17 +139,17 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
                   key={sector.href}
                   href={sector.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`rounded-md px-3 py-1.5 text-[11px] font-semibold ${
+                  className={`cursor-pointer rounded-md px-3 py-1.5 text-[11px] font-semibold transition-colors ${
                     isActive
-                      ? "bg-blue-600 text-white"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
                   }`}
                 >
                   {sector.title}
                 </Link>
               );
             })}
-          </div>
+          </nav>
         </div>
       </div>
 
@@ -139,7 +175,7 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
           </p>
         </section>
 
-        {/* Tiga metrik: font monospace seperti testimoni.tsx */}
+        {/* Metrik: font monospace seperti testimoni.tsx */}
         <section className={`grid grid-cols-1 gap-4 ${statCols}`}>
           {detail.stats.map((stat) => (
             <div
@@ -213,11 +249,67 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
           <button
             type="button"
             onClick={openDemo}
-            className="inline-flex shrink-0 items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-bold text-white hover:bg-blue-700"
+            className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-lg bg-blue-600 px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-blue-700"
           >
             {labels.ctaButton}
           </button>
         </section>
+
+        {/* Industri Klien yang Sesuai dengan Studi Kasus */}
+        {matchingClients.length > 0 && (
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-2">
+                <Building2 className="h-4 w-4 text-blue-600" />
+                <h2 className="text-sm font-extrabold tracking-tight text-slate-900">
+                  Klien Pengguna di Sektor {detail.sectorName}
+                </h2>
+              </div>
+              <p className="text-[11px] text-slate-500">
+                Klik kartu perusahaan untuk melihat profil lengkap
+              </p>
+            </div>
+
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {matchingClients.map((client) => (
+                <Link
+                  key={client.id}
+                  href={`/profil-klien/${client.slug}`}
+                  className="group flex cursor-pointer flex-col justify-between rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:shadow-md"
+                >
+                  <div className="flex h-14 items-center justify-center rounded-xl border border-slate-100 bg-white px-3">
+                    {client.logoSrc ? (
+                      <Image
+                        src={client.logoSrc}
+                        alt={client.name}
+                        width={140}
+                        height={44}
+                        className="h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                      />
+                    ) : (
+                      <span className="text-xs font-extrabold text-slate-800">
+                        {client.name}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="mt-3.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-xs font-extrabold text-slate-900 group-hover:text-blue-700">
+                        {client.name}
+                      </h3>
+                      <ArrowUpRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-600" />
+                    </div>
+
+                    <span className="mt-2 inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">
+                      {client.industry}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );

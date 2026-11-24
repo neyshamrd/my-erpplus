@@ -195,6 +195,7 @@ export const siteConfig = {
         slug: "pt-kawata-indonesia",
         name: "PT Kawata Indonesia",
         industry: "Manufaktur",
+        caseStudySlugs: ["mesin", "logam"],
         logoSrc: "/logos/kawata.png",
         popup: {
           reviewerName: "Budi Santoso",
@@ -210,6 +211,7 @@ export const siteConfig = {
         slug: "pt-topla-abadi-jaya",
         name: "PT Topla Abadi Jaya",
         industry: "Plastik Injeksi",
+        caseStudySlugs: ["plastik"],
         logoSrc: "/logos/topla.png",
         popup: {
           reviewerName: "Siti Rahmawati",
@@ -225,6 +227,7 @@ export const siteConfig = {
         slug: "pt-ikuyo-indonesia",
         name: "PT Ikuyo Indonesia",
         industry: "Manufaktur Komponen",
+        caseStudySlugs: ["mesin", "plastik"],
         logoSrc: "/logos/ikuyo.png",
         popup: {
           reviewerName: "Andi Pratama",
@@ -239,7 +242,8 @@ export const siteConfig = {
         id: "motasa",
         slug: "pt-motasa-indonesia",
         name: "PT Motasa Indonesia",
-        industry: "Manufaktur",
+        industry: "Manufaktur Bahan Rempah",
+        caseStudySlugs: ["rempah"],
         logoSrc: "/logos/motasa.png",
         popup: {
           reviewerName: "Rina Kusuma",
@@ -255,6 +259,7 @@ export const siteConfig = {
         slug: "pt-narumi-indonesia-mfg",
         name: "PT Narumi Indonesia Mfg (NIM)",
         industry: "Manufaktur Keramik",
+        caseStudySlugs: ["logam", "mesin"],
         logoSrc: "/logos/narumi.png",
         popup: {
           reviewerName: "Dedi Kurniawan",
@@ -270,6 +275,7 @@ export const siteConfig = {
         slug: "pt-prima-copper-industri",
         name: "PT Prima Copper Industri",
         industry: "Pengolahan Logam",
+        caseStudySlugs: ["logam", "mesin"],
         logoSrc: "/logos/pci.jpg",
         popup: {
           reviewerName: "Hendra Wijaya",
@@ -284,7 +290,8 @@ export const siteConfig = {
         id: "ujs",
         slug: "pt-unggul-jaya-sejahtera",
         name: "PT Unggul Jaya Sejahtera",
-        industry: "Alat Kesehatan",
+        industry: "Tekstil",
+        caseStudySlugs: ["tekstil"],
         logoSrc: "/logos/ujs.jpg",
         popup: {
           reviewerName: "Faradila Utami",
@@ -300,6 +307,7 @@ export const siteConfig = {
         slug: "pt-nanda-persada-transport",
         name: "PT Nanda Persada Transport",
         industry: "Ekspedisi & Logistik",
+        caseStudySlugs: ["ekspedisi"],
         logoSrc: "/logos/npt.png",
         popup: {
           reviewerName: "Yusuf Hidayat",
@@ -324,7 +332,6 @@ export const siteConfig = {
       },
     ],
   },
-
   clientProfiles: {
     backLabel: "Kembali ke Daftar Klien",
     modulesSectionTitle: "Modul MyERP yang Digunakan",
