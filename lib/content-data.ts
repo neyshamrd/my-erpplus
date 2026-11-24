@@ -188,7 +188,7 @@ export const siteConfig = {
   // Tambahkan / perbarui bagian berikut di dalam `export const siteConfig = { ... }` pada `lib/content-data.ts`
 
   trust: {
-    title: "Dipercaya oleh 250 Perusahaan Indonesia",
+    title: "Dipercaya oleh 250 Perusahaan Di Indonesia",
     clients: [
       {
         id: "kawata",
@@ -339,7 +339,7 @@ export const siteConfig = {
         companyName: "PT Kawata Indonesia",
         shortName: "Kawata",
         industry: "Manufaktur",
-        location: "Indonesia",
+        location: "Jababeka Techno Park, Blok E No.2-C KIJ III, Pasirgombong, Kec. Cikarang Utara, Kabupaten Bekasi, Jawa Barat.",
         logoSrc: "/logos/kawata.png",
         headline:
           "PT Kawata Indonesia Menyatukan Alur Produksi, Stok & Keuangan dengan MyERP Plus",

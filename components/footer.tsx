@@ -3,15 +3,25 @@
 import React from "react";
 import Link from "next/link";
 import { MyErpLogo } from "./myerp-logo";
+import { useDemoModal } from "./demo-modal";
 import { siteConfig } from "@/lib/content-data";
 
 type FooterProps = {
-  // Dipanggil saat "Jadwalkan Live Demo" diklik (untuk membuka pop up form nanti)
+  // Dipanggil saat "Jadwalkan Live Demo" diklik (opsional, fallback ke useDemoModal)
   onOpenDemo?: () => void;
 };
 
 export function Footer({ onOpenDemo }: FooterProps) {
+  const { openDemo } = useDemoModal();
   const data = siteConfig.footer;
+
+  const handleOpenDemo = () => {
+    if (onOpenDemo) {
+      onOpenDemo();
+      return;
+    }
+    openDemo();
+  };
 
   return (
     <footer className="w-full bg-[#0B132B] text-slate-300">
@@ -20,7 +30,7 @@ export function Footer({ onOpenDemo }: FooterProps) {
         <div className="grid grid-cols-1 gap-10 pb-12 pt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Kolom 1: logo + deskripsi + alamat */}
           <div className="max-w-xs">
-                        <Link
+            <Link
               href="/"
               className="inline-flex rounded-xl bg-white px-4 py-2.5"
               aria-label="MyERP Plus"
@@ -37,7 +47,7 @@ export function Footer({ onOpenDemo }: FooterProps) {
             <p className="mt-4 text-[13px] leading-snug text-slate-300">
               <Link
                 href="/kontak"
-                className="hover:text-white transition-colors"
+                className="transition-colors hover:text-white"
                 title="Kunjungi Kantor Kami"
               >
                 {data.address}
@@ -85,7 +95,7 @@ export function Footer({ onOpenDemo }: FooterProps) {
               <li>
                 <button
                   type="button"
-                  onClick={onOpenDemo}
+                  onClick={handleOpenDemo}
                   className="text-left text-[13px] font-semibold text-blue-400 transition-colors hover:text-blue-300"
                 >
                   {data.demoText}

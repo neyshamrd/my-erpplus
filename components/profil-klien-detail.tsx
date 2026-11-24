@@ -184,10 +184,14 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
               <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                 Lokasi
               </p>
-              <p className="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-                <MapPin className="h-3.5 w-3.5 text-slate-400" />
-                <span>{profile.location}</span>
-              </p>
+              <div className="mt-1.5 flex items-start gap-2 text-xs font-semibold leading-relaxed text-slate-700">
+                <MapPin
+                  className="mt-0.5 h-4 w-4 shrink-0 text-blue-600"
+                  strokeWidth={2.25}
+                  aria-hidden="true"
+                />
+                <span className="min-w-0 flex-1">{profile.location}</span>
+              </div>
             </div>
 
             <div className="border-t border-slate-100 pt-3.5">
@@ -266,4 +270,4 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
       </div>
     </main>
   );
-}    //profile klien data
+}
