@@ -31,7 +31,7 @@ export function HeroIllustration({ onPlayVideo }: HeroIllustrationProps) {
       {visual.images.map((image, index) => (
         <div
           key={image.id}
-          className={`absolute w-[86%] rounded-2xl border border-slate-200/80 bg-white p-1.5 shadow-[0_18px_50px_-12px_rgba(15,23,42,0.18)] ${
+          className={`group absolute w-[86%] cursor-pointer rounded-2xl border border-slate-200/80 bg-white p-1.5 shadow-[0_18px_50px_-12px_rgba(15,23,42,0.18)] transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-[0_22px_55px_-12px_rgba(37,99,235,0.22)] motion-reduce:transition-none ${
             cardPosition[index] ?? ""
           }`}
         >
@@ -42,7 +42,7 @@ export function HeroIllustration({ onPlayVideo }: HeroIllustrationProps) {
               fill
               priority
               sizes="(min-width: 1024px) 45vw, 95vw"
-              className="object-contain"
+              className="object-contain transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none"
             />
           </div>
         </div>
@@ -53,9 +53,9 @@ export function HeroIllustration({ onPlayVideo }: HeroIllustrationProps) {
         type="button"
         onClick={onPlayVideo ?? openVideo}
         aria-label={visual.videoAria}
-        className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
       >
-        <span className="flex items-center gap-3 rounded-full bg-white py-2 pl-2 pr-5 shadow-xl shadow-slate-900/15 ring-1 ring-slate-900/5 transition-transform hover:scale-105 motion-reduce:transition-none">
+        <span className="flex cursor-pointer items-center gap-3 rounded-full bg-white py-2 pl-2 pr-5 shadow-xl shadow-slate-900/15 ring-1 ring-slate-900/5 transition-transform hover:scale-105 motion-reduce:transition-none">
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
             <Play className="ml-0.5 h-4 w-4 fill-white text-white" />
           </span>
