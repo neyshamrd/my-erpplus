@@ -120,7 +120,7 @@ export function HeroSection() {
                 />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-1.5 h-10 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-semibold whitespace-nowrap shadow-md shadow-blue-500/20 transition"
+                  className="cursor-pointer inline-flex items-center justify-center gap-1.5 h-10 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-semibold whitespace-nowrap shadow-md shadow-blue-500/20 transition"
                 >
                   <span>{hero.form.buttonText}</span>
                   <ArrowRight className="h-3.5 w-3.5" />
