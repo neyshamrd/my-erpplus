@@ -1,19 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react"; //update trus section
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, FileCheck2 } from "lucide-react";
+import { ArrowRight, FileCheck2, MapPin, ShieldCheck } from "lucide-react";
 import { siteConfig } from "@/lib/content-data";
-
-type ClientPopupData = {
-  reviewerName: string;
-  reviewerRole: string;
-  avatarSrc?: string;
-  quote: string;
-  ctaLabel?: string;
-};
 
 type Client = {
   id: string;
@@ -21,7 +13,8 @@ type Client = {
   name: string;
   industry: string;
   logoSrc?: string;
-  popup: ClientPopupData;
+  location?: string;
+  description?: string;
 };
 
 type ActivePopupState = {
@@ -32,15 +25,6 @@ type ActivePopupState = {
 
 const { title: trustTitle, notes: trustNotes } = siteConfig.trust;
 const clients: Client[] = siteConfig.trust.clients as Client[];
-
-function getInitials(name: string) {
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "")
-    .join("");
-}
 
 function ClientMark({ id }: { id: string }) {
   switch (id) {
@@ -222,6 +206,7 @@ function ClientPopupCard({
   onMouseLeave: () => void;
   onClose: () => void;
 }) {
+  const { client } = active;
   const cardWidth = 320;
   const margin = 12;
   const viewportW = typeof window !== "undefined" ? window.innerWidth : 1200;
@@ -233,7 +218,7 @@ function ClientPopupCard({
     viewportW - cardWidth - margin
   );
 
-  const estimatedHeight = 250;
+  const estimatedHeight = 270;
   const showAbove = active.rect.top > estimatedHeight + 16;
   const top = showAbove
     ? Math.max(margin, active.rect.top - estimatedHeight - 10)
@@ -242,48 +227,58 @@ function ClientPopupCard({
   return (
     <div
       role="dialog"
-      aria-label={`Review ${active.client.name}`}
+      aria-label={`Profil ${client.name}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       style={{ width: cardWidth, left, top }}
       className="myerp-popup-enter fixed z-50 rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_20px_50px_rgba(15,23,42,0.16)]"
     >
-      <div className="flex items-start gap-3">
-        {active.client.popup.avatarSrc ? (
+      {/* Logo perusahaan */}
+      <div className="flex h-10 items-center">
+        {client.logoSrc ? (
           <Image
-            src={active.client.popup.avatarSrc}
-            alt={active.client.popup.reviewerName}
-            width={44}
-            height={44}
-            className="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-slate-100"
+            src={client.logoSrc}
+            alt={client.name}
+            width={120}
+            height={36}
+            className="h-9 w-auto max-w-[140px] object-contain"
           />
         ) : (
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-extrabold text-blue-700 ring-1 ring-blue-200">
-            {getInitials(active.client.popup.reviewerName)}
-          </div>
+          <ClientMark id={client.id} />
         )}
-
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-bold text-slate-900">
-            {active.client.popup.reviewerName}
-          </p>
-          <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-slate-500">
-            {active.client.popup.reviewerRole}
-          </p>
-        </div>
       </div>
 
-      <blockquote className="mt-3.5 text-xs leading-relaxed text-slate-700">
-        &ldquo;{active.client.popup.quote}&rdquo;
-      </blockquote>
+      {/* Nama, industri, lokasi */}
+      <p className="mt-3 text-sm font-bold leading-snug text-slate-900">
+        {client.name}
+      </p>
+
+      <div className="mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1">
+        <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">
+          {client.industry}
+        </span>
+        {client.location && (
+          <span className="inline-flex items-center gap-1 text-[11px] text-slate-500">
+            <MapPin className="h-3 w-3 shrink-0 text-slate-400" aria-hidden="true" />
+            <span>{client.location}</span>
+          </span>
+        )}
+      </div>
+
+      {/* Deskripsi singkat profil perusahaan */}
+      {client.description && (
+        <p className="mt-3 text-xs leading-relaxed text-slate-600">
+          {client.description}
+        </p>
+      )}
 
       <div className="mt-4 border-t border-slate-100 pt-3">
         <Link
-          href={`/profil-klien/${active.client.slug}`}
+          href={`/profil-klien/${client.slug}`}
           onClick={onClose}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 underline decoration-slate-400 underline-offset-4 transition-colors hover:text-blue-600 hover:decoration-blue-600"
+          className="inline-flex cursor-pointer items-center gap-1.5 text-xs font-bold text-slate-900 underline decoration-slate-400 underline-offset-4 transition-colors hover:text-blue-600 hover:decoration-blue-600"
         >
-          <span>{active.client.popup.ctaLabel ?? "Baca profil & studi kasus"}</span>
+          <span>Lihat profil perusahaan</span>
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>

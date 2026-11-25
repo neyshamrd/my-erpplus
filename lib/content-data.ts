@@ -189,7 +189,7 @@ export const siteConfig = {
 
   trust: {
     title: "Dipercaya oleh 250 Perusahaan Di Indonesia",
-    clients: [
+        clients: [
       {
         id: "kawata",
         slug: "pt-kawata-indonesia",
@@ -197,14 +197,9 @@ export const siteConfig = {
         industry: "Manufaktur",
         caseStudySlugs: ["mesin", "logam"],
         logoSrc: "/logos/kawata.png",
-        popup: {
-          reviewerName: "Budi Santoso",
-          reviewerRole: "Operations Manager, PT Kawata Indonesia",
-          avatarSrc: "",
-          quote:
-            "MyERP Plus membantu menyatukan alur produksi, stok bahan baku, dan pelaporan biaya secara lebih transparan dan terukur.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Cikarang Utara, Kab. Bekasi",
+        description:
+          "Perusahaan manufaktur di Jababeka Techno Park, Cikarang, dengan kebutuhan pengelolaan material, jadwal produksi, dan pelaporan operasional yang terstruktur.",
       },
       {
         id: "topla",
@@ -213,14 +208,9 @@ export const siteConfig = {
         industry: "Plastik Injeksi",
         caseStudySlugs: ["plastik"],
         logoSrc: "/logos/topla.png",
-        popup: {
-          reviewerName: "Siti Rahmawati",
-          reviewerRole: "Finance & Accounting Head, PT Topla Abadi Jaya",
-          avatarSrc: "",
-          quote:
-            "Pemantauan work order, penggunaan bahan baku, serta rekonsiliasi stok dan jurnal menjadi jauh lebih tertib.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Cikarang Barat, Kab. Bekasi",
+        description:
+          "Produsen plastik injeksi di Cikarang Barat yang mengandalkan ketepatan pemakaian bahan baku, penjadwalan work order, dan akurasi pencatatan persediaan.",
       },
       {
         id: "ikuyo",
@@ -229,14 +219,9 @@ export const siteConfig = {
         industry: "Manufaktur Komponen",
         caseStudySlugs: ["mesin", "plastik"],
         logoSrc: "/logos/ikuyo.png",
-        popup: {
-          reviewerName: "Andi Pratama",
-          reviewerRole: "Supply Chain Lead, PT Ikuyo Indonesia",
-          avatarSrc: "",
-          quote:
-            "Siklus pengadaan hingga penerimaan gudang dan kalkulasi biaya produksi kini terpantau dalam satu sistem terintegrasi.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Cikarang Pusat, Kab. Bekasi",
+        description:
+          "Perusahaan manufaktur komponen di Kota Deltamas dengan koordinasi yang ketat antara pengadaan, penyimpanan gudang, dan produksi.",
       },
       {
         id: "motasa",
@@ -245,14 +230,9 @@ export const siteConfig = {
         industry: "Manufaktur Bahan Rempah",
         caseStudySlugs: ["rempah"],
         logoSrc: "/logos/motasa.png",
-        popup: {
-          reviewerName: "Rina Kusuma",
-          reviewerRole: "PPIC Supervisor, PT Motasa Indonesia",
-          avatarSrc: "",
-          quote:
-            "Koordinasi jadwal produksi, kebutuhan material, dan stok barang jadi berjalan lebih cepat dengan data yang konsisten.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Mojosari, Kab. Mojokerto",
+        description:
+          "Perusahaan manufaktur bahan rempah di Mojosari, Jawa Timur, yang menyelaraskan rencana produksi, ketersediaan material, dan pengiriman barang jadi.",
       },
       {
         id: "narumi",
@@ -261,14 +241,9 @@ export const siteConfig = {
         industry: "Manufaktur Keramik",
         caseStudySlugs: ["logam", "mesin"],
         logoSrc: "/logos/narumi.png",
-        popup: {
-          reviewerName: "Dedi Kurniawan",
-          reviewerRole: "Plant Controller, PT Narumi Indonesia Mfg",
-          avatarSrc: "",
-          quote:
-            "Transparansi proses produksi, pengendalian mutu/reject, dan pelaporan keuangan membantu pengambilan keputusan lebih akurat.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Cikarang Selatan, Kab. Bekasi",
+        description:
+          "Produsen keramik di kawasan EJIP, Cikarang Selatan, dengan tahapan proses produksi dan kontrol kualitas yang terstruktur.",
       },
       {
         id: "pci",
@@ -277,14 +252,9 @@ export const siteConfig = {
         industry: "Pengolahan Logam",
         caseStudySlugs: ["logam", "mesin"],
         logoSrc: "/logos/pci.jpg",
-        popup: {
-          reviewerName: "Hendra Wijaya",
-          reviewerRole: "Commercial & Inventory Lead, PT Prima Copper Industri",
-          avatarSrc: "",
-          quote:
-            "Akurasi saldo stok, pelacakan batch/lot, serta integrasi penjualan dan akuntansi meningkatkan efisiensi operasional harian.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Batuceper, Tangerang",
+        description:
+          "Perusahaan pengolahan logam di Tangerang dengan kebutuhan ketepatan pengelolaan stok, pemenuhan pesanan pelanggan, dan pencatatan akuntansi.",
       },
       {
         id: "ujs",
@@ -293,14 +263,9 @@ export const siteConfig = {
         industry: "Tekstil",
         caseStudySlugs: ["tekstil"],
         logoSrc: "/logos/ujs.jpg",
-        popup: {
-          reviewerName: "Faradila Utami",
-          reviewerRole: "Operational & Compliance Analyst, PT Unggul Jaya Sejahtera",
-          avatarSrc: "",
-          quote:
-            "Pengelolaan distribusi multi-gudang, surat jalan, serta pelaporan stok dan piutang menjadi lebih terstruktur dan transparan.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Tirto, Kota Pekalongan",
+        description:
+          "Perusahaan di Pekalongan, Jawa Tengah, dengan kebutuhan ketertelusuran barang, ketepatan pengiriman, dan pelaporan administrasi yang rapi.",
       },
       {
         id: "npt",
@@ -309,14 +274,9 @@ export const siteConfig = {
         industry: "Ekspedisi & Logistik",
         caseStudySlugs: ["ekspedisi"],
         logoSrc: "/logos/npt.png",
-        popup: {
-          reviewerName: "Yusuf Hidayat",
-          reviewerRole: "Fleet & Operations Head, PT Nanda Persada Transport",
-          avatarSrc: "",
-          quote:
-            "Pemantauan operasional pengiriman, penagihan, dan buku besar keuangan lebih rapi tanpa rekap manual terpisah.",
-          ctaLabel: "Baca profil & studi kasus",
-        },
+        location: "Pulogadung, Jakarta Timur",
+        description:
+          "Perusahaan ekspedisi dan logistik di Jakarta Timur dengan kebutuhan pencatatan penagihan, biaya operasional, dan pengelolaan aset yang teratur.",
       },
     ],
     notes: [
