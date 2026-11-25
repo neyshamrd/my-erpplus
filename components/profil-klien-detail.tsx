@@ -1,15 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowLeftRight,
   ArrowRight,
+  BarChart3,
   Building2,
+  CheckCircle2,
+  Clock,
+  FileText,
   Layers,
   MapPin,
+  Package,
   Quote,
+  Users,
+  Wallet,
+  XCircle,
 } from "lucide-react";
 import { siteConfig } from "@/lib/content-data";
 import { useDemoModal } from "./demo-modal";
@@ -24,6 +33,23 @@ type ClientNarrativeSection = {
   title: string;
   paragraphs?: string[];
   bullets?: string[];
+};
+
+type BeforeAfterRow = {
+  /** Kunci ikon: clock | document | stock | finance | report | team */
+  icon?: string;
+  label: string;
+  before: string;
+  after: string;
+};
+
+type BeforeAfterConfig = {
+  sectionTitle: string;
+  sectionSubtitle: string;
+  beforeBadge: string;
+  afterBadge: string;
+  hint: string;
+  rows: BeforeAfterRow[];
 };
 
 type ClientProfileItem = {
@@ -41,6 +67,8 @@ type ClientProfileItem = {
   highlights: { value: string; label: string }[];
   aboutCompany?: string[];
   sections?: ClientNarrativeSection[];
+  /** Opsional: isi baris perbandingan khusus klien. Jika kosong, memakai default. */
+  beforeAfterRows?: BeforeAfterRow[];
   usedModules: ClientUsedModule[];
 };
 
@@ -49,9 +77,186 @@ const profileItems = profileConfig.items as Record<
   string,
   ClientProfileItem | undefined
 >;
+const defaultBeforeAfter = (
+  profileConfig as { defaultBeforeAfter?: BeforeAfterConfig }
+).defaultBeforeAfter;
 
 const monoFont =
   "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
+
+const rowIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  clock: Clock,
+  document: FileText,
+  stock: Package,
+  finance: Wallet,
+  report: BarChart3,
+  team: Users,
+};
+
+/* -------------------------------------------------------------------------- */
+/*  Komponen Slider Perbandingan Sebelum / Sesudah (versi minimalis)          */
+/* -------------------------------------------------------------------------- */
+
+function BeforeAfterSlider({
+  config,
+  rows,
+}: {
+  config: BeforeAfterConfig;
+  rows: BeforeAfterRow[];
+}) {
+  const [pos, setPos] = useState<number>(50);
+  const [dragging, setDragging] = useState<boolean>(false);
+  const areaRef = useRef<HTMLDivElement | null>(null);
+
+  const updateFromClientX = useCallback((clientX: number) => {
+    const el = areaRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.width <= 0) return;
+    const next = ((clientX - rect.left) / rect.width) * 100;
+    setPos(Math.min(95, Math.max(5, next)));
+  }, []);
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {
+      // abaikan jika pointer capture tidak didukung
+    }
+    setDragging(true);
+    updateFromClientX(e.clientX);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragging) return;
+    updateFromClientX(e.clientX);
+  };
+
+  const handlePointerEnd = () => {
+    setDragging(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      setPos((p) => Math.max(5, p - 5));
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      setPos((p) => Math.min(95, p + 5));
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      setPos(5);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      setPos(95);
+    }
+  };
+
+  const beforeClip = `inset(0 ${100 - pos}% 0 0)`;
+  const afterClip = `inset(0 0 0 ${pos}%)`;
+
+  return (
+    <div className="overflow-hidden rounded-xl border border-slate-200/70 bg-slate-50/50">
+      {/* Header ringkas */}
+      <div className="flex items-center justify-between gap-2 border-b border-slate-200/60 px-3 py-2">
+        <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2 py-0.5 text-[10px] font-bold text-rose-600">
+          <span className="h-1 w-1 rounded-full bg-rose-500" />
+          {config.beforeBadge}
+        </span>
+
+        <span className="hidden items-center gap-1 text-[10px] font-medium text-slate-400 sm:inline-flex">
+          <ArrowLeftRight className="h-2.5 w-2.5" />
+          {config.hint}
+        </span>
+
+        <span className="inline-flex items-center gap-1 rounded-full bg-sky-50 px-2 py-0.5 text-[10px] font-bold text-blue-700">
+          <span className="h-1 w-1 rounded-full bg-blue-600" />
+          {config.afterBadge}
+        </span>
+      </div>
+
+      {/* Area interaktif */}
+      <div
+        className="touch-pan-y select-none px-3 py-3"
+        style={{ cursor: dragging ? "grabbing" : "ew-resize" }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerEnd}
+      >
+        <div ref={areaRef} className="relative">
+          <div className="space-y-1.5">
+            {rows.map((row, idx) => {
+              const Icon = (row.icon && rowIconMap[row.icon]) || Layers;
+              return (
+                <div key={`${row.label}-${idx}`} className="grid">
+                  {/* Lapisan SEBELUM (terlihat di kiri garis) */}
+                  <div
+                    className="col-start-1 row-start-1 flex flex-col gap-0.5 rounded-lg border border-rose-100/80 bg-white px-3 py-2 sm:flex-row sm:items-center sm:gap-2"
+                    style={{ clipPath: beforeClip }}
+                  >
+                    <div className="flex shrink-0 items-center gap-1.5 sm:w-[38%]">
+                      <Icon className="h-3 w-3 shrink-0 text-slate-400" />
+                      <span className="text-[11px] font-semibold text-slate-700">
+                        {row.label}
+                      </span>
+                    </div>
+                    <div className="flex min-w-0 flex-1 items-center gap-1.5 text-[11px] font-semibold text-rose-600">
+                      <XCircle className="h-3 w-3 shrink-0" />
+                      <span>{row.before}</span>
+                    </div>
+                  </div>
+
+                  {/* Lapisan SESUDAH (terlihat di kanan garis) */}
+                  <div
+                    className="col-start-1 row-start-1 flex flex-col gap-0.5 rounded-lg border border-sky-100 bg-white px-3 py-2 sm:flex-row sm:items-center sm:gap-2"
+                    style={{ clipPath: afterClip }}
+                  >
+                    <div className="flex shrink-0 items-center gap-1.5 sm:w-[38%]">
+                      <Icon className="h-3 w-3 shrink-0 text-slate-400" />
+                      <span className="text-[11px] font-semibold text-slate-700">
+                        {row.label}
+                      </span>
+                    </div>
+                    <div className="flex min-w-0 flex-1 items-center gap-1.5 text-[11px] font-semibold text-emerald-700">
+                      <CheckCircle2 className="h-3 w-3 shrink-0" />
+                      <span>{row.after}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Garis pembagi + handle */}
+          <div
+            className="pointer-events-none absolute -bottom-1.5 -top-1.5 w-px -translate-x-1/2 bg-blue-600"
+            style={{ left: `${pos}%` }}
+          >
+            <div
+              role="slider"
+              tabIndex={0}
+              aria-label="Geser untuk membandingkan sebelum dan sesudah"
+              aria-orientation="horizontal"
+              aria-valuemin={5}
+              aria-valuemax={95}
+              aria-valuenow={Math.round(pos)}
+              onKeyDown={handleKeyDown}
+              className="pointer-events-auto absolute left-1/2 top-1/2 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border-2 border-white bg-blue-600 text-white shadow-md outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-blue-300"
+            >
+              <ArrowLeftRight className="h-3 w-3" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Halaman Detail Profil Klien                                               */
+/* -------------------------------------------------------------------------- */
 
 export function ProfilKlienDetail({ slug }: { slug: string }) {
   const { openDemo } = useDemoModal();
@@ -73,6 +278,12 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
             paragraphs: profile.aboutCompany ?? [],
           },
         ];
+
+  // Data perbandingan sebelum/sesudah: pakai milik klien jika ada, jika tidak pakai default
+  const beforeAfterRows: BeforeAfterRow[] =
+    profile.beforeAfterRows && profile.beforeAfterRows.length > 0
+      ? profile.beforeAfterRows
+      : defaultBeforeAfter?.rows ?? [];
 
   return (
     <main className="min-h-screen bg-white pb-16 pt-8">
@@ -186,7 +397,7 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {/* Bagian tengah: Kolom kiri (Perusahaan, Lokasi, Industri + Modul MyERP di bawahnya) & Kolom kanan (Konten profil dinamis) */}
+        {/* Bagian tengah: Kolom kiri (Perusahaan, Lokasi, Industri + Modul MyERP di bawahnya) & Kolom kanan (Konten profil dinamis + Before/After) */}
         <section className="mt-7 grid grid-cols-1 gap-7 lg:grid-cols-12 lg:items-start">
           {/* Kolom kiri: Metadata perusahaan + Modul yang digunakan di bawahnya */}
           <div className="space-y-6 lg:col-span-4">
@@ -255,7 +466,7 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
             </article>
           </div>
 
-          {/* Kolom kanan: Konten profil & narasi dinamis (profil umum, before/after memakai MyERP, dll.) */}
+          {/* Kolom kanan: Konten profil & narasi dinamis + card perbandingan Before/After */}
           <div className="space-y-6 lg:col-span-8">
             <article className="rounded-3xl bg-white p-6 shadow-[0_4px_24px_rgba(15,23,42,0.04)] sm:p-8">
               <div className="space-y-8">
@@ -295,6 +506,25 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
                 ))}
               </div>
             </article>
+
+            {/* Card perbandingan Sebelum vs Sesudah memakai MyERP Plus */}
+            {defaultBeforeAfter && beforeAfterRows.length > 0 && (
+              <article className="rounded-3xl bg-white p-5 shadow-[0_4px_24px_rgba(15,23,42,0.04)] sm:p-6">
+                <h2 className="text-base font-extrabold tracking-tight text-slate-900">
+                  {defaultBeforeAfter.sectionTitle}
+                </h2>
+                <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                  {defaultBeforeAfter.sectionSubtitle}
+                </p>
+
+                <div className="mt-4">
+                  <BeforeAfterSlider
+                    config={defaultBeforeAfter}
+                    rows={beforeAfterRows}
+                  />
+                </div>
+              </article>
+            )}
           </div>
         </section>
 

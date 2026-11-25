@@ -332,7 +332,7 @@ export const siteConfig = {
       },
     ],
   },
-  clientProfiles: {
+    clientProfiles: {
     backLabel: "Kembali ke Daftar Klien",
     modulesSectionTitle: "Modul MyERP yang Digunakan",
     profileSectionTitle: "Tentang Perusahaan",
@@ -340,6 +340,49 @@ export const siteConfig = {
     ctaText:
       "Diskusikan kebutuhan modul dan proses bisnis Anda bersama tim PT You profit Indonesia.",
     ctaButton: "Jadwalkan Live Demo",
+
+    //BARU: konten dummy perbandingan Sebelum vs Sesudah (default semua klien)
+    defaultBeforeAfter: {
+      sectionTitle: "Sebelum vs Sesudah Menggunakan MyERP Plus",
+      sectionSubtitle:
+        "Perbandingan langsung dampak efisiensi operasional sebelum dan sesudah perusahaan mengintegrasikan MyERP Plus ke alur kerja.",
+      beforeBadge: "Sebelum MyERP Plus",
+      afterBadge: "Sesudah MyERP Plus",
+      hint: "Geser garis tengah untuk membandingkan",
+      rows: [
+        {
+          icon: "document",
+          label: "Pencatatan Transaksi",
+          before: "Input manual berulang di banyak file Excel",
+          after: "Satu sistem, jurnal tercatat otomatis",
+        },
+        {
+          icon: "stock",
+          label: "Akurasi Stok",
+          before: "Selisih stok sering ditemukan saat opname",
+          after: "Saldo stok real-time & akurat",
+        },
+        {
+          icon: "clock",
+          label: "Waktu Closing Bulanan",
+          before: "5 - 7 hari kerja setiap akhir bulan",
+          after: "1 - 2 hari, laporan siap",
+        },
+        {
+          icon: "team",
+          label: "Koordinasi Antar Divisi",
+          before: "Rekap manual, data sering tidak sinkron",
+          after: "Data terpusat & dapat diakses lintas divisi",
+        },
+        {
+          icon: "report",
+          label: "Pelaporan Manajemen",
+          before: "Laporan disusun manual & sering terlambat",
+          after: "Dashboard & laporan tersedia real-time",
+        },
+      ],
+    },
+
     items: {
       "pt-kawata-indonesia": {
         slug: "pt-kawata-indonesia",
@@ -363,6 +406,33 @@ export const siteConfig = {
         aboutCompany: [
           "PT Kawata Indonesia beroperasi di bidang manufaktur dengan kebutuhan pengelolaan material, jadwal kerja produksi, serta pelaporan operasional yang terstruktur.",
           "Melalui implementasi MyERP Plus, proses pencatatan transaksi dari gudang dan lantai produksi terhubung langsung ke pembukuan sehingga meminimalkan input berulang.",
+        ],
+        // Contoh override khusus klien (opsional). Hapus jika ingin memakai default.
+        beforeAfterRows: [
+          {
+            icon: "document",
+            label: "Pencatatan Produksi",
+            before: "Laporan produksi dicatat manual di kertas & Excel",
+            after: "Work Order & hasil produksi tercatat langsung di sistem",
+          },
+          {
+            icon: "stock",
+            label: "Stok Bahan Baku",
+            before: "Saldo bahan baku sulit dipantau saat produksi berjalan",
+            after: "Saldo stok & pemakaian material real-time",
+          },
+          {
+            icon: "finance",
+            label: "Biaya Produksi",
+            before: "Kalkulasi biaya dihitung manual di akhir bulan",
+            after: "Biaya produksi terhitung otomatis & masuk jurnal",
+          },
+          {
+            icon: "report",
+            label: "Pelaporan Keuangan",
+            before: "Rekonsiliasi stok dan jurnal memakan waktu berhari-hari",
+            after: "Laporan keuangan terpusat siap kapan saja",
+          },
         ],
         usedModules: [
           {
