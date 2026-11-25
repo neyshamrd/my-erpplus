@@ -47,7 +47,7 @@ export function CtaBanner({ onOpenFlowchart }: CtaBannerProps) {
             <button
               type="button"
               onClick={openDemo}
-              className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-lg shadow-slate-900/10 transition-colors hover:bg-slate-100"
+              className="inline-flex cursor-pointer items-center justify-center rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-slate-900 shadow-lg shadow-slate-900/10 transition-colors hover:bg-slate-100"
             >
               {data.demoText}
             </button>
@@ -55,7 +55,7 @@ export function CtaBanner({ onOpenFlowchart }: CtaBannerProps) {
             <button
               type="button"
               onClick={handleOpenFlowchart}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-[#0B132B]/50 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#0B132B]/80"
+              className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/20 bg-[#0B132B]/50 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#0B132B]/80"
             >
               <Download className="h-4 w-4" />
               <span>{data.flowchartText}</span>
