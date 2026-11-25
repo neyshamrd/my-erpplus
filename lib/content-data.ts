@@ -355,10 +355,6 @@ export const siteConfig = {
           "PT Kawata Indonesia Menyatukan Alur Produksi, Stok & Keuangan dengan MyERP Plus",
         summary:
           "Profil perusahaan dan pemanfaatan modul MyERP Plus untuk menjaga ketertelusuran material, proses produksi, serta pelaporan keuangan.",
-        picName: "Budi Santoso",
-        picRole: "Operations Manager, PT Kawata Indonesia",
-        quote:
-          "MyERP Plus membantu menyatukan alur produksi, stok bahan baku, dan pelaporan biaya secara lebih transparan dan terukur.",
         highlights: [
           { value: "Terintegrasi", label: "Produksi, Stok & Akuntansi" },
           { value: "Real-Time", label: "Monitoring Saldo & Jurnal" },
@@ -426,10 +422,6 @@ export const siteConfig = {
           "PT Topla Abadi Jaya Meningkatkan Ketertiban Produksi & Stok dengan MyERP Plus",
         summary:
           "Profil perusahaan dan penggunaan modul MyERP Plus untuk mendukung operasional plastik injeksi, pengendalian stok, dan akuntansi.",
-        picName: "Siti Rahmawati",
-        picRole: "Finance & Accounting Head, PT Topla Abadi Jaya",
-        quote:
-          "Pemantauan work order, penggunaan bahan baku, serta rekonsiliasi stok dan jurnal menjadi jauh lebih tertib.",
         highlights: [
           { value: "Otomatis", label: "Jurnal Stok & Biaya Produksi" },
           { value: "Terpusat", label: "Data Operasional & Keuangan" },
@@ -470,10 +462,6 @@ export const siteConfig = {
           "PT Ikuyo Indonesia Menyelaraskan Pengadaan, Gudang & Produksi di MyERP Plus",
         summary:
           "Profil perusahaan dan modul MyERP Plus yang digunakan untuk mendukung rantai pasok, gudang, dan pelaporan.",
-        picName: "Andi Pratama",
-        picRole: "Supply Chain Lead, PT Ikuyo Indonesia",
-        quote:
-          "Siklus pengadaan hingga penerimaan gudang dan kalkulasi biaya produksi kini terpantau dalam satu sistem terintegrasi.",
         highlights: [
           { value: "End-to-End", label: "Pengadaan hingga Pelaporan" },
           { value: "Akurat", label: "Kontrol Stok & Mutasi" },
@@ -514,10 +502,6 @@ export const siteConfig = {
           "PT Motasa Indonesia Memperkuat Koordinasi PPIC, Stok & Keuangan dengan MyERP Plus",
         summary:
           "Profil perusahaan dan penerapan modul MyERP Plus untuk mendukung kelancaran operasional manufaktur.",
-        picName: "Rina Kusuma",
-        picRole: "PPIC Supervisor, PT Motasa Indonesia",
-        quote:
-          "Koordinasi jadwal produksi, kebutuhan material, dan stok barang jadi berjalan lebih cepat dengan data yang konsisten.",
         highlights: [
           { value: "Terpadu", label: "PPIC, Gudang & Penjualan" },
           { value: "Transparan", label: "Status Dokumen & Stok" },
@@ -558,10 +542,6 @@ export const siteConfig = {
           "PT Narumi Indonesia Mfg Meningkatkan Visibilitas Produksi & Keuangan dengan MyERP Plus",
         summary:
           "Profil perusahaan dan modul MyERP Plus yang digunakan untuk mendukung proses manufaktur dan akuntansi.",
-        picName: "Dedi Kurniawan",
-        picRole: "Plant Controller, PT Narumi Indonesia Mfg",
-        quote:
-          "Transparansi proses produksi, pengendalian mutu/reject, dan pelaporan keuangan membantu pengambilan keputusan lebih akurat.",
         highlights: [
           { value: "Terkontrol", label: "Proses & Evaluasi Biaya" },
           { value: "Terstandar", label: "Jejak Audit & Laporan" },
@@ -602,10 +582,6 @@ export const siteConfig = {
           "PT Prima Copper Industri Mengoptimalkan Stok, Penjualan & Akuntansi di MyERP Plus",
         summary:
           "Profil perusahaan dan pemanfaatan modul MyERP Plus untuk mendukung operasional pengolahan logam dan distribusi.",
-        picName: "Hendra Wijaya",
-        picRole: "Commercial & Inventory Lead, PT Prima Copper Industri",
-        quote:
-          "Akurasi saldo stok, pelacakan batch/lot, serta integrasi penjualan dan akuntansi meningkatkan efisiensi operasional harian.",
         highlights: [
           { value: "Presisi", label: "Saldo Stok & Lot/Batch" },
           { value: "Terhubung", label: "Penjualan, Stok & Jurnal" },
@@ -646,10 +622,6 @@ export const siteConfig = {
           "PT Unggul Jaya Sejahtera Menata Distribusi, Inventaris & Keuangan dengan MyERP Plus",
         summary:
           "Profil perusahaan dan modul MyERP Plus yang digunakan untuk mendukung operasional alat kesehatan dan distribusi.",
-        picName: "Faradila Utami",
-        picRole: "Operational & Compliance Analyst, PT Unggul Jaya Sejahtera",
-        quote:
-          "Pengelolaan distribusi multi-gudang, surat jalan, serta pelaporan stok dan piutang menjadi lebih terstruktur dan transparan.",
         highlights: [
           { value: "Terukur", label: "Distribusi & Piutang Dagang" },
           { value: "Tertib", label: "Dokumentasi & Pelaporan" },
@@ -696,10 +668,6 @@ export const siteConfig = {
           "PT Nanda Persada Transport Menyederhanakan Operasional & Keuangan dengan MyERP Plus",
         summary:
           "Profil perusahaan dan modul MyERP Plus yang digunakan untuk mendukung operasional ekspedisi dan akuntansi.",
-        picName: "Yusuf Hidayat",
-        picRole: "Fleet & Operations Head, PT Nanda Persada Transport",
-        quote:
-          "Pemantauan operasional pengiriman, penagihan, dan buku besar keuangan lebih rapi tanpa rekap manual terpisah.",
         highlights: [
           { value: "Terintegrasi", label: "Penagihan & Buku Besar" },
           { value: "Terpantau", label: "Aset & Biaya Operasional" },

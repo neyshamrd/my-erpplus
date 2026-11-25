@@ -15,7 +15,6 @@ import {
   Layers,
   MapPin,
   Package,
-  Quote,
   Users,
   Wallet,
   XCircle,
@@ -61,9 +60,6 @@ type ClientProfileItem = {
   logoSrc?: string;
   headline: string;
   summary: string;
-  picName: string;
-  picRole: string;
-  quote: string;
   highlights: { value: string; label: string }[];
   aboutCompany?: string[];
   sections?: ClientNarrativeSection[];
@@ -318,7 +314,7 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
           </div>
         </div>
 
-        {/* Bagian atas: Judul, ringkasan & kutipan di kiri; kartu logo di kanan (tanpa garis batas antar blok) */}
+        {/* Bagian atas: Judul & ringkasan di kiri; kartu logo di kanan */}
         <section className="rounded-3xl bg-white p-6 shadow-[0_4px_24px_rgba(15,23,42,0.04)] sm:p-10">
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
             <div className="lg:col-span-7">
@@ -334,23 +330,6 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
                 {profile.summary}
               </p>
-
-              <div className="mt-5 rounded-2xl bg-slate-50/70 p-4">
-                <div className="flex items-start gap-2.5">
-                  <Quote className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />
-                  <div>
-                    <p className="text-xs italic leading-relaxed text-slate-700">
-                      &ldquo;{profile.quote}&rdquo;
-                    </p>
-                    <p className="mt-2 text-xs font-bold text-slate-900">
-                      {profile.picName}{" "}
-                      <span className="font-normal text-slate-500">
-                        — {profile.picRole}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="lg:col-span-5">
