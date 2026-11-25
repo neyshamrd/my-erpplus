@@ -96,7 +96,7 @@ export function Footer({ onOpenDemo }: FooterProps) {
                 <button
                   type="button"
                   onClick={handleOpenDemo}
-                  className="text-left text-[13px] font-semibold text-blue-400 transition-colors hover:text-blue-300"
+                  className="cursor-pointer text-left text-[13px] font-semibold text-blue-400 transition-colors hover:text-blue-300"
                 >
                   {data.demoText}
                 </button>
