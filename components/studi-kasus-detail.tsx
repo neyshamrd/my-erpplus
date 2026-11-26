@@ -255,36 +255,36 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
           </button>
         </section>
 
-        {/* Industri Klien yang Sesuai dengan Studi Kasus */}
+        {/* Pengguna di sektor ini (ukuran standar, sedikit lebih kecil, border tipis) */}
         {matchingClients.length > 0 && (
-          <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+          <section className="rounded-2xl border border-slate-100 bg-white p-4 sm:p-5">
             <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-2">
                 <Building2 className="h-4 w-4 text-blue-600" />
                 <h2 className="text-sm font-extrabold tracking-tight text-slate-900">
-                  Klien Pengguna di Sektor {detail.sectorName}
+                  Pengguna di Sektor {detail.sectorName}
                 </h2>
               </div>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-400">
                 Klik kartu perusahaan untuk melihat profil lengkap
               </p>
             </div>
 
-            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-3.5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {matchingClients.map((client) => (
                 <Link
                   key={client.id}
                   href={`/klien/${client.slug}`}
-                  className="group flex cursor-pointer flex-col justify-between rounded-2xl border border-slate-200/90 bg-slate-50/50 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white hover:shadow-md"
+                  className="group flex cursor-pointer flex-col justify-between rounded-xl border border-slate-100 bg-slate-50/60 p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-sm"
                 >
-                  <div className="flex h-14 items-center justify-center rounded-xl border border-slate-100 bg-white px-3">
+                  <div className="flex h-12 items-center justify-center rounded-lg bg-white px-3">
                     {client.logoSrc ? (
                       <Image
                         src={client.logoSrc}
                         alt={client.name}
-                        width={140}
-                        height={44}
-                        className="h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                        width={120}
+                        height={40}
+                        className="h-8 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
                       />
                     ) : (
                       <span className="text-xs font-extrabold text-slate-800">
@@ -293,15 +293,15 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
                     )}
                   </div>
 
-                  <div className="mt-3.5">
+                  <div className="mt-3">
                     <div className="flex items-start justify-between gap-2">
                       <h3 className="text-xs font-extrabold text-slate-900 group-hover:text-blue-700">
                         {client.name}
                       </h3>
-                      <ArrowUpRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-600" />
+                      <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-600" />
                     </div>
 
-                    <span className="mt-2 inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">
+                    <span className="mt-1.5 inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700">
                       {client.industry}
                     </span>
                   </div>
