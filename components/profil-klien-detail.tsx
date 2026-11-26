@@ -300,7 +300,7 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
               return (
                 <Link
                   key={item.slug}
-                  href={`/profil-klien/${item.slug}`}
+                  href={`/klien/${item.slug}`}
                   className={`cursor-pointer rounded-full px-3 py-1 text-[11px] font-semibold transition-colors ${
                     isCurrent
                       ? "bg-blue-600 text-white"
