@@ -80,6 +80,10 @@ const defaultBeforeAfter = (
 const monoFont =
   "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
 
+const RELATED_TITLE = "Baca Profile Pelanggan Kami Lainnya";
+const RELATED_LINK_LABEL = "Baca profil";
+const RELATED_COUNT = 3;
+
 const rowIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   clock: Clock,
   document: FileText,
@@ -247,6 +251,86 @@ function BeforeAfterSlider({
         </div>
       </div>
     </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Section: Baca Profile Pelanggan Kami Lainnya                              */
+/* -------------------------------------------------------------------------- */
+
+function RelatedClients({
+  currentSlug,
+  profiles,
+}: {
+  currentSlug: string;
+  profiles: ClientProfileItem[];
+}) {
+  const currentIndex = profiles.findIndex((item) => item.slug === currentSlug);
+  const others = profiles.filter((item) => item.slug !== currentSlug);
+
+  // Urutan berputar: mulai dari klien setelah klien yang sedang dibuka
+  const start = currentIndex >= 0 ? currentIndex : 0;
+  const rotated = [...others.slice(start), ...others.slice(0, start)];
+  const related = rotated.slice(0, RELATED_COUNT);
+
+  if (related.length === 0) return null;
+
+  return (
+    <section className="mt-10">
+      <h2 className="text-xl font-extrabold tracking-tight text-slate-900 sm:text-2xl">
+        {RELATED_TITLE}
+      </h2>
+
+      <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {related.map((item) => (
+          <Link
+            key={item.slug}
+            href={`/klien/${item.slug}`}
+            className="group flex cursor-pointer flex-col rounded-2xl border border-transparent bg-slate-100/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white hover:shadow-md"
+          >
+            {/* Panel gambar (logo perusahaan) */}
+            <div className="flex h-40 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-white via-slate-50 to-blue-50 px-6">
+              {item.logoSrc ? (
+                <Image
+                  src={item.logoSrc}
+                  alt={item.companyName}
+                  width={200}
+                  height={80}
+                  className="h-16 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              ) : (
+                <span className="text-center text-lg font-extrabold text-slate-800">
+                  {item.companyName}
+                </span>
+              )}
+            </div>
+
+            {/* Badge industri */}
+            <div className="mt-4">
+              <span className="inline-flex max-w-full items-center rounded-full border border-rose-300 bg-white/60 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-rose-600">
+                <span className="truncate">{item.industry}</span>
+              </span>
+            </div>
+
+            {/* Nama perusahaan */}
+            <p className="mt-3 text-[11px] font-semibold text-slate-500">
+              {item.companyName}
+            </p>
+
+            {/* Judul */}
+            <h3 className="mt-1.5 line-clamp-3 text-sm font-bold leading-snug text-slate-900">
+              {item.headline}
+            </h3>
+
+            {/* Tautan */}
+            <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-xs font-medium text-blue-600">
+              <span>{RELATED_LINK_LABEL}</span>
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -507,8 +591,11 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
           </div>
         </section>
 
+        {/* Baca profile pelanggan kami lainnya */}
+        <RelatedClients currentSlug={slug} profiles={allProfiles} />
+
         {/* Card Banner CTA tersendiri di paling bawah */}
-        <section className="mt-8 rounded-3xl bg-[#0B132B] p-6 text-white shadow-[0_8px_30px_rgba(11,19,43,0.12)] sm:p-8">
+        <section className="mt-10 rounded-3xl bg-[#0B132B] p-6 text-white shadow-[0_8px_30px_rgba(11,19,43,0.12)] sm:p-8">
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-center">
             <div className="max-w-2xl">
               <h2 className="text-lg font-extrabold tracking-tight text-white sm:text-xl">
