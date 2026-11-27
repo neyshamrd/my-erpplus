@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -82,6 +82,15 @@ const monoFont =
 const RELATED_TITLE = "Baca Profile Pelanggan Kami Lainnya";
 const RELATED_LINK_LABEL = "Baca profil";
 const RELATED_COUNT = 3;
+
+/** BARU: gulir halus ke paling atas halaman (instan jika pengguna memilih kurangi gerakan) */
+function scrollToTop() {
+  if (typeof window === "undefined") return;
+  const reduceMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, left: 0, behavior: reduceMotion ? "auto" : "smooth" });
+}
 
 const rowIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   clock: Clock,
@@ -285,6 +294,8 @@ function RelatedClients({
           <Link
             key={item.slug}
             href={`/klien/${item.slug}`}
+            scroll={false}
+            onClick={scrollToTop}
             className="group flex cursor-pointer flex-col rounded-2xl border border-transparent bg-slate-100/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white hover:shadow-md"
           >
             {/* Panel gambar (logo perusahaan) */}
@@ -340,6 +351,11 @@ function RelatedClients({
 export function ProfilKlienDetail({ slug }: { slug: string }) {
   const { openDemo } = useDemoModal();
   const profile = profileItems[slug];
+
+  // BARU: setiap pindah ke profil klien lain, pastikan halaman terbaca dari atas
+  useEffect(() => {
+    scrollToTop();
+  }, [slug]);
 
   if (!profile) return null;
 
