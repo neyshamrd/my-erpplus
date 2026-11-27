@@ -4,7 +4,6 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowLeft,
   ArrowLeftRight,
   ArrowRight,
   BarChart3,
@@ -368,36 +367,6 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
   return (
     <main className="min-h-screen bg-white pb-16 pt-8">
       <div className="mx-auto w-full max-w-[1140px] px-4 sm:px-6 lg:px-8">
-        {/* Bar navigasi atas & switcher slug klien */}
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <Link
-            href="/#trust"
-            className="inline-flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-slate-600 transition-colors hover:text-blue-600"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            <span>{profileConfig.backLabel}</span>
-          </Link>
-
-          <div className="flex flex-wrap gap-1.5">
-            {allProfiles.map((item) => {
-              const isCurrent = item.slug === slug;
-              return (
-                <Link
-                  key={item.slug}
-                  href={`/klien/${item.slug}`}
-                  className={`cursor-pointer rounded-full px-3 py-1 text-[11px] font-semibold transition-colors ${
-                    isCurrent
-                      ? "bg-blue-600 text-white"
-                      : "bg-slate-100/80 text-slate-600 hover:bg-blue-50 hover:text-blue-700"
-                  }`}
-                >
-                  {item.shortName}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Bagian atas: Judul & ringkasan di kiri; kartu logo di kanan */}
         <section className="rounded-3xl bg-white p-6 shadow-[0_4px_24px_rgba(15,23,42,0.04)] sm:p-10">
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">

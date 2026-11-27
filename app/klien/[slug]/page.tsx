@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProfilKlienDetail } from "@/components/profil-klien-detail";
 import { siteConfig } from "@/lib/content-data";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 type PageProps = {
   params: Promise<{ slug: string }>;    // use slug
@@ -50,7 +52,9 @@ export default function ProfilKlienPage({ params }: PageProps) {
     <Suspense
       fallback={<div className="min-h-[60vh] bg-[#f8fafc]" aria-hidden="true" />}
     >
+      <Navbar />
       <ProfilKlienContent params={params} />
+      <Footer />
     </Suspense>
   );
 }
