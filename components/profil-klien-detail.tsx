@@ -591,13 +591,22 @@ export function ProfilKlienDetail({ slug }: { slug: string }) {
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={openDemo}
-              className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-xs font-bold text-white transition-colors hover:bg-blue-500"
-            >
-              {profileConfig.ctaButton}
-            </button>
+            <div className="flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row">
+              <button
+                type="button"
+                onClick={openDemo}
+                className="inline-flex cursor-pointer items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-xs font-bold text-white transition-colors hover:bg-blue-500"
+              >
+                {profileConfig.ctaButton}
+              </button>
+
+              <Link
+                href="/"
+                className="inline-flex cursor-pointer items-center justify-center rounded-xl border border-white/25 bg-white/5 px-5 py-3 text-xs font-bold text-white transition-colors hover:bg-white/15"
+              >
+                Kembali ke Beranda
+              </Link>
+            </div>
           </div>
         </section>
       </div>
