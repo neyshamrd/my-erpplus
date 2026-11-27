@@ -274,7 +274,7 @@ export function StudiKasusDetail({ slug }: { slug: string }) {
               {matchingClients.map((client) => (
                 <Link
                   key={client.id}
-                  href={`/klien/${client.slug}`}
+                  href={`/pelanggan/${client.slug}`}
                   className="group flex cursor-pointer flex-col justify-between rounded-xl border border-slate-100 bg-slate-50/60 p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-white hover:shadow-sm"
                 >
                   <div className="flex h-12 items-center justify-center rounded-lg bg-white px-3">

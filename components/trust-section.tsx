@@ -274,7 +274,7 @@ function ClientPopupCard({
 
       <div className="mt-4 border-t border-slate-100 pt-3">
         <Link
-          href={`/klien/${client.slug}`}
+          href={`/pelanggan/${client.slug}`}
           onClick={onClose}
           className="inline-flex cursor-pointer items-center gap-1.5 text-xs font-bold text-slate-900 underline decoration-slate-400 underline-offset-4 transition-colors hover:text-blue-600 hover:decoration-blue-600"
         >

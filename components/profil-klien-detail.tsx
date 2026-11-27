@@ -293,7 +293,7 @@ function RelatedClients({
         {related.map((item) => (
           <Link
             key={item.slug}
-            href={`/klien/${item.slug}`}
+            href={`/pelanggan/${item.slug}`}
             scroll={false}
             onClick={scrollToTop}
             className="group flex cursor-pointer flex-col rounded-2xl border border-transparent bg-slate-100/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white hover:shadow-md"
